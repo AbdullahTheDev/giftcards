@@ -400,3 +400,131 @@ input#submit-btn {
 .d-block.mt-2 input {
     padding: 8px !important;
 }
+
+
+
+
+
+
+
+
+
+/ event  /
+form#send-gift-frm h3 {
+    font-family: playfair display, sans-serif;
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #b09042;
+}
+
+form#send-gift-frm input {
+    border: 2px solid #b09042;
+    border-radius: 10px;
+    color: #000;
+    padding: 10px;
+    margin: 0 0 8px;
+    background-color: #fff;
+    height: auto;
+    outline: none;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+form#send-gift-frm label {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1%;
+}
+
+form#send-gift-frm textarea {
+    border: 3px #b09042 solid !important;
+    padding: 17px 20px;
+    border-radius: 10px;
+}
+
+input#send-gift {
+    background: #b09042 !important;
+    padding: 11px 40px !important;
+    border-radius: 30px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    float: none;
+    font-size: 18px !important;
+    color: #fff !important;
+    margin-top: 5% !important;
+    width: 30%;
+}
+
+form#send-gift-frm {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.total-container {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.form-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #866d32;
+}
+.user-main {
+    background: #b09042;
+    display: flex;
+    padding: 22px;
+    border-radius: 15px;
+    margin-bottom: 3%;
+}
+
+.user-prf i {
+    font-size: 162px;
+    color: #fff;
+}
+
+.user-prf {
+    margin-right: 3%;
+}
+
+.user-details h4 {
+    font-size: 25px;
+    color: #fff !important;
+}
+
+.user-details p i {
+    margin-right: 8px;
+}
+
+.user-details p {
+    font-size: 15px;
+}
+button.btn.btn-warning.w-100 {
+    background: #b09042 !important;
+    padding: 11px 40px !important;
+    border-radius: 30px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    float: none;
+    font-size: 18px !important;
+    color: #fff !important;
+    margin-top: 5% !important;
+    width: 30% !important;
+}
+/ event  /

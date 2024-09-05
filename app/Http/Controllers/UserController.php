@@ -12,12 +12,14 @@ class UserController extends Controller
     function profile(){
         $user = User::findOrFail(Auth::id());
 
-        // Generate the URL to the user's profile
-        $profileUrl = route('user.profile', $user->id); // Example URL
 
-        return $profileUrl;
-        // Generate the QR code as a base64 image
-        $qrCode = QrCode::size(200)->generate($profileUrl);
+        if($user->qrcode == null){
+            $profileUrl = route('user.profile', $user->id);
+            
+            $qrCode = QrCode::size(200)->generate($profileUrl);
+            $user->qrcode = $qrCode;
+            $user->save();
+        }
 
         return view('front.dashboard');
     }
@@ -25,7 +27,7 @@ class UserController extends Controller
     function userProfile($id) {
         $user = User::findOrFail($id);
 
-        
-        return;
+
+        return view('front.event', compact('user'));
     }
 }

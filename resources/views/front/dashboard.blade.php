@@ -85,12 +85,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="">
+          <form method="POST" action="{{ route('logout') }}">
+          <a class="nav-link text-white " onclick="event.preventDefault(); this.closest('form').submit();">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Logut</span>
-          </a>
+              @csrf
+              <span class="nav-link-text ms-1" onclick="event.preventDefault(); this.closest('form').submit();">Logout</span>
+            </a>
+          </form>
         </li>
       </ul>
     </div>
@@ -118,8 +121,21 @@
     <div class="container py-3">
 
       <div class="row">
-        <div class="col-md-12">
-          <img src="{{ asset('assets/assets_admin/img/scan.png') }}" alt="">
+        <div class="col-md-6">
+          <ul style="list-style: none;">
+            <li>
+              <h2>Welcome to the Dashboad</h2>
+            </li>
+            <li>
+              <p><strong> {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}</strong></p>
+            </li>
+            <li>Your profile URL: <a href="{{ route('user.profile', \Auth::id()) }}">{{ route('user.profile', \Auth::id()) }}</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          {!! \Auth::user()->qrcode !!}
+
+          {{-- <img src="{{ asset('assets/assets_admin/img/scan.png') }}" alt=""> --}}
         </div>
       </div>
      </div>
