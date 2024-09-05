@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -46,7 +46,7 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
 @extends('layouts.ourapp')
 
 @section('content')
@@ -63,7 +63,8 @@
                             <h3>Login</h3>
                             <p>Welcome To My Wishing Well.</p>
                         </div>
-                        <form action="" class="main-form form-group">
+                        <form action="{{ route('login') }}" method="POST" class="main-form form-group">
+                            @csrf
                             <label for="email">Email address *</label>
                             <input type="email" name="email" placeholder="" class="form-control">
                             <label for="password">Password *</label>
@@ -73,8 +74,8 @@
                                 <label for="remember">Remember Me</label>
                                 <input type="checkbox" name="remember" placeholder="" class="form-control check">
                             </div>
-                            <p><a href="">Lost your password?</a></p>
-                            <span>Don't have an account yet?<a href="">Register now.</a></span>
+                            {{-- <p><a href="">Lost your password?</a></p> --}}
+                            <span>Don't have an account yet?<a href="{{ route('register') }}">Register now.</a></span>
                         </form>
                     </div>
                 </div>

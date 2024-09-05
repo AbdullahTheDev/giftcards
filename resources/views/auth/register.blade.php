@@ -78,9 +78,9 @@
                                 </span>
                             @enderror
 
-                            <div class="code">
+                            {{-- <div class="code">
                                 <button type="button" class="btn btn-secondary" id="send-code-btn">Send Code</button>
-                            </div>
+                            </div> --}}
 
                             <label for="first_name">First Name *</label>
                             <input type="text" name="first_name" placeholder="Enter your first name"
