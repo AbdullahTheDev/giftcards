@@ -19,8 +19,11 @@
                     <div class="setting-tabs-container">
                         <!-- Progress bar -->
                         <div class="progress-bar-container">
-                            <div class="progress-bar" id="progressBar">0% Complete!</div>
+                            <div class="progress-bar" id="progressBar" style="width: {{ $completionPercentage }}%;">
+                                {{ number_format($completionPercentage, 0) }}% Complete!
+                            </div>
                         </div>
+
 
                         <form class="form-container" method="POST" action="{{ route('update.user') }}" id="form">
                             @csrf
@@ -28,7 +31,8 @@
                                 <h3>General Setting</h3>
                                 <div class="input-group">
                                     <label for="email">Contact Email:</label>
-                                    <input type="email" disabled name="email" value="{{ $user->email }}" id="email">
+                                    <input type="email" disabled name="email" value="{{ $user->email }}"
+                                        id="email">
                                 </div>
                                 <div class="input-group">
                                     <label for="phone">Contact Phone:</label>

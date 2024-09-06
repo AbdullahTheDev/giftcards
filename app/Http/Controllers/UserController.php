@@ -11,13 +11,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
 {
-    function profile(){
+    function profile()
+    {
         $user = User::findOrFail(Auth::id());
 
 
-        if($user->qrcode == null){
+        if ($user->qrcode == null) {
             $profileUrl = route('user.profile', $user->id);
-            
+
             $qrCode = QrCode::size(200)->generate($profileUrl);
             $user->qrcode = $qrCode;
             $user->save();
@@ -26,21 +27,23 @@ class UserController extends Controller
         return view('front.dashboard');
     }
 
-    function userProfile($id) {
+    function userProfile($id)
+    {
         $user = User::findOrFail($id);
 
 
         return view('front.event', compact('user'));
     }
 
-    function userSearch(Request $request) {
+    function userSearch(Request $request)
+    {
         $request->validate([
             'user_id' => 'required|numeric'
         ]);
-        
+
         $user = User::find($request->user_id);
-        
-        if($user){
+
+        if ($user) {
             return redirect(route('user.profile', $user->id));
         }
         return redirect()->route('home')->with('warning', 'User Not Found!');
@@ -48,15 +51,68 @@ class UserController extends Controller
 
 
     // Setting
-    function setting(){
+    function setting()
+    {
         $user = Auth::user();
         $event = Event::where('user_id', $user->id)->first();
+        
+        $completed = 0;
+        $points = [
+            "email" => 10,
+            "phone" => 10,
+            "name" => 10,
+            "image" => 10,
+            "banner" => 10,
+            "event_date" => 10,
+            "description" => 10,
+            "location" => 10,
+            "payment_details" => 20,
+        ];
 
-        return view('front.setting', compact('user', 'event'));
+        // Check User fields
+        if (!empty($user->email)) {
+            $completed += $points["email"];
+        }
+        if (!empty($user->phone)) {
+            $completed += $points["phone"];
+        }
+        // Assuming payment_details is a column in the User table
+        if (!empty($user->payment_details)) {
+            $completed += $points["payment_details"];
+        }
+
+        // Check Event fields
+        if ($event) {
+            if (!empty($event->name)) {
+                $completed += $points["name"];
+            }
+            if (!empty($event->image)) {
+                $completed += $points["image"];
+            }
+            if (!empty($event->banner)) {
+                $completed += $points["banner"];
+            }
+            if (!empty($event->location)) {
+                $completed += $points["location"];
+            }
+            if (!empty($event->event_date)) {
+                $completed += $points["event_date"];
+            }
+            if (!empty($event->description)) {
+                $completed += $points["description"];
+            }
+        }
+
+        // Calculate total points and completion percentage
+        $totalPoints = array_sum($points);
+        $completionPercentage = ($completed / $totalPoints) * 100;
+
+        return view('front.setting', compact('user', 'event', 'completionPercentage'));
     }
 
-    function updateUser(Request $request){
-        try{
+    function updateUser(Request $request)
+    {
+        try {
             $request->validate([
                 'name' => 'unique:events,name',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add validation for images
@@ -64,7 +120,7 @@ class UserController extends Controller
             ]);
             $user = User::find(Auth::id());
             $user->update([
-                'phone' => $request->phone 
+                'phone' => $request->phone
             ]);
 
             $event = Event::where('user_id', $user->id)->first();
@@ -77,7 +133,7 @@ class UserController extends Controller
             } else {
                 $imagePath = $event->image;
             }
-    
+
             // Handle banner upload
             if ($request->hasFile('banner')) {
                 $banner = $request->file('banner');
@@ -97,7 +153,7 @@ class UserController extends Controller
                 'location' => $request->location,
             ]);
             return redirect()->back()->with('success', 'Information Updated Successfully!');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
