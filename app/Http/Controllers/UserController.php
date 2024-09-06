@@ -113,11 +113,22 @@ class UserController extends Controller
     function updateUser(Request $request)
     {
         try {
+            $event = Event::where('user_id', Auth::id())->first();
+
+            $messages = [
+                'name.unique' => 'The event name is already taken. Please choose a different name.',
+                'name.min' => 'The event number must be at least 6 digits.',
+                'name.max' => 'The event number must not be greater than 7 digits.',
+                'name.numeric' => 'The event name must be a numeric value.',
+            ];
+            
             $request->validate([
-                'name' => 'unique:events,name',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add validation for images
-                'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add validation for banners
-            ]);
+                'name' => 'numeric|min:100000|max:9999999|unique:events,name,' . $event->id, // Correct range check
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ], $messages);
+
+            
             $user = User::find(Auth::id());
             $user->update([
                 'phone' => $request->phone

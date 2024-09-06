@@ -44,7 +44,7 @@
                                 <h3>Event Setup</h3>
                                 <div class="input-group">
                                     <label for="eventName">Event Name:</label>
-                                    <input type="text" name="event" value="{{ $event->name ?? '' }}" id="eventName">
+                                    <input type="text" name="name" value="{{ $event->name ?? '' }}" id="eventName">
                                 </div>
                                 <div class="input-group">
                                     <label for="eventImage">Event Image:</label>
