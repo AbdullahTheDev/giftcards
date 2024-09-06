@@ -33,10 +33,10 @@ class UserController extends Controller
 
     function userSearch(Request $request) {
         $request->validate([
-            'search' => 'required|numeric'
+            'user_id' => 'required|numeric'
         ]);
         
-        $user = User::find($request->search);
+        $user = User::find($request->user_id);
         
         if($user){
             return redirect(route('user.profile', $user->id));
