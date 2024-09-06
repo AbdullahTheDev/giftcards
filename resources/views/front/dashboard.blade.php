@@ -130,6 +130,9 @@
               <p><strong> {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}</strong></p>
             </li>
             <li>Your profile URL: <a href="{{ route('user.profile', \Auth::id()) }}">{{ route('user.profile', \Auth::id()) }}</a></li>
+            <li>
+              Last Login: <strong>{{ \Carbon\Carbon::parse(\Auth::user()->last_login)->format('h:i (d M Y)') }}</strong> 
+            </li>
           </ul>
         </div>
         <div class="col-md-6">
