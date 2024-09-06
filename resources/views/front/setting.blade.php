@@ -25,7 +25,7 @@
                         </div>
 
 
-                        <form class="form-container" method="POST" action="{{ route('update.user') }}" id="form">
+                        <form class="form-container" method="POST" action="{{ route('update.user') }}" id="form" enctype="multipart/form-data">
                             @csrf
                             <div class="general-settings">
                                 <h3>General Setting</h3>
@@ -48,11 +48,11 @@
                                 </div>
                                 <div class="input-group">
                                     <label for="eventImage">Event Image:</label>
-                                    <input type="file" name="image" value="{{ $event->image ?? '' }}" id="eventImage">
+                                    <input type="file" name="image" id="eventImage" accept="image/*" onchange="previewImage(event, 'eventImagePreview')">
                                     <!-- Show existing image if available -->
                                     @if ($event->image ?? null)
                                         <img id="eventImagePreview"
-                                            src="{{ asset('path/to/your/images/' . $event->image) }}" alt="Event Image"
+                                            src="{{ asset($event->image) }}" alt="Event Image"
                                             style="max-width: 200px; display: block; margin-top: 10px;">
                                     @else
                                         <img id="eventImagePreview"
@@ -69,12 +69,12 @@
                                 --}}
                                 <div class="input-group">
                                     <label for="eventBanner">Event Banner:</label>
-                                    <input type="file" name="banner" value="{{ $event->banner ?? '' }}"
-                                        id="eventBanner">
+                                    <input type="file" name="banner" id="eventBanner" accept="image/*" onchange="previewImage(event, 'eventBannerPreview')">
+
 
                                     @if ($event->banner ?? null)
                                         <img id="eventBannerPreview"
-                                            src="{{ asset('path/to/your/banners/' . $event->banner) }}" alt="Event Banner"
+                                            src="{{ asset($event->banner) }}" alt="Event Banner"
                                             style="max-width: 200px; display: block; margin-top: 10px;">
                                     @else
                                         <img id="eventBannerPreview"
@@ -82,10 +82,9 @@
                                     @endif
                                 </div>
                                 <div class="input-group">
-                                    <label for="eventDate">Event Date:</label>
-                                    <input type="date" name="event_date" value="{{ $event->event_date ?? '' }}"
-                                        id="eventDate">
-                                </div>
+                                  <label for="eventDate">Event Date:</label>
+                                  <input type="date" name="event_date" value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}" id="eventDate">
+                                </div>                              
                                 <div class="input-group">
                                     <label for="eventDescription">Event Description:</label>
                                     <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
