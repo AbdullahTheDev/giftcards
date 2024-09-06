@@ -33,7 +33,7 @@ class UserController extends Controller
 
     function userSearch(Request $request) {
         $request->validate([
-            'search' => 'required'
+            'search' => 'required|numeric'
         ]);
         
         $user = User::find($request->search);
@@ -41,6 +41,6 @@ class UserController extends Controller
         if($user){
             return redirect(route('user.profile', $user->id));
         }
-        return redirect()->route('home')->with('success', 'User Not Found!');
+        return redirect()->route('home')->with('warning', 'User Not Found!');
     }
 }
