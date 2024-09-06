@@ -30,4 +30,17 @@ class UserController extends Controller
 
         return view('front.event', compact('user'));
     }
+
+    function userSearch(Request $request) {
+        $request->validate([
+            'search' => 'required'
+        ]);
+        
+        $user = User::find($request->search);
+        
+        if($user){
+            return redirect(route('user.profile', $user->id));
+        }
+        return redirect()->route('home')->with('success', 'User Not Found!');
+    }
 }

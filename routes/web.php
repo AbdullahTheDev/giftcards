@@ -19,9 +19,13 @@ use App\Http\Controllers\VerificationController;
 Route::post('/send-verification-code', [VerificationController::class, 'sendVerificationCode'])->name('send.verification.code');
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
+
+Route::post('/user/search/', [UserController::class, 'userSearch'])->name('user.search');
+
 Route::get('/user/{id}', [UserController::class, 'userProfile'])->name('user.profile');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

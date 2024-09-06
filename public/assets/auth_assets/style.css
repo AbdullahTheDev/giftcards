@@ -76,7 +76,7 @@ p{
 .login-register{
     padding: 12px;
 }
-button.Login {
+.button .Login {
     background-color: #b09043;
     padding: 10px;
     width: 28%;
@@ -89,11 +89,11 @@ button.Login {
     margin-right: 70px;
     font-family: "Playfair Display", serif;
 }
-button.Login:hover{
+.button .Login:hover{
     background-color: #5e5e5e;
     color: #fefefe;
 }
-button.Register{
+.button .Register{
     background-color: #767676;
     padding: 10px;
     width: 28%;
@@ -105,7 +105,7 @@ button.Register{
     border-color: #b08f4300;
     font-family: "Playfair Display", serif;
 }
-button.Register:hover{
+.button .Register:hover{
     background-color: #343838;
     color: #fefefe;
 }
