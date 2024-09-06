@@ -63,12 +63,23 @@
                             <h3>Login</h3>
                             <p>Welcome To My Wishing Well.</p>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul style="margin: 0 !important; list-style: none;">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <form action="{{ route('login') }}" method="POST" class="main-form form-group">
                             @csrf
                             <label for="email">Email address *</label>
                             <input type="email" name="email" placeholder="" class="form-control">
+                            
                             <label for="password">Password *</label>
                             <input type="password" name="password" placeholder="" class="form-control">
+                            
                             <input type="submit" value="Login" id="submit-btn" class="form-control">
                             <div class="d-block mt-2">
                                 <label for="remember">Remember Me</label>
