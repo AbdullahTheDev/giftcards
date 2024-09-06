@@ -33,6 +33,7 @@ Route::get('/user/{id}', [UserController::class, 'userProfile'])->name('user.pro
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
+    Route::get('/setting', [UserController::class, 'setting'])->name('setting');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

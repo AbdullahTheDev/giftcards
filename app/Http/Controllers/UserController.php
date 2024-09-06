@@ -43,4 +43,12 @@ class UserController extends Controller
         }
         return redirect()->route('home')->with('warning', 'User Not Found!');
     }
+
+
+    // Setting
+    function setting(){
+        $user = Auth::user();
+
+        return view('front.setting', compact('user'));
+    }
 }
