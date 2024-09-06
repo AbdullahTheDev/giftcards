@@ -16,23 +16,24 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::id());
 
 
-        if ($user->qrcode == null) {
+        // if ($user->qrcode == null) {
             $profileUrl = route('user.profile', $user->id);
 
             $qrCode = QrCode::size(200)->generate($profileUrl);
             $user->qrcode = $qrCode;
             $user->save();
-        }
+        // }
 
-        return view('front.dashboard');
+        return view('front.dashboard', compact('user'));
     }
 
     function userProfile($id)
     {
         $user = User::findOrFail($id);
 
+        $event = Event::where('user_id', $user->id)->first();
 
-        return view('front.event', compact('user'));
+        return view('front.event', compact('user', 'event'));
     }
 
     function userSearch(Request $request)

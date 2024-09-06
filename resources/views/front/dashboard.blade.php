@@ -42,7 +42,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        {!! \Auth::user()->qrcode !!}
+                        {!! $user ->qrcode !!}
                         {{-- <img src="{{ asset('assets/assets_admin/img/scan.png') }}" alt=""> --}}
                     </div>
                 </div>
