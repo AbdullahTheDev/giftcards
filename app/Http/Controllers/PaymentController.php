@@ -15,6 +15,8 @@ class PaymentController extends Controller
 
     public function processPayment(Request $request)
     {
+        return $request->all();
+        
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {

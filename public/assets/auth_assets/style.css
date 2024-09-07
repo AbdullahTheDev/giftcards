@@ -409,8 +409,8 @@ input#submit-btn {
 
 
 
-/ event  /
-form#send-gift-frm h3 {
+/* / event  / */
+#send-gift-frm h3 {
     font-family: playfair display, sans-serif;
     font-size: 34px;
     line-height: 40px;
@@ -420,7 +420,7 @@ form#send-gift-frm h3 {
     color: #b09042;
 }
 
-form#send-gift-frm input {
+#send-gift-frm input {
     border: 2px solid #b09042;
     border-radius: 10px;
     color: #000;
@@ -434,13 +434,13 @@ form#send-gift-frm input {
     font-weight: 700;
 }
 
-form#send-gift-frm label {
+#send-gift-frm label {
     display: flex;
     justify-content: center;
     margin-bottom: 1%;
 }
 
-form#send-gift-frm textarea {
+#send-gift-frm textarea {
     border: 3px #b09042 solid !important;
     padding: 17px 20px;
     border-radius: 10px;
@@ -460,7 +460,7 @@ input#send-gift {
     width: 30%;
 }
 
-form#send-gift-frm {
+#send-gift-frm {
     width: 50%;
     display: block;
     margin: 0 auto;

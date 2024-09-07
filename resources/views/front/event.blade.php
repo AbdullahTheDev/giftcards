@@ -64,23 +64,25 @@
                         </div>
                     </div>
 
+                    <form action="{{ route('process.payment') }}" method="POST" id="payment-form" class="p-3">
+                        <div class="gift-amount-main">
 
-                    <div class="gift-amount-main">
+                            <div id="send-gift-frm">
 
-                        <form action="" class="form-group" id="send-gift-frm">
-                            <h3>Your Gift</h3>
-                            <label for=""><b>Enter your gift amount ( $ )</b></label>
-                            <input type="text" placeholder="" class="form-control">
-                            <h3 class="text-start">Message</h3>
-                            <label for=""><i>Your special message for the host</i></label>
-                            <textarea name="" id="" rows="3" class="form-control"></textarea>
-                            <input type="submit" value="Send Gift" id="send-gift" class="form-control">
+                                <h3>Your Gift</h3>
+                                <label for=""><b>Enter your gift amount ( $ )</b></label>
+                                <input type="text" placeholder="" class="form-control">
+                                <h3 class="text-start">Message</h3>
+                                <label for=""><i>Your special message for the host</i></label>
+                                <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                <input type="submit" value="Send Gift" id="send-gift" class="form-control">
+                                
+                            </div>
+                            {{-- </form> --}}
 
-                        </form>
-
-                        <div class="container form-container">
-                            <h4 class="form-title">Your Details</h4>
-                            <form>
+                            <div class="container form-container">
+                                <h4 class="form-title">Your Details</h4>
+                                {{-- <form> --}}
                                 <div class="mb-3 row">
                                     <div class="col-md-6">
                                         <label for="firstName" class="form-label">First name *</label>
@@ -162,10 +164,9 @@
                                     </div>
                                 </div>
 
-                            </form>
+                                {{-- </form> --}}
 
-                            <form action="{{ route('process.payment') }}" method="POST" id="payment-form"
-                                class="p-3">
+
                                 @csrf
                                 <div class="input">
                                     <div id="card-element" class="form-control">
@@ -178,10 +179,10 @@
 
                                 <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Your transaction is
                                     secured with SSL certificate</span>
-                            </form>
 
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
