@@ -48,8 +48,12 @@
                 </div>
                 <div class="col-md-3">
                     <div class="header-btn">
-                        <a href="" class="registerr">Register</a>
-                        <a href="" class="loginn">Login</a>
+                        @if (!Auth::check())
+                            <a href="{{ route('register') }}" class="registerr">Register</a>
+                            <a href="{{ route('login') }}" class="loginn">Login</a>
+                        @else
+                            <a href="{{ route('dashboard') }}" class="registerr">Dashboard</a>
+                        @endif
                     </div>
                 </div>
             </div>
