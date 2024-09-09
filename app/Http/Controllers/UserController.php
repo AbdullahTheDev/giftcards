@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Gift;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,6 +16,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail(Auth::id());
 
+        $totalGifts = Gift::where('user_id', Auth::id())->count();
+        $amount = Gift::where('user_id', Auth::id())->sum('amount');
 
         // if ($user->qrcode == null) {
             $profileUrl = route('user.profile', $user->id);
@@ -24,7 +27,7 @@ class UserController extends Controller
             $user->save();
         // }
 
-        return view('front.dashboard', compact('user'));
+        return view('front.dashboard', compact('user', 'amount', 'totalGifts'));
     }
 
     function userProfile($id)

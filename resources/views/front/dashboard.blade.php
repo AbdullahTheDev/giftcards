@@ -59,8 +59,8 @@
                             <i class="material-icons opacity-10">weekend</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Recieve this Month</p>
-                            <h4 class="mb-0">$ 53k</h4>
+                            <p class="text-sm mb-0 text-capitalize">Gift Amount</p>
+                            <h4 class="mb-0">$ {{ $amount }}</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
@@ -74,8 +74,8 @@
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Recieve this Month</p>
-                            <h4 class="mb-0">0 Gifts</h4>
+                            <p class="text-sm mb-0 text-capitalize">Recieved Gifts</p>
+                            <h4 class="mb-0">{{ $totalGifts }} Gifts</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
