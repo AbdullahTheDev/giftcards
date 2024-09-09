@@ -43,10 +43,14 @@ Route::get('/payment/failure', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
     Route::get('/setting', [UserController::class, 'setting'])->name('setting');
     Route::get('/gifts', [GiftController::class, 'index'])->name('gifts');
+    Route::get('/withdraw', [GiftController::class, 'index'])->name('withdraw');
+    Route::get('/reports', [GiftController::class, 'index'])->name('reports');
 
     Route::post('/update/user', [UserController::class, 'updateUser'])->name('update.user');
 
