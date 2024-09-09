@@ -25,11 +25,93 @@
 </head>
 
 <body>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="main-logo">
+                        <a href="">
+                            <img src="https://wishify.com.au/wp-content/uploads/2024/08/Wishify-Logo.png"
+                                alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <nav class="header-menu">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">FAQ's</a></li>
+                            <li><a href="">Caontact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-3">
+                    <div class="header-btn">
+                        <a href="" class="registerr">Register</a>
+                        <a href="" class="loginn">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div>
 
         @yield('content')
 
     </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="main-logo">
+                        <a href="">
+                            <img src="https://wishify.com.au/wp-content/uploads/2024/08/Wishify-Logo.png"
+                                alt="">
+                        </a>
+                        <p>wishify is the new and improved way of allowing guests to gift money for any event. Allows
+                            the host, to receive money gifts in a convenient, secure, and environmentally friendly way
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-list">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">FAQ's</a></li>
+                            <li><a href="">Caontact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-list">
+                        <h5>Hosts</h5>
+                        <ul>
+                            <li><a href="">Register</a></li>
+                            <li><a href="">Login</a></li>
+                            <li><a href="">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-list">
+                        <h5>Stay in touch</h5>
+                        <form action="">
+                            <input type="email" class="form-control" placeholder="Enter Your Email...">
+                            <input type="submit" value="SUMBIT" id="footer_send">
+                        </form>
+                        <img src="https://wishify.com.au/wp-content/uploads/2024/08/image-21.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="footer-last">Copyright © 2024 | UniquelogoDesign | All Rights Reserved</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
