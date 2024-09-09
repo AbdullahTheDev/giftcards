@@ -64,19 +64,29 @@
                         </div>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul style="margin: 0 !important; list-style: none;">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('process.payment') }}" method="POST" id="payment-form" class="p-3">
                         <div class="gift-amount-main">
 
                             <div id="send-gift-frm">
 
                                 <h3>Your Gift</h3>
-                                <label for=""><b>Enter your gift amount ( $ )</b></label>
-                                <input type="text" placeholder="" class="form-control">
+                                <label for="amount"><b>Enter your gift amount ($)</b></label>
+                                <input type="number" name="amount" id="amount" placeholder="" class="form-control" pattern="[0-9]*" title="Please enter only numbers.">
                                 <h3 class="text-start">Message</h3>
                                 <label for=""><i>Your special message for the host</i></label>
-                                <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                <textarea name="message" id="" rows="3" class="form-control"></textarea>
                                 <input type="submit" value="Send Gift" id="send-gift" class="form-control">
-                                
+
                             </div>
                             {{-- </form> --}}
 
@@ -86,17 +96,18 @@
                                 <div class="mb-3 row">
                                     <div class="col-md-6">
                                         <label for="firstName" class="form-label">First name *</label>
-                                        <input type="text" class="form-control" id="firstName" required>
+                                        <input type="text" name="first_name" class="form-control" id="firstName"
+                                            required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lastName" class="form-label">Last name *</label>
-                                        <input type="text" class="form-control" id="lastName" required>
+                                        <input type="text" name="last_name" class="form-control" id="lastName" required>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="country" class="form-label">Country/Region *</label>
-                                    <select id="country" class="form-select" required>
+                                    <select id="country" name="country" class="form-select" required>
                                         <option selected>Australia</option>
                                         <!-- Add more options as needed -->
                                     </select>
@@ -104,18 +115,18 @@
 
                                 <div class="mb-3">
                                     <label for="streetAddress" class="form-label">Street address *</label>
-                                    <input type="text" class="form-control" id="streetAddress"
+                                    <input type="text" name="address" class="form-control" id="streetAddress"
                                         placeholder="House number and street name" required>
                                 </div>
 
                                 <div class="mb-3 row">
                                     <div class="col-md-6">
                                         <label for="suburb" class="form-label">Suburb *</label>
-                                        <input type="text" class="form-control" id="suburb" required>
+                                        <input type="text" name="suburb" class="form-control" id="suburb" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="state" class="form-label">State *</label>
-                                        <select id="state" class="form-select" required>
+                                        <select id="state" name="state" class="form-select" required>
                                             <option selected>New South Wales</option>
                                             <!-- Add more options as needed -->
                                         </select>
@@ -124,24 +135,24 @@
 
                                 <div class="mb-3">
                                     <label for="postcode" class="form-label">Postcode *</label>
-                                    <input type="text" class="form-control" id="postcode" required>
+                                    <input type="text" name="postcode" class="form-control" id="postcode" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone *</label>
-                                    <input type="tel" class="form-control" id="phone" required>
+                                    <input type="tel" name="phone" class="form-control" id="phone" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address *</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" name="email" class="form-control" id="email" required>
                                 </div>
 
                                 <div class="total-container">
                                     <h4>Your Gift</h4>
                                     <div class="d-flex justify-content-between">
                                         <span>Gift amount</span>
-                                        <span>$999.00</span>
+                                        <span>$<span id="amountVal">0.00</span> </span>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span>Credit card surcharge</span>
@@ -306,6 +317,23 @@
             if (!valid) {
                 event.preventDefault();
             }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Listen for input changes on the amount field
+            $('#amount').on('input', function() {
+
+                // Get the current value of the input
+                var amountValue = $(this).val();
+
+                // Update the hidden input value
+                $('#amountValInput').val(amountValue);
+
+                // Update the display element with the new amount
+                $('#amountVal').text(amountValue);
+            });
         });
     </script>
 @endsection

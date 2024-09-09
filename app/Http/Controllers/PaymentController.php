@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gift;
+use App\Models\Sender;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
@@ -15,18 +17,52 @@ class PaymentController extends Controller
 
     public function processPayment(Request $request)
     {
-        return $request->all();
-        
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'suburb' => 'required',
+            'state' => 'required',
+            'postcode' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'amount' => 'required|numeric',
+            'message' => 'required'
+        ]);
 
         try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
             $token = $request->input('stripeToken');
 
-            Charge::create([
-                'amount' => 1000, // Amount in cents
+            $payment_details = Charge::create([
+                'amount' => $request->amount * 100, // Amount in cents
                 'currency' => 'usd',
                 'source' => $token,
-                'description' => 'Test Payment',
+                'description' => $request->message,
+            ]);
+
+            $sender = Sender::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'country' => $request->country,
+                'address' => $request->address,
+                'suburb' => $request->suburb,
+                'state' => $request->state,
+                'postcode' => $request->postcode,
+                'phone' => $request->phone,
+                'email' => $request->email
+            ]);
+            
+            $gift = Gift::create([
+                'gift_id' => 213,
+                'sender' => $sender->id,
+                'message' => $request->message,
+                'amount' => $request->amount,
+                'admin_fee' => 5,
+                'date' => now(),
+                'payment_details' => $payment_details,
             ]);
 
             return redirect()->route('payment.success')->with('success', 'Payment successful!');
