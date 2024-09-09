@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\GiftRecieve;
+use App\Mail\Payment;
 use App\Models\Gift;
 use App\Models\Sender;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Str;
 use Stripe\Stripe;
 use Stripe\Charge;
@@ -70,6 +74,19 @@ class PaymentController extends Controller
                 'date' => now(),
                 'payment_details' => $payment_details,
             ]);
+
+            $data = [
+                'name' => $request->first_name . ' ' . $request->last_name,
+            ];
+
+            $user = User::find($request->user_id);
+
+            Mail::to($user->email)->send(new GiftRecieve($data));
+
+            $data = [
+                'name' => $user->first_name . ' ' . $user->last_name,
+            ];
+            Mail::to($request->email)->send(new Payment($data));
 
             return redirect()->route('payment.success')->with('success', 'Payment successful!');
         } catch (\Exception $e) {
