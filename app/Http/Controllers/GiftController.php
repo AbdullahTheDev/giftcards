@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gift;
 use Exception;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
+    function index() {
+        $gifts = Gift::where('');
+        return view('front.gifts');
+    }
     function sendGift(Request $request){
         try{
 

@@ -75,6 +75,7 @@
                     @endif
 
                     <form action="{{ route('process.payment') }}" method="POST" id="payment-form" class="p-3">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}" id="">
                         <div class="gift-amount-main">
 
                             <div id="send-gift-frm">

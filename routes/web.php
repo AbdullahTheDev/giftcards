@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::get('/payment/failure', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
     Route::get('/setting', [UserController::class, 'setting'])->name('setting');
+    Route::get('/gifts', [GiftController::class, 'index'])->name('gifts');
 
     Route::post('/update/user', [UserController::class, 'updateUser'])->name('update.user');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gift;
 use App\Models\Sender;
 use Illuminate\Http\Request;
+use Str;
 use Stripe\Stripe;
 use Stripe\Charge;
 
@@ -28,7 +29,8 @@ class PaymentController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
             'amount' => 'required|numeric',
-            'message' => 'required'
+            'message' => 'required',
+            'user_id' => 'required'
         ]);
 
         try {
@@ -54,9 +56,13 @@ class PaymentController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email
             ]);
-            
+
+            $giftId = 'GFT-' . strtoupper(Str::random(8));
+
+            // Create the Gift with the generated ID
             $gift = Gift::create([
-                'gift_id' => 213,
+                'gift_id' => $giftId,
+                'user_id' => $request->user_id,
                 'sender' => $sender->id,
                 'message' => $request->message,
                 'amount' => $request->amount,
