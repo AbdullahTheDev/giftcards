@@ -24,29 +24,29 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card mt-5">
                 <div class="card-body">
-                    <table>
+                    <table class="table" id="gift-table">
                         <thead>
                             <tr>
-                                <th>Gift ID</th>
-                                <th>Sender</th>
-                                <th>Message</th>
-                                <th>Amount</th>
-                                <th>Admin Fee</th>
-                                <th>Date</th>
+                                <th class="text-center">Gift ID</th>
+                                <th class="text-center">Sender</th>
+                                <th class="text-center">Message</th>
+                                <th class="text-center">Amount</th>
+                                <th class="text-center">Admin Fee</th>
+                                <th class="text-center">Date</th>
                                 {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($gifts as $gift)
                                 <tr>
-                                    <td>{{ $gift?->gift_id }}</td>
-                                    <td>{{ $gift?->sender }}</td>
-                                    <td>{{ $gift?->message }}</td>
-                                    <td>{{ $gift?->amount }}</td>
-                                    <td>%{{ $gift?->admin_fee }}</td>
-                                    <td>{{ \CArbon\Carbon::parse($gift?->date)->format('Y M d') }}</td>
+                                    <td class="text-center">{{ $gift?->gift_id }}</td>
+                                    <td class="text-center">{{ $gift?->senderInfo->first_name . ' ' . $gift?->senderInfo->last_name }}</td>
+                                    <td class="text-center">{{ $gift?->message }}</td>
+                                    <td class="text-center">{{ $gift?->amount }}</td>
+                                    <td class="text-center">{{ $gift?->admin_fee }}%</td>
+                                    <td class="text-center">{{ \CArbon\Carbon::parse($gift?->date)->format('Y M d') }}</td>
                                     {{-- <td>{{ $gift?->date }}</td> --}}
                                 </tr>
                             @endforeach
@@ -55,4 +55,11 @@
                 </div>
             </div>
         </div>
+    @endsection
+    @section('scripts')
+    <script>
+         $(document).ready(function() {
+            $('#gift-table').DataTable();
+        });
+    </script>
     @endsection

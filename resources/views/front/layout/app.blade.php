@@ -32,6 +32,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.0/dist/jquery.min.js"></script>
 
+    <link href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -438,6 +439,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('assets/assets_admin/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

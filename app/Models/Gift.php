@@ -10,4 +10,13 @@ class Gift extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function senderInfo(){
+        return $this->belongsTo(Sender::class, 'sender');
+    }
+
+    
+    public function user(){
+        return $this->belongsTo(Sender::class, 'user_id');
+    }
 }
