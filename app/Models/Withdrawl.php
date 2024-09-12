@@ -10,4 +10,5 @@ class Withdrawl extends Model
     use HasFactory;
 
     protected $guarded = [];
+
 }

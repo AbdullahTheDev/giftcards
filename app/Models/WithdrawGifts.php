@@ -14,4 +14,8 @@ class WithdrawGifts extends Model
     public function gifts(){
         return $this->belongsTo(Gift::class);
     }
+
+    public function withdraw(){
+        return $this->belongsTo(Withdrawl::class);
+    }
 }

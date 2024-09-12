@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class WithdrawController extends Controller
 {
     function index(){
-        $gifts = Gift::where('user_id', Auth::id())->get();
+        $withdrawls = Withdrawl::where('user_id', Auth::id())->get();
 
-        return view('front.withdraw.withdraw', compact('gifts'));
+        return view('front.withdraw.withdraw', compact('withdrawls'));
     }
 
     function requestWithdrawPage(Request $request){
