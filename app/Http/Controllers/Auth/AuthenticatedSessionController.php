@@ -34,6 +34,9 @@ class AuthenticatedSessionController extends Controller
         $user->last_login = now();
         $user->save();
         
+        if($user->role == 'admin'){
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
