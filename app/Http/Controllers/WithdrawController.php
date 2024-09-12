@@ -18,7 +18,7 @@ class WithdrawController extends Controller
     }
 
     function requestWithdrawPage(Request $request){
-        $gifts = Gift::where('user_id', Auth::id())->get();
+        $gifts = Gift::where('user_id', Auth::id())->where('requested', 0)->get();
 
         return view('front.withdraw.gifts', compact('gifts'));
     }

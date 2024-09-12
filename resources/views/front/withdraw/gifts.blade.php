@@ -32,6 +32,7 @@
                         <table class="table" id="gift-table">
                             <thead>
                                 <tr>
+                                    <th class="text-center">Select</th> <!-- Add column for checkboxes -->
                                     <th class="text-center">#</th>
                                     <th class="text-center">Gift ID</th>
                                     <th class="text-center">Sender</th>
@@ -39,12 +40,14 @@
                                     <th class="text-center">Amount</th>
                                     <th class="text-center">Admin Fee</th>
                                     <th class="text-center">Date</th>
-                                    <th class="text-center">Select</th> <!-- Add column for checkboxes -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($gifts as $gift)
                                     <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" style="width: 20px; height: 20px;" name="gift_ids[]" value="{{ $gift->id }}">
+                                        </td> <!-- Add checkbox -->
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">{{ $gift?->gift_id }}</td>
                                         <td class="text-center">
@@ -55,9 +58,6 @@
                                         <td class="text-center">{{ $gift?->admin_fee }}%</td>
                                         <td class="text-center">{{ \Carbon\Carbon::parse($gift?->date)->format('Y M d') }}
                                         </td>
-                                        <td class="text-center">
-                                            <input type="checkbox" name="gift_ids[]" value="{{ $gift->id }}">
-                                        </td> <!-- Add checkbox -->
                                     </tr>
                                 @endforeach
                             </tbody>
