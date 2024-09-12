@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -46,7 +47,9 @@ Route::get('/payment/failure', function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->group(function (){
-        Route::get('/dashboard', [UserController::class, 'profile'])->name('admin.dashboard');
+        Route::get('/dashboard', [AdminController::class, 'profile'])->name('admin.dashboard');
+
+        Route::get('/withdraw', [WithdrawController::class, 'adminWithdraw'])->name('withdraw');
     });
 });
 

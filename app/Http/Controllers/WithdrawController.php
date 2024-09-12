@@ -17,6 +17,12 @@ class WithdrawController extends Controller
         return view('front.withdraw.withdraw', compact('withdrawls'));
     }
 
+    function adminWithdraw(){
+        $withdrawls = Withdrawl::all();
+
+        return view('front.withdraw.withdraw', compact('withdrawls'));
+    }
+
     function requestWithdrawPage(Request $request){
         $gifts = Gift::where('user_id', Auth::id())->where('requested', 0)->get();
 

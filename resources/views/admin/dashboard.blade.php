@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+@extends('admin.layout.app')
 
 @section('content')
 
@@ -32,9 +32,6 @@
                                 <p><strong> {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}</strong>
                                 </p>
                             </li>
-                            <li>Your profile URL: <a
-                                    href="{{ route('user.profile', \Auth::id()) }}">{{ route('user.profile', \Auth::id()) }}</a>
-                            </li>
                             <li>
                                 Last Login:
                                 <strong>{{ \Carbon\Carbon::parse(\Auth::user()->last_login)->format('h:i (d M Y)') }}</strong>
@@ -42,11 +39,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <div style="width: max-content; display: flex; flex-direction: column;">
-                            {!! $user ->qrcode !!}
-                            <a href="{{ route('dashboard') }}" style="display: flex; align-content: center; justify-content: center; margin-top: 6px;"><i style="margin-top: 2px" class="material-icons opacity-10">cached</i> Regenerate  </a>
-                        </div>
-                            {{-- <img src="{{ asset('assets/assets_admin/img/scan.png') }}" alt=""> --}}
+                        
                     </div>
                 </div>
             </div>
@@ -62,8 +55,8 @@
                             <i class="material-icons opacity-10">weekend</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Gift Amount</p>
-                            <h4 class="mb-0">$ {{ $amount }}</h4>
+                            <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                            <h4 class="mb-0">{{ $totalUsers }}</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
@@ -78,7 +71,7 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Recieved Gifts</p>
-                            <h4 class="mb-0">{{ $totalGifts }} Gifts</h4>
+                            <h4 class="mb-0"></h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
