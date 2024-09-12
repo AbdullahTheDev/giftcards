@@ -40,9 +40,16 @@ class WithdrawController extends Controller
 
                 $amount += $gift->amount;
             }
-            return $request->all();
+
+            $withd = Withdrawl::find($withdrawl->id);
+            $withd->invoice_id = Auth::id() . (time() % 100000);
+            $withd->amount = $amount;
+            $withd->save();
+
+
+            // return $request->all();
             
-            return redirect()->back()->with('success', 'Withdrawl request successfully!');
+            return redirect()->back()->with('success', 'Withdrawl request sent successfully!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
