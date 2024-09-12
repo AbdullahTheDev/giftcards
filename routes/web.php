@@ -44,7 +44,11 @@ Route::get('/payment/failure', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('admin')->group(function (){
+        Route::get('/dashboard', [UserController::class, 'profile'])->name('admin.dashboard');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
