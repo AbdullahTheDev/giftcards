@@ -56,7 +56,7 @@
                                         <td class="text-center">{{ \Carbon\Carbon::parse($gift?->date)->format('Y M d') }}
                                         </td>
                                         <td class="text-center">
-                                            <input type="checkbox" name="gifts[]" value="{{ $gift->gift_id }}">
+                                            <input type="checkbox" name="gift_ids[]" value="{{ $gift->id }}">
                                         </td> <!-- Add checkbox -->
                                     </tr>
                                 @endforeach

@@ -25,6 +25,8 @@ class WithdrawController extends Controller
     function requestWithdraw(Request $request){
         try {
 
+            // return $request->all();
+
             $withdrawl = Withdrawl::create([
                 'user_id' => Auth::id()
             ]);
@@ -32,6 +34,8 @@ class WithdrawController extends Controller
 
             foreach($request->gift_ids as $gift_id){
                 $gift = Gift::find($gift_id);
+                $gift->requested = 1;
+                $gift->save();
 
                 $withdrawGifts = WithdrawGifts::create([
                     'gift_id' => $gift_id,
@@ -44,6 +48,7 @@ class WithdrawController extends Controller
             $withd = Withdrawl::find($withdrawl->id);
             $withd->invoice_id = Auth::id() . (time() % 100000);
             $withd->amount = $amount;
+            $withd->admin_fees = 5;
             $withd->save();
 
 
