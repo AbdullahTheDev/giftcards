@@ -131,16 +131,16 @@
                     <form class="payment-form" method="POST" action="{{ route('update.payament.user') }}">
                         @csrf
                         <label for="accountName">Account Name</label>
-                        <input type="text" name="accountName" id="accountName" placeholder="Enter your card number">
+                        <input type="text" name="accountName" value="{{ $paymentDetails->accountName }}" id="accountName" placeholder="Enter your card number">
 
                         <label for="BSBNumber">BSB Number</label>
-                        <input type="text" name="BSBNumber" id="BSBNumber">
+                        <input type="text" name="BSBNumber" value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
 
                         <label for="accountNumber">Account Number</label>
-                        <input type="text" name="accountNumber" id="accountNumber" placeholder="Enter your card number">
+                        <input type="text" name="accountNumber" value="{{ $paymentDetails->accountNumber }}" id="accountNumber" placeholder="Enter your card number">
 
                         <label for="bankName">Bank Name</label>
-                        <input type="text" name="bankName" id="bankName" placeholder="Enter name on card">
+                        <input type="text" name="bankName" value="{{ $paymentDetails->bankName }}" id="bankName" placeholder="Enter name on card">
 
                         <button type="submit">Save</button>
                     </form>

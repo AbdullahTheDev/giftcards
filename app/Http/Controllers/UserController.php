@@ -59,6 +59,7 @@ class UserController extends Controller
     function setting()
     {
         $user = Auth::user();
+        $paymentDetails = PaymentDetail::where('user_id', $user->id)->first();
         $event = Event::where('user_id', $user->id)->first();
 
         $completed = 0;
@@ -112,7 +113,7 @@ class UserController extends Controller
         $totalPoints = array_sum($points);
         $completionPercentage = ($completed / $totalPoints) * 100;
 
-        return view('front.setting', compact('user', 'event', 'completionPercentage'));
+        return view('front.setting', compact('user', 'event', 'completionPercentage', 'paymentDetails'));
     }
 
     function updateUser(Request $request)
