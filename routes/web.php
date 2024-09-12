@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports', [GiftController::class, 'index'])->name('reports');
 
     Route::post('/update/user', [UserController::class, 'updateUser'])->name('update.user');
+    Route::post('/update/payament-details', [UserController::class, 'updatePaymentDetails'])->name('update.payament.user');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

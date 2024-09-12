@@ -128,20 +128,21 @@
                 <!-- Payment Tab -->
                 <div id="paymentTab">
                     <h3>Payment Form</h3>
-                    <form class="payment-form">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" placeholder="Enter your card number">
+                    <form class="payment-form" method="POST" action="{{ route('update.payament.user') }}">
+                        @csrf
+                        <label for="accountName">Account Name</label>
+                        <input type="text" name="accountName" id="accountName" placeholder="Enter your card number">
 
-                        <label for="expiryDate">Expiry Date</label>
-                        <input type="text" id="expiryDate" placeholder="MM/YY">
+                        <label for="BSBNumber">BSB Number</label>
+                        <input type="text" name="BSBNumber" id="BSBNumber">
 
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" placeholder="CVV">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" name="accountNumber" id="accountNumber" placeholder="Enter your card number">
 
-                        <label for="nameOnCard">Name on Card</label>
-                        <input type="text" id="nameOnCard" placeholder="Enter name on card">
+                        <label for="bankName">Bank Name</label>
+                        <input type="text" name="bankName" id="bankName" placeholder="Enter name on card">
 
-                        <button type="submit">Pay Now</button>
+                        <button type="submit">Save</button>
                     </form>
                 </div>
             </div>

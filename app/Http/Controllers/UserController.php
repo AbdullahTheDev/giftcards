@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Gift;
+use App\Models\PaymentDetail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,11 +21,11 @@ class UserController extends Controller
         $amount = Gift::where('user_id', Auth::id())->sum('amount');
 
         // if ($user->qrcode == null) {
-            $profileUrl = route('user.profile', $user->id);
+        $profileUrl = route('user.profile', $user->id);
 
-            $qrCode = QrCode::size(200)->generate($profileUrl);
-            $user->qrcode = $qrCode;
-            $user->save();
+        $qrCode = QrCode::size(200)->generate($profileUrl);
+        $user->qrcode = $qrCode;
+        $user->save();
         // }
 
         return view('front.dashboard', compact('user', 'amount', 'totalGifts'));
@@ -59,7 +60,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $event = Event::where('user_id', $user->id)->first();
-        
+
         $completed = 0;
         $points = [
             "email" => 10,
@@ -125,14 +126,14 @@ class UserController extends Controller
                 'name.max' => 'The event number must not be greater than 7 digits.',
                 'name.numeric' => 'The event name must be a numeric value.',
             ];
-            
+
             $request->validate([
                 'name' => 'numeric|min:100000|max:9999999|unique:events,name,' . $event->id, // Correct range check
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ], $messages);
 
-            
+
             $user = User::find(Auth::id());
             $user->update([
                 'phone' => $request->phone
@@ -167,7 +168,28 @@ class UserController extends Controller
                 'description' => $request->description,
                 'location' => $request->location,
             ]);
+
             return redirect()->back()->with('success', 'Information Updated Successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    function updatePaymentDetails(Request $request)
+    {
+
+        try {
+            $paymentDetails = PaymentDetail::updateOrCreate(
+                ['user_id' => Auth::id()], // Condition to check
+                [
+                    'accountName' => $request->accountName,
+                    'BSBNumber' => $request->BSBNumber,
+                    'accountNumber' => $request->accountNumber,
+                    'bankName' => $request->bankName,
+                ]
+            );
+
+            return redirect()->back()->with('success', 'Payment Details Updated Successfully!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
