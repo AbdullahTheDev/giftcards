@@ -155,13 +155,13 @@
                                         <span>Gift amount</span>
                                         <span>$<span id="amountVal">0.00</span> </span>
                                     </div>
-                                    <div class="d-flex justify-content-between">
+                                    {{-- <div class="d-flex justify-content-between">
                                         <span>Credit card surcharge</span>
                                         <span>$18.10</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
-                                        <span>$1,017.10</span>
+                                        <span>$<span id="amountValTotal">0.00</span> </span>
                                     </div>
                                 </div>
 
@@ -334,6 +334,7 @@
 
                 // Update the display element with the new amount
                 $('#amountVal').text(amountValue);
+                $('#amountValTotal').text(amountValue);
             });
         });
     </script>
