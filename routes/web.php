@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/request-withdraw', [WithdrawController::class, 'requestWithdrawPage'])->name('withdraw.request.page');
     Route::post('/request-withdraw', [WithdrawController::class, 'requestWithdraw'])->name('withdraw.request');
 
-    Route::get('/reports', [GiftController::class, 'index'])->name('reports');
+    Route::get('/reports', [GiftController::class, 'reports'])->name('reports');
 
     Route::post('/update/user', [UserController::class, 'updateUser'])->name('update.user');
     Route::post('/update/payament-details', [UserController::class, 'updatePaymentDetails'])->name('update.payament.user');

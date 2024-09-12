@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}" href="">
+                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}" href="{{ route('reports') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">assessment</i>
                         </div>
@@ -122,8 +122,8 @@
     <script src="{{ asset('assets/assets_admin/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/assets_admin/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/assets_admin/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/assets_admin/js/plugins/chartjs.min.js') }}"></script>
-    <script>
+    {{-- <script src="{{ asset('assets/assets_admin/js/plugins/chartjs.min.js') }}"></script> --}}
+    {{-- <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
         new Chart(ctx, {
@@ -369,7 +369,7 @@
                 },
             },
         });
-    </script>
+    </script> --}}
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
