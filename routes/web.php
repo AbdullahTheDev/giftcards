@@ -3,6 +3,7 @@
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 /*
@@ -49,7 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
     Route::get('/setting', [UserController::class, 'setting'])->name('setting');
     Route::get('/gifts', [GiftController::class, 'index'])->name('gifts');
-    Route::get('/withdraw', [GiftController::class, 'index'])->name('withdraw');
+
+    Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
+    Route::get('/request-withdraw', [WithdrawController::class, 'requestWithdraw'])->name('withdraw.request');
+
     Route::get('/reports', [GiftController::class, 'index'])->name('reports');
 
     Route::post('/update/user', [UserController::class, 'updateUser'])->name('update.user');
