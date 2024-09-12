@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/gifts', [GiftController::class, 'index'])->name('gifts');
 
     Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
-    Route::get('/request-withdraw', [WithdrawController::class, 'requestWithdraw'])->name('withdraw.request');
+    Route::get('/request-withdraw', [WithdrawController::class, 'requestWithdrawPage'])->name('withdraw.request.page');
+    Route::post('/request-withdraw', [WithdrawController::class, 'requestWithdraw'])->name('withdraw.request');
 
     Route::get('/reports', [GiftController::class, 'index'])->name('reports');
 

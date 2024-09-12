@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-header px-3 py-2 d-flex" style="justify-content: space-between; align-items: center;">
                     <h3>Withdraw</h3>
-                    <a class="btn btn-warning m-0" href="{{ route('withdraw.request') }}">Request Withdraw</a>
+                    <a class="btn btn-warning m-0" href="{{ route('withdraw.request.page') }}">Request Withdraw</a>
                 </div>
             </div>
 
@@ -49,11 +49,7 @@
                                     @php
                                         $amount = $gift?->amount;
                                         $percentage = $gift?->admin_fee;
-
-                                        // Calculate the percentage amount
                                         $percentageAmount = ($amount * $percentage) / 100;
-
-                                        // Subtract the percentage amount from the original amount
                                         $result = $amount - $percentageAmount;
 
                                     @endphp 
