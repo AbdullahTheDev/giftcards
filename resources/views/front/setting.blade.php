@@ -110,18 +110,10 @@
 
                 <!-- Location Tab (with Map) -->
                 <div id="locationTab">
-                    <h3>Location Map</h3>
+                    <h3>Location</h3>
                     <div class="map-search">
-                        <h4>Find Location</h4>
-                        <input type="text" id="find_address" name="geolocation[find_address]"
-                            class="wcfm-text wcfm_ele pac-target-input" value="" placeholder="Type an address to find"
-                            autocomplete="off" data-has-listeners="true">
-                    </div>
-                    <div class="map-container" id="map">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705913.5088881315!2d62.46719218750003!3d24.896065899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f30a80523ff%3A0xf18a3ecfe7cffbdd!2sNational%20Stadium%20Karachi!5e0!3m2!1sen!2sru!4v1725657099729!5m2!1sen!2sru"
-                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <h4>Your Location</h4>
+                        <input type="text" id="find_address" name="location" class="" value="" placeholder="Enter your location">
                     </div>
                 </div>
 
