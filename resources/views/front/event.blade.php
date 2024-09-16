@@ -49,7 +49,9 @@
             <div style="width: 100%; position: relative;">
                 <div>
                     <img src="{{ asset('/') }}{{ $event?->banner }}" style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
-                    <span style="position: absolute; top: 27%; left: 44%; color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->name }}-</span>
+                    <div style="position: absolute; top: 27%; text-align: center; width: 100%;">
+                        <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->name }}-</span>
+                    </div>
                 </div>
 
 
