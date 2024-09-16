@@ -20,10 +20,12 @@ class UserController extends Controller
         $totalGifts = Gift::where('user_id', Auth::id())->count();
         $amount = Gift::where('user_id', Auth::id())->sum('amount');
 
-        // if ($user->qrcode == null) {
-        $profileUrl = route('user.profile', $user->id);
+        $event = Event::where('user_id', $user->id)->first();
 
-        $qrCode = QrCode::size(200)->generate($profileUrl);
+        // if ($user->qrcode == null) {
+        $url = route('user.profile', $event->name);
+
+        $qrCode = QrCode::size(200)->generate($url);
         $user->qrcode = $qrCode;
         $user->save();
         // }
@@ -33,9 +35,10 @@ class UserController extends Controller
 
     function userProfile($id)
     {
-        $user = User::findOrFail($id);
-
-        $event = Event::where('user_id', $user->id)->first();
+        $event = Event::where('name', $id)->first();
+        
+        $user = User::findOrFail($event->user_id);
+        // return $user;
 
         return view('front.event', compact('user', 'event'));
     }
@@ -46,10 +49,11 @@ class UserController extends Controller
             'user_id' => 'required|numeric'
         ]);
 
-        $user = User::find($request->user_id);
+        $event = Event::where('name', $request->user_id)->first();;
+        // $user = User::find($request->user_id);
 
-        if ($user) {
-            return redirect(route('user.profile', $user->id));
+        if ($event) {
+            return redirect(route('user.profile', $event->user_id));
         }
         return redirect()->route('home')->with('warning', 'User Not Found!');
     }

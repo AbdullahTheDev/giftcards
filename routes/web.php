@@ -25,9 +25,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::post('/user/search/', [UserController::class, 'userSearch'])->name('user.search');
+Route::post('/event/search/', [UserController::class, 'userSearch'])->name('user.search');
 
-Route::get('/user/{id}', [UserController::class, 'userProfile'])->name('user.profile');
+Route::get('/event/{id}', [UserController::class, 'userProfile'])->name('user.profile');
 
 
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
