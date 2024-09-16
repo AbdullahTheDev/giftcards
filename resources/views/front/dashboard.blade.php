@@ -26,7 +26,7 @@
                     <div class="col-md-6">
                         <ul style="list-style: none;">
                             <li>
-                                <h2>Welcome to the Dashboad</h2>
+                                <h2>Welcome {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}</h2>
                             </li>
                             <li>
                                 <p><strong> {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}</strong>
