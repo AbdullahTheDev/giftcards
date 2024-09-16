@@ -45,12 +45,17 @@
         }
     </style>
     <section class="">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="user-main">
+        @if ($event->banner != null)
+            <div style="width: 100%; position: relative;">
+                <div>
+                    <img src="{{ asset('/') }}{{ $event?->banner }}" style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
+                    <span style="position: absolute; top: 27%; left: 44%; color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->name }}-</span>
+                </div>
+
+
+                <div style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
                         <div class="user-prf">
-                            <img src="{{ asset($event?->image) }}" style="width: 200px; border-radius: 50%;" alt="">
+                            <img src="{{ asset($event?->image) }}" style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
                             {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
                         </div>
                         <div class="user-details">
@@ -59,11 +64,15 @@
                                     {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
                             <p><i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
                                     {{ $event?->location }}</b></p>
-                            <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }}</b>
+                            <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
                             </p>
                         </div>
-                    </div>
-
+                </div>
+            </div>
+        @endif
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-12">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul style="margin: 0 !important; list-style: none;">
@@ -82,7 +91,8 @@
 
                                 <h3>Your Gift</h3>
                                 <label for="amount"><b>Enter your gift amount ($)</b></label>
-                                <input type="number" name="amount" id="amount" placeholder="" class="form-control" pattern="[0-9]*" title="Please enter only numbers.">
+                                <input type="number" name="amount" id="amount" placeholder="" class="form-control"
+                                    pattern="[0-9]*" title="Please enter only numbers.">
                                 <h3 class="text-start">Message</h3>
                                 <label for=""><i>Your special message for the host</i></label>
                                 <textarea name="message" id="" rows="3" class="form-control"></textarea>
@@ -157,7 +167,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span>Merchant fee</span>
-                                        <span id="admin_fees">${{ number_format( $settings->admin_fees,2) }}</span>
+                                        <span id="admin_fees">${{ number_format($settings->admin_fees, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>

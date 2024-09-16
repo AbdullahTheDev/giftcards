@@ -650,7 +650,9 @@ input#send-gift {
 }
 
 .user-prf {
-    margin-right: 3%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 .user-details h4 {
