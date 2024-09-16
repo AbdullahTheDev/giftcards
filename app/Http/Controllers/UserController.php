@@ -127,8 +127,8 @@ class UserController extends Controller
 
             $request->validate([
                 'name' => 'required|unique:events,name,' . $event->id,
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048',
+                'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048',
                 'first_name' => 'required',
                 'last_name' => 'required',
             ], $messages);

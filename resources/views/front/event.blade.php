@@ -155,10 +155,10 @@
                                         <span>Gift amount</span>
                                         <span>$<span id="amountVal">0.00</span> </span>
                                     </div>
-                                    {{-- <div class="d-flex justify-content-between">
-                                        <span>Credit card surcharge</span>
-                                        <span>$18.10</span>
-                                    </div> --}}
+                                    <div class="d-flex justify-content-between">
+                                        <span>Merchant fee</span>
+                                        <span id="admin_fees">${{ number_format( $settings->admin_fees,2) }}</span>
+                                    </div>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
                                         <span>$<span id="amountValTotal">0.00</span> </span>
