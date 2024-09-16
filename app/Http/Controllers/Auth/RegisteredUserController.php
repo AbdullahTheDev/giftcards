@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\PaymentDetail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -48,6 +49,11 @@ class RegisteredUserController extends Controller
         $event = Event::create([
             'user_id' => $user->id,
             'name' => $user->id,
+        ]);
+
+
+        $payment = PaymentDetail::create([
+            'user_id' => $user->id
         ]);
 
         event(new Registered($user));

@@ -22,6 +22,7 @@ class UserController extends Controller
     function profile()
     {
         $user = User::findOrFail(Auth::id());
+        $event = Event::where('user_id', $user->id)->first();
 
         $totalGifts = Gift::where('user_id', Auth::id())->count();
         $amount = Gift::where('user_id', Auth::id())->sum('amount');
@@ -34,7 +35,7 @@ class UserController extends Controller
         $user->qrcode = $qrCode;
         $user->save();
 
-        return view('front.dashboard', compact('user', 'amount', 'totalGifts'));
+        return view('front.dashboard', compact('user', 'amount', 'totalGifts', 'event'));
     }
 
     public function downloadQRCode()

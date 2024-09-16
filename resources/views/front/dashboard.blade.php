@@ -33,7 +33,7 @@
                                 </p>
                             </li>
                             <li>Your profile URL: <a
-                                    href="{{ route('user.profile', \Auth::id()) }}">{{ route('user.profile', \Auth::id()) }}</a>
+                                    href="{{ route('user.profile', $event->name) }}">{{ route('user.profile', $event->name) }}</a>
                             </li>
                             <li>
                                 Last Login:

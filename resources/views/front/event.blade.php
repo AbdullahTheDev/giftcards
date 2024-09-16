@@ -45,8 +45,8 @@
         }
     </style>
     <section class="">
-        @if ($event->banner != null)
-            <div style="width: 100%; position: relative;">
+        <div style="width: 100%; position: relative;">
+                @if ($event->banner != null)
                 <div>
                     <img src="{{ asset('/') }}{{ $event?->banner }}"
                         style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
@@ -54,15 +54,20 @@
                         <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->name }}-</span>
                     </div>
                 </div>
-
-
+                @else
+                    @if ($event->image != null)
+                        <div style="height: 35px;"></div>
+                    @endif
+                @endif
                 <div
                     style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
+                    @if ($event->image != null)
                     <div class="user-prf">
                         <img src="{{ asset($event?->image) }}"
                             style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
                         {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
                     </div>
+                    @endif
                     <div class="user-details">
                         <h4>{{ $user->first_name . ' ' . $user->last_name }}</h4>
                         <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
@@ -74,7 +79,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-12">
