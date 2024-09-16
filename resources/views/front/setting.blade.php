@@ -29,6 +29,20 @@
                             @csrf
                             <div class="general-settings">
                                 <h3>General Setting</h3>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <label for="first_name">First Name:</label>
+                                            <input type="text" name="first_name" value="{{ $user->first_name }}" id="first_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <label for="last_name">Last Name:</label>
+                                            <input type="text" name="last_name" value="{{ $user->last_name }}" id="last_name">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="input-group">
                                     <label for="email">Contact Email:</label>
                                     <input type="email" disabled name="email" value="{{ $user->email }}"

@@ -32,7 +32,10 @@
                         <table class="table" id="gift-table">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Select</th> <!-- Add column for checkboxes -->
+                                    <th class="text-center" style="padding: 10px;">
+                                        <!-- Add "Select All" checkbox -->
+                                        <input type="checkbox" id="select-all" style="width: 20px; height: 20px;">
+                                    </th>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Gift ID</th>
                                     <th class="text-center">Sender</th>
@@ -45,8 +48,9 @@
                                 @foreach ($gifts as $gift)
                                     <tr>
                                         <td class="text-center">
-                                            <input type="checkbox" style="width: 20px; height: 20px;" name="gift_ids[]" value="{{ $gift->id }}">
-                                        </td> <!-- Add checkbox -->
+                                            <input type="checkbox" style="width: 20px; height: 20px;" name="gift_ids[]"
+                                                value="{{ $gift->id }}">
+                                        </td>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">{{ $gift?->gift_id }}</td>
                                         <td class="text-center">
@@ -60,7 +64,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary mt-3">Submit</button> <!-- Add submit button -->
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
                     </form>
                 </div>
             </div>
@@ -70,7 +74,31 @@
     @section('scripts')
         <script>
             $(document).ready(function() {
-                $('#gift-table').DataTable();
+                // Initialize DataTables
+                // $('#gift-table').DataTable();
+
+                $('#gift-table').DataTable({
+                    "columnDefs": [{
+                            "orderable": false,
+                            "targets": 0
+                        } // Disable sorting on the first column (the checkboxes column)
+                    ]
+                });
+
+                // Handle Select All functionality
+                $('#select-all').click(function() {
+                    // If select-all is checked, check all checkboxes; otherwise, uncheck all
+                    $('input[name="gift_ids[]"]').prop('checked', this.checked);
+                });
+
+                // Ensure "Select All" checkbox is updated if individual checkboxes are clicked
+                $('input[name="gift_ids[]"]').click(function() {
+                    if ($('input[name="gift_ids[]"]').length === $('input[name="gift_ids[]"]:checked').length) {
+                        $('#select-all').prop('checked', true);
+                    } else {
+                        $('#select-all').prop('checked', false);
+                    }
+                });
             });
         </script>
     @endsection

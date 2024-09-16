@@ -31,7 +31,7 @@ class WithdrawController extends Controller
     function requestWithdraw(Request $request){
         try {
 
-            // return $request->all();
+            return $request->all();
 
             $withdrawl = Withdrawl::create([
                 'user_id' => Auth::id()

@@ -132,12 +132,16 @@ class UserController extends Controller
                 'name' => 'numeric|min:100000|max:9999999|unique:events,name,' . $event->id, // Correct range check
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'first_name' => 'required',
+                'last_name' => 'required',
             ], $messages);
 
 
             $user = User::find(Auth::id());
             $user->update([
-                'phone' => $request->phone
+                'phone' => $request->phone,
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name
             ]);
 
             $event = Event::where('user_id', $user->id)->first();
