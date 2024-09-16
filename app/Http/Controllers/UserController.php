@@ -123,13 +123,10 @@ class UserController extends Controller
 
             $messages = [
                 'name.unique' => 'The event name is already taken. Please choose a different name.',
-                'name.min' => 'The event number must be at least 6 digits.',
-                'name.max' => 'The event number must not be greater than 7 digits.',
-                'name.numeric' => 'The event name must be a numeric value.',
             ];
 
             $request->validate([
-                'name' => 'numeric|min:100000|max:9999999|unique:events,name,' . $event->id, // Correct range check
+                'name' => 'required|unique:events,name,' . $event->id,
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'first_name' => 'required',
