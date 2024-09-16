@@ -9,6 +9,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
@@ -35,28 +36,46 @@ class UserController extends Controller
 
     function userProfile($id)
     {
-        $event = Event::where('name', $id)->first();
-        
-        $user = User::findOrFail($event->user_id);
-        // return $user;
+        $formattedUserId = str_replace(' ', '-', $id);
 
-        return view('front.event', compact('user', 'event'));
-    }
+        // return  $formattedUserId;
 
-    function userSearch(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|numeric'
-        ]);
+        // Search for the event by name using the formatted user_id
+        $event = Event::whereRaw('LOWER(name) = ?', [strtolower($formattedUserId)])->first();
 
-        $event = Event::where('name', $request->user_id)->first();;
-        // $user = User::find($request->user_id);
+        // $event = Event::where('name', $id)->first();
 
         if ($event) {
-            return redirect(route('user.profile', $event->user_id));
+            $user = User::findOrFail($event->user_id);
+            // return $user;
+
+            return view('front.event', compact('user', 'event'));
+        } else {
+            return redirect()->route('home')->with('warning', 'User Not Found!');
         }
+    }
+
+    public function userSearch(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required'
+        ]);
+
+        // Replace spaces with hyphens for the search
+        $formattedUserId = str_replace(' ', '-', $request->user_id);
+
+        // return  $formattedUserId;
+
+        // Search for the event by name using the formatted user_id
+        $event = Event::whereRaw('LOWER(name) = ?', [strtolower($formattedUserId)])->first();
+
+        if ($event) {
+            return redirect(route('user.profile', $event->name));
+        }
+
         return redirect()->route('home')->with('warning', 'User Not Found!');
     }
+
 
 
     // Setting
@@ -130,7 +149,12 @@ class UserController extends Controller
             ];
 
             $request->validate([
-                'name' => 'required|unique:events,name,' . $event->id,
+                'name' => [
+                    'required',
+                    Rule::unique('events', 'name')->ignore($event->id)->where(function ($query) use ($request) {
+                        $query->whereRaw('LOWER(name) = ?', [strtolower($request->name)]);
+                    }),
+                ],
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048',
                 'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048',
                 'first_name' => 'required',
@@ -172,7 +196,6 @@ class UserController extends Controller
                 'banner' => $bannerPath,
                 'event_date' => $request->event_date,
                 'description' => $request->description,
-                'location' => $request->location,
             ]);
 
             return redirect()->back()->with('success', 'Information Updated Successfully!');

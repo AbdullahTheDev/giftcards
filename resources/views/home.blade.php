@@ -20,7 +20,7 @@
                             @endforeach
                             <form action="{{ route("user.search") }}" method="POST">
                                 @csrf
-                                <input type="text" name="user_id" placeholder="Enter 6-Digit ID">
+                                <input type="text" value="{{ old('user_id') }}" name="user_id" placeholder="Enter ID or name to find">
                                 <button>Search</button>
                             </form>
                         </div>

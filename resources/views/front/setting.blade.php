@@ -61,7 +61,8 @@
                                 <h3>Event Setup</h3>
                                 <div class="input-group">
                                     <label for="eventName">Event Name:</label>
-                                    <input type="text" name="name" value="{{ $event->name ?? '' }}" id="eventName">
+                                    <input type="text" name="name" value="{{ $event->name ?? '' }}" id="eventName"
+                                        id="eventName">
                                 </div>
                                 <div class="input-group">
                                     <label for="eventImage">Event Image:</label>
@@ -134,7 +135,8 @@
                         <form class="form-container" method="POST" action="{{ route('update.user.location') }}">
                             @csrf
                             <h4>Your Location</h4>
-                            <input type="text" id="find_address" name="location" class="" value="{{ $event->location }}" placeholder="Enter your location">
+                            <input type="text" id="find_address" name="location" class=""
+                                value="{{ $event->location }}" placeholder="Enter your location">
                             <button>Save</button>
                         </form>
                     </div>
@@ -173,6 +175,17 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
 
     <script>
+        $('#eventName').on('input', function() {
+            // Get the current value
+            var eventName = $(this).val();
+
+            // Replace spaces with hyphens
+            var formattedEventName = eventName.replace(/\s+/g, '-');
+
+            // Set the updated value back to the input field
+            $(this).val(formattedEventName);
+        });
+
         function previewImage(event, previewId) {
             var reader = new FileReader();
             reader.onload = function() {
