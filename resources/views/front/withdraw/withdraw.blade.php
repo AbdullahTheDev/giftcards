@@ -18,7 +18,10 @@
     <div class="container py-3">
         <div class="card">
             <div class="card-header px-3 py-2 d-flex" style="justify-content: space-between; align-items: center;">
-                <h3>Withdraw History</h3>
+                <div>
+                    <h3>Withdraw History</h3>
+                    <h6>Withdraw amount: ${{ number_format($total, 2) }}</h6>
+                </div>
                 <a class="btn btn-warning m-0" href="{{ route('withdraw.request.page') }}">Request Withdraw</a>
             </div>
         </div>

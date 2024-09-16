@@ -14,7 +14,13 @@ class WithdrawController extends Controller
     function index(){
         $withdrawls = Withdrawl::where('user_id', Auth::id())->get();
 
-        return view('front.withdraw.withdraw', compact('withdrawls'));
+        $total = 0;
+
+        foreach($withdrawls as $withdrawl){
+            $total += $withdrawl->amount;
+        }
+
+        return view('front.withdraw.withdraw', compact('withdrawls', 'total'));
     }
 
     function adminWithdraw(){
@@ -30,9 +36,6 @@ class WithdrawController extends Controller
     }
     function requestWithdraw(Request $request){
         try {
-
-            return $request->all();
-
             $withdrawl = Withdrawl::create([
                 'user_id' => Auth::id()
             ]);
