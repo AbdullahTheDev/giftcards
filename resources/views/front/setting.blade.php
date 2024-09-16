@@ -25,7 +25,8 @@
                         </div>
 
 
-                        <form class="form-container" method="POST" action="{{ route('update.user') }}" id="form" enctype="multipart/form-data">
+                        <form class="form-container" method="POST" action="{{ route('update.user') }}" id="form"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="general-settings">
                                 <h3>General Setting</h3>
@@ -33,13 +34,15 @@
                                     <div class="col-6">
                                         <div class="input-group">
                                             <label for="first_name">First Name:</label>
-                                            <input type="text" name="first_name" value="{{ $user->first_name }}" id="first_name">
+                                            <input type="text" name="first_name" value="{{ $user->first_name }}"
+                                                id="first_name">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="input-group">
                                             <label for="last_name">Last Name:</label>
-                                            <input type="text" name="last_name" value="{{ $user->last_name }}" id="last_name">
+                                            <input type="text" name="last_name" value="{{ $user->last_name }}"
+                                                id="last_name">
                                         </div>
                                     </div>
                                 </div>
@@ -62,11 +65,11 @@
                                 </div>
                                 <div class="input-group">
                                     <label for="eventImage">Event Image:</label>
-                                    <input type="file" name="image" id="eventImage" accept="image/*" onchange="previewImage(event, 'eventImagePreview')">
+                                    <input type="file" name="image" id="eventImage" accept="image/*"
+                                        onchange="previewImage(event, 'eventImagePreview')">
                                     <!-- Show existing image if available -->
                                     @if ($event->image ?? null)
-                                        <img id="eventImagePreview"
-                                            src="{{ asset($event->image) }}" alt="Event Image"
+                                        <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
                                             style="max-width: 200px; display: block; margin-top: 10px;">
                                     @else
                                         <img id="eventImagePreview"
@@ -83,12 +86,12 @@
                                 --}}
                                 <div class="input-group">
                                     <label for="eventBanner">Event Banner:</label>
-                                    <input type="file" name="banner" id="eventBanner" accept="image/*" onchange="previewImage(event, 'eventBannerPreview')">
+                                    <input type="file" name="banner" id="eventBanner" accept="image/*"
+                                        onchange="previewImage(event, 'eventBannerPreview')">
 
 
                                     @if ($event->banner ?? null)
-                                        <img id="eventBannerPreview"
-                                            src="{{ asset($event->banner) }}" alt="Event Banner"
+                                        <img id="eventBannerPreview" src="{{ asset($event->banner) }}" alt="Event Banner"
                                             style="max-width: 200px; display: block; margin-top: 10px;">
                                     @else
                                         <img id="eventBannerPreview"
@@ -96,9 +99,11 @@
                                     @endif
                                 </div>
                                 <div class="input-group">
-                                  <label for="eventDate">Event Date:</label>
-                                  <input type="date" name="event_date" value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}" id="eventDate">
-                                </div>                              
+                                    <label for="eventDate">Event Date:</label>
+                                    <input type="date" name="event_date"
+                                        value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}"
+                                        id="eventDate">
+                                </div>
                                 <div class="input-group">
                                     <label for="eventDescription">Event Description:</label>
                                     <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
@@ -125,9 +130,13 @@
                 <!-- Location Tab (with Map) -->
                 <div id="locationTab">
                     <h3>Location</h3>
-                    <div class="map-search">
-                        <h4>Your Location</h4>
-                        <input type="text" id="find_address" name="location" class="" value="" placeholder="Enter your location">
+                    <div class="location-tabs-container">
+                        <form class="form-container" method="POST" action="{{ route('update.user.location') }}">
+                            @csrf
+                            <h4>Your Location</h4>
+                            <input type="text" id="find_address" name="location" class="" value="{{ $event->location }}" placeholder="Enter your location">
+                            <button>Save</button>
+                        </form>
                     </div>
                 </div>
 
@@ -137,16 +146,19 @@
                     <form class="payment-form" method="POST" action="{{ route('update.payament.user') }}">
                         @csrf
                         <label for="accountName">Account Name</label>
-                        <input type="text" name="accountName" value="{{ $paymentDetails->accountName }}" id="accountName" placeholder="Enter your card number">
+                        <input type="text" name="accountName" value="{{ $paymentDetails->accountName }}"
+                            id="accountName" placeholder="Enter your card number">
 
                         <label for="BSBNumber">BSB Number</label>
                         <input type="text" name="BSBNumber" value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
 
                         <label for="accountNumber">Account Number</label>
-                        <input type="text" name="accountNumber" value="{{ $paymentDetails->accountNumber }}" id="accountNumber" placeholder="Enter your card number">
+                        <input type="text" name="accountNumber" value="{{ $paymentDetails->accountNumber }}"
+                            id="accountNumber" placeholder="Enter your card number">
 
                         <label for="bankName">Bank Name</label>
-                        <input type="text" name="bankName" value="{{ $paymentDetails->bankName }}" id="bankName" placeholder="Enter name on card">
+                        <input type="text" name="bankName" value="{{ $paymentDetails->bankName }}" id="bankName"
+                            placeholder="Enter name on card">
 
                         <button type="submit">Save</button>
                     </form>

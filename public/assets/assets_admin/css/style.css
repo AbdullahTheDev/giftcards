@@ -230,6 +230,39 @@ textarea {
     font-weight: bold;
 }
 
+
+.location-tabs-container input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.location-tabs-container label {
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    display: block;
+}
+
+.location-tabs-container button {
+    background-color: #f4c542;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.location-tabs-container button:hover {
+    background-color: #e0b430;
+}
+
 .map-search {
     display: flex;
     margin: 25px 0px;

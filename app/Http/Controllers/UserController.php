@@ -200,4 +200,25 @@ class UserController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    function updateLocation(Request $request)
+    {
+
+        try {
+
+            $request->validate([
+                'location' => 'required',
+            ]);
+
+            $event = Event::where('user_id', Auth::id())->first();
+
+            $event->update([
+                'location' => $request->location,
+            ]);
+
+            return redirect()->back()->with('success', 'Location Updated Successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 }
