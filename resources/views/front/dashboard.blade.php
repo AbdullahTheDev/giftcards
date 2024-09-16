@@ -44,7 +44,8 @@
                     <div class="col-md-6">
                         <div style="width: max-content; display: flex; flex-direction: column;">
                             {!! $user ->qrcode !!}
-                            <a href="{{ route('dashboard') }}" style="display: flex; align-content: center; justify-content: center; margin-top: 6px;"><i style="margin-top: 2px" class="material-icons opacity-10">cached</i> Regenerate  </a>
+                            <a href="{{ route('download.qrcode') }}" style="display: flex; align-content: center; justify-content: center; margin-top: 6px;"><i style="margin-top: 2px" class="material-icons opacity-10">download</i> Download</a>
+                            {{-- <a href="{{ route('dashboard') }}" style="display: flex; align-content: center; justify-content: center; margin-top: 6px;"><i style="margin-top: 2px" class="material-icons opacity-10">cached</i> Regenerate  </a> --}}
                         </div>
                             {{-- <img src="{{ asset('assets/assets_admin/img/scan.png') }}" alt=""> --}}
                     </div>

@@ -55,6 +55,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'profile'])->name('dashboard');
+
+    Route::get('/download/qrcode', [UserController::class, 'downloadQRCode'])->name('download.qrcode');
     Route::get('/setting', [UserController::class, 'setting'])->name('setting');
     Route::get('/gifts', [GiftController::class, 'index'])->name('gifts');
 

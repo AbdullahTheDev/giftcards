@@ -6,11 +6,16 @@ use App\Models\Event;
 use App\Models\Gift;
 use App\Models\PaymentDetail;
 use App\Models\User;
+use Endroid\QrCode\Writer\PngWriter;
 use Exception;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Response;
+use SimpleSoftwareIO\QrCode\Facades\QrCode as MQrCode;
+use Endroid\QrCode\QrCode;
+
 
 class UserController extends Controller
 {
@@ -23,15 +28,35 @@ class UserController extends Controller
 
         $event = Event::where('user_id', $user->id)->first();
 
-        // if ($user->qrcode == null) {
         $url = route('user.profile', $event->name);
 
-        $qrCode = QrCode::size(200)->generate($url);
+        $qrCode = MQrCode::format('svg')->size(200)->generate($url);
         $user->qrcode = $qrCode;
         $user->save();
-        // }
 
         return view('front.dashboard', compact('user', 'amount', 'totalGifts'));
+    }
+
+    public function downloadQRCode()
+    {
+        $user = Auth::user();
+        $event = Event::where('user_id', $user->id)->first();
+        $url = route('user.profile', $event->name);
+
+        // Create a QR Code
+        $qrCode = new QrCode($url);
+        $qrCode->setSize(200);
+
+        // Create a PNG writer and generate PNG data
+        $writer = new PngWriter();
+        $result = $writer->write(qrCode: $qrCode);
+        $pngData = $result->getString();
+
+        // Serve the PNG image for download
+        return Response::make($pngData, 200, [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="user_' . $user->id . '_qrcode.png"',
+        ]);
     }
 
     function userProfile($id)
