@@ -48,6 +48,7 @@ Route::get('/payment/failure', function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('/dashboard', [AdminController::class, 'profile'])->name('admin.dashboard');
+        Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
 
         Route::get('/withdraw', [WithdrawController::class, 'adminWithdraw'])->name('withdraw');
     });

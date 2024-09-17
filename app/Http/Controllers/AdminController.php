@@ -16,4 +16,11 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('user', 'totalUsers'));
     }
+
+    function users()
+    {
+        $users = User::where('role', 'user')->get();
+
+        return view('admin.users.users', compact('users'));
+    }
 }
