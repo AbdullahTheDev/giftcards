@@ -34,6 +34,7 @@
                             <th class="text-center">Invoice ID</th>
                             <th class="text-center">Amount</th>
                             <th class="text-center">Payment</th>
+                            <th class="text-center">Admin Fees</th>
                             <th class="text-center">Mode</th>
                             <th class="text-center">Note</th>
                             <th class="text-center">Date</th>
@@ -45,6 +46,7 @@
                                 <td class="text-center">{{ $withdrawl?->invoice_id }}</td>
                                 <td class="text-center">${{ number_format($withdrawl?->amount, 2) }}</td>
                                 <th class="text-center">{{ $withdrawl->payment_status }}</th>
+                                <td class="text-center">$0.00</td>
                                 <th class="text-center">{{ $withdrawl->mode }}</th>
                                 <th class="text-center">{{ $withdrawl->note }}</th>
                                 <td class="text-center">{{ \Carbon\Carbon::parse($withdrawl?->date)->format('Y M d') }}</td>
