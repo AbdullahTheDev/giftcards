@@ -192,9 +192,9 @@ class UserController extends Controller
             $user->update([
                 'phone' => $request->phone,
                 'last_name' => $request->last_name,
-                'first_name' => $request->first_name
+                'first_name' => $request->first_name,
             ]);
-
+            
             $event = Event::where('user_id', $user->id)->first();
 
             if ($request->hasFile('image')) {
@@ -222,6 +222,7 @@ class UserController extends Controller
                 'banner' => $bannerPath,
                 'event_date' => $request->event_date,
                 'description' => $request->description,
+                'showname' => $request->showname
             ]);
 
             return redirect()->back()->with('success', 'Information Updated Successfully!');

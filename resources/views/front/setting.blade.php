@@ -59,25 +59,36 @@
 
                             <div class="event-setup">
                                 <h3>Event Setup</h3>
-                                <div class="input-group">
-                                    <label for="eventName">Event Name:</label>
-                                    <input type="text" name="name" value="{{ $event->name ?? '' }}" id="eventName"
-                                        id="eventName">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <label for="showname">Event Name:</label>
+                                            <input type="text" name="showname" value="{{ $event->showname ?? '' }}"
+                                                id="showname" id="showname">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <label for="eventName">Event URL:</label>
+                                            <input type="text" name="name" value="{{ $event->name ?? '' }}"
+                                                id="eventName" id="eventName">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <label for="eventImage">Event Image:</label>
-                                    <input type="file" name="image" id="eventImage" accept="image/*"
-                                        onchange="previewImage(event, 'eventImagePreview')">
-                                    <!-- Show existing image if available -->
-                                    @if ($event->image ?? null)
-                                        <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
-                                            style="max-width: 200px; display: block; margin-top: 10px;">
-                                    @else
-                                        <img id="eventImagePreview"
-                                            style="max-width: 200px; display: none; margin-top: 10px;">
-                                    @endif
-                                </div>
-                                {{-- 
+                                    <div class="input-group">
+                                        <label for="eventImage">Event Image:</label>
+                                        <input type="file" name="image" id="eventImage" accept="image/*"
+                                            onchange="previewImage(event, 'eventImagePreview')">
+                                        <!-- Show existing image if available -->
+                                        @if ($event->image ?? null)
+                                            <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
+                                                style="max-width: 200px; display: block; margin-top: 10px;">
+                                        @else
+                                            <img id="eventImagePreview"
+                                                style="max-width: 200px; display: none; margin-top: 10px;">
+                                        @endif
+                                    </div>
+                                    {{-- 
                                   <div class="input-group">
                                     <label for="eventBannerType">Event Banner Type:</label>
                                     <select id="eventBannerType">
@@ -85,33 +96,34 @@
                                     </select>
                                   </div> 
                                 --}}
-                                <div class="input-group">
-                                    <label for="eventBanner">Event Banner:</label>
-                                    <input type="file" name="banner" id="eventBanner" accept="image/*"
-                                        onchange="previewImage(event, 'eventBannerPreview')">
+                                    <div class="input-group">
+                                        <label for="eventBanner">Event Banner:</label>
+                                        <input type="file" name="banner" id="eventBanner" accept="image/*"
+                                            onchange="previewImage(event, 'eventBannerPreview')">
 
 
-                                    @if ($event->banner ?? null)
-                                        <img id="eventBannerPreview" src="{{ asset($event->banner) }}" alt="Event Banner"
-                                            style="max-width: 200px; display: block; margin-top: 10px;">
-                                    @else
-                                        <img id="eventBannerPreview"
-                                            style="max-width: 200px; display: none; margin-top: 10px;">
-                                    @endif
+                                        @if ($event->banner ?? null)
+                                            <img id="eventBannerPreview" src="{{ asset($event->banner) }}"
+                                                alt="Event Banner"
+                                                style="max-width: 200px; display: block; margin-top: 10px;">
+                                        @else
+                                            <img id="eventBannerPreview"
+                                                style="max-width: 200px; display: none; margin-top: 10px;">
+                                        @endif
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="eventDate">Event Date:</label>
+                                        <input type="date" name="event_date"
+                                            value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}"
+                                            id="eventDate">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="eventDescription">Event Description:</label>
+                                        <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
+                                    </div>
                                 </div>
-                                <div class="input-group">
-                                    <label for="eventDate">Event Date:</label>
-                                    <input type="date" name="event_date"
-                                        value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}"
-                                        id="eventDate">
-                                </div>
-                                <div class="input-group">
-                                    <label for="eventDescription">Event Description:</label>
-                                    <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
-                                </div>
-                            </div>
 
-                            {{-- <div class="profile-visibility">
+                                {{-- <div class="profile-visibility">
                                 <h3>Profile Visibility Setup</h3>
                                 <div class="input-group">
                                     <label for="visibility">Profile Name Position:</label>
@@ -122,7 +134,7 @@
                                 </div>
                             </div> --}}
 
-                            <button type="submit">Save</button>
+                                <button type="submit">Save</button>
                         </form>
                     </div>
 

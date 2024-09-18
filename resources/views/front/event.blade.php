@@ -46,40 +46,40 @@
     </style>
     <section class="">
         <div style="width: 100%; position: relative;">
-                @if ($event->banner != null)
+            @if ($event->banner != null)
                 <div>
                     <img src="{{ asset('/') }}{{ $event?->banner }}"
                         style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
                     <div style="position: absolute; top: 27%; text-align: center; width: 100%;">
-                        <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->name }}-</span>
+                        <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</span>
                     </div>
                 </div>
-                @else
-                    @if ($event->image != null)
-                        <div style="height: 35px;"></div>
-                    @endif
+            @else
+                @if ($event->image != null)
+                    <div style="height: 35px;"></div>
                 @endif
-                <div
-                    style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
-                    @if ($event->image != null)
+            @endif
+            <div
+                style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
+                @if ($event->image != null)
                     <div class="user-prf">
                         <img src="{{ asset($event?->image) }}"
                             style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
                         {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
                     </div>
-                    @endif
-                    <div class="user-details">
-                        <h4>{{ $user->first_name . ' ' . $user->last_name }}</h4>
-                        <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
-                                {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
-                        <p><i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
-                                {{ $event?->location }}</b></p>
-                        <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
-                        </p>
-                    </div>
+                @endif
+                <div class="user-details">
+                    <h4>{{ $event?->showname }}</h4>
+                    <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
+                            {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
+                            {{ $event?->location }}</b></p>
+                    <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
+                    </p>
                 </div>
             </div>
-        
+        </div>
+
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-12">
@@ -177,12 +177,13 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span>Merchant fee</span>
-                                        <span>${{ number_format($settings->admin_fees, 2) }}</span>
+                                        <span id="showFees">$0</span>
                                         <span style="display: none;" id="admin_fees">{{ $settings->admin_fees }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
-                                        <span>$<span id="amountValTotal">{{ number_format($settings->admin_fees, 2) }}</span> </span>
+                                        <span>$<span id="amountValTotal">0</span>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -349,16 +350,24 @@
 
                 // Get the current value of the input and convert to a number
                 var amountValue = parseFloat($(this).val()) || 0;
-                var adminFees = parseFloat($('#admin_fees').text()) || 0;
+                var adminFeesPercent = parseFloat($('#admin_fees').text()) || 0;
+
+                // Calculate the admin fee as a percentage of the amount
+                var adminFees = (amountValue * adminFeesPercent) / 100;
 
                 // Update the hidden input value
                 $('#amountValInput').val(amountValue);
 
                 // Update the display element with the new amount
                 $('#amountVal').text(amountValue.toFixed(2));
-                $('#amountValTotal').text((amountValue + adminFees).toFixed(2));
-            });
 
+                // Calculate the total with admin fees and update the display
+                var totalAmount = amountValue + adminFees;
+                
+                $('#amountValTotal').text(totalAmount.toFixed(2));
+
+                $('#showFees').text('$' + adminFees.toFixed(2));
+            });
         });
     </script>
 @endsection
