@@ -45,7 +45,7 @@
                                 <td class="text-center">{{ $withdrawl->user->email }}</td>
                                 <td class="text-center">${{ number_format($withdrawl->amount, 2) }}</td>
                                 <th class="text-center">{{ $withdrawl->payment_status }}</th>
-                                <td class="text-center"><a href="" class="btn btn-warning">Details</a></td>
+                                <td class="text-center"><a href="{{ route('admin.withdraw.details', $withdrawl->id) }}" class="btn btn-warning">Details</a></td>
                             </tr>
                         @endforeach
                     </tbody>

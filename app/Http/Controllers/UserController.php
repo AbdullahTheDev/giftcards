@@ -21,6 +21,9 @@ class UserController extends Controller
 {
     function profile()
     {
+        if(\Auth::user()->role == 'admin'){
+            return redirect(route('admin.dashboard'));
+        }
         $user = User::findOrFail(Auth::id());
         $event = Event::where('user_id', $user->id)->first();
 

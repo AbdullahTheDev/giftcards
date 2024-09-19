@@ -12,10 +12,10 @@ class WithdrawGifts extends Model
     protected $guarded = [];
 
     public function gifts(){
-        return $this->belongsTo(Gift::class);
+        return $this->belongsTo(Gift::class, 'gift_id');
     }
 
-    public function withdraw(){
-        return $this->belongsTo(Withdrawl::class);
+    public function withdrawFunc(){
+        return $this->belongsTo(Withdrawl::class, 'withdrawl_id');
     }
 }

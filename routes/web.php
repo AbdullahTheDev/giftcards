@@ -51,6 +51,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
 
         Route::get('/withdraw-requests', [WithdrawController::class, 'adminWithdraw'])->name('admin.withdraw');
+        Route::get('/withdraw-details/{id}', [WithdrawController::class, 'adminWithdrawDetails'])->name('admin.withdraw.details');
 
 
         // Settings

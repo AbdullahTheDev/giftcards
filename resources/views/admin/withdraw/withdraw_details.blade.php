@@ -29,56 +29,39 @@
 
             <div class="card mt-5">
                 <div class="card-body">
-                    <div class="d-flex flex-row my-2">
-                        <h3>User Email</h3>
-                        <p>{{ $withdraw->user->email }}</p>
+                    <div class="d-flex flex-row my-2 gap-3">
+                        <h5>User Email</h5>
+                        <p>{{ $withdraw->withdrawFunc }}</p>
                     </div>
-                    <div class="d-flex flex-row my-2">
-                        <h3>Total Amount</h3>
+                    <div class="d-flex flex-row my-2 gap-3">
+                        <h5>Total Amount</h5>
                         <p>{{ $withdraw->amount }}</p>
                     </div>
-                    <div class="d-flex flex-row my-2">
-                        <h3>Payment Status</h3>
+                    <div class="d-flex flex-row my-2 gap-3">
+                        <h5>Payment Status</h5>
                         <p>{{ $withdraw->payment_status }}</p>
                     </div>
 
                     <div>
                         <h2 class="my-2">Transactions</h2>
-                        @foreach ($withdrawlGifts as $withdrawlGift)
-                            <div style="border: 2px solid #ccc; margin: 7px; border-radius: 9px;">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex flex-row my-2">
-                                            <h3>User Email</h3>
-                                            <p>{{ $withdrawlGift->user->email }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="d-flex flex-row my-2">
-                                            <h3>User Name</h3>
-                                            <p>{{ $withdrawlGift->user->first_name . " " . $withdrawlGift->user->last_name }}</p>
-                                        </div>
-                                    </div>
-                                    
-
-                                    <div class="col-6">
-                                        <div class="d-flex flex-row my-2">
-                                            <h3>Gift Id</h3>
-                                            <p>{{ $withdrawlGift->gift->gift_id }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="d-flex flex-row my-2">
-                                            <h3>Amount</h3>
-                                            <p>{{ $withdrawlGift->gift->amount }}</p>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        @endforeach
+                        <table class="table" id="gift-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Gift ID</th>
+                                    <th class="text-center">User Email</th>
+                                    <th class="text-center">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($withdrawlGifts as $withdrawlGift)
+                                    <tr>
+                                        <td class="text-center">{{ $withdrawlGift->gifts->gift_id }}</td>
+                                        <td class="text-center">{{ $withdrawlGift->withdrawFunc->user->email }}</td>
+                                        <td class="text-center">${{ number_format($withdrawlGift->amount, 2) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
