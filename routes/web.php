@@ -51,6 +51,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
 
         Route::get('/withdraw', [WithdrawController::class, 'adminWithdraw'])->name('withdraw');
+
+
+        // Settings
+        Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
+        Route::post('/settings', [AdminController::class, 'settingsSave'])->name('admin.settings.save');
+
     });
 });
 
