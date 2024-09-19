@@ -9,5 +9,5 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_fees'];
+    protected $fillable = ['admin_fees', 'merchant_fees'];
 }
