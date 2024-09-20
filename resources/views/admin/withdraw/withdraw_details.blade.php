@@ -84,9 +84,17 @@
                             @endif
                         </h5>
                         @if($withdraw->payment_status == 'paid')
-                            <a href="" class="btn btn-success">Make Payment Paid</a>
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" name="payment_status" value="paid" id="">
+                                <button class="btn btn-success">Make Payment Paid</button>
+                            </form>
                         @else
-                            <a href="" class="btn btn-success">Make Payment Pending</a>
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" name="payment_status" value="pending" id="">
+                                <button class="btn btn-success">Make Payment Pending</button>
+                            </form>
                         @endif
                     </div>
 
