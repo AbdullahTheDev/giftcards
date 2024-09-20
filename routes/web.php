@@ -58,6 +58,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::post('/settings', [AdminController::class, 'settingsSave'])->name('admin.settings.save');
 
+
+        // Gifts
+        Route::get('/gifts', [AdminController::class, 'gifts'])->name('admin.gifts');
+
+
     });
 });
 

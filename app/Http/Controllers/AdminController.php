@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gift;
 use App\Models\Setting;
 use App\Models\User;
 use Exception;
@@ -50,5 +51,13 @@ class AdminController extends Controller
         }catch(Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+
+    function gifts()
+    {
+        $gifts = Gift::latest()->get();
+
+        return view('admin.gifts.gifts', compact('gifts'));
     }
 }
