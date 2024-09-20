@@ -92,6 +92,8 @@ class WithdrawController extends Controller
             $withd->amount = $amount;
             $withd->admin_fees = $settings->merchant_fees;
             $withd->merchant_fees = $settings->admin_fees;
+            $withd->mode = 'Bank Transfer';
+            
             $withd->save();
 
             $user = User::find(Auth::id());
