@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Gift;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Event;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,5 +61,34 @@ class AdminController extends Controller
         $gifts = Gift::latest()->get();
 
         return view('admin.gifts.gifts', compact('gifts'));
+    }
+
+    function events()
+    {
+        $events = Event::latest()->get();
+
+        return view('admin.events.events', compact('events'));
+    }
+
+    function eventDetails($id)
+    {
+        $event = Event::find($id);
+
+        $event->event_date = Carbon::parse($event->event_date)->format('Y-m-d');
+
+        return view('admin.events.event_details', compact('event'));
+    }
+
+    function eventEdit()
+    {
+        $events = Event::latest()->get();
+
+        return view('admin.events.events', compact('events'));
+    }
+    function eventUpdate()
+    {
+        $events = Event::latest()->get();
+
+        return view('admin.events.events', compact('events'));
     }
 }
