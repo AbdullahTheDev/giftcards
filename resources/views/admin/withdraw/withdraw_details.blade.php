@@ -85,6 +85,7 @@
                         </p>
                     </div>
 
+                    <hr class="bg-secondary mb-4">
                     <div>
                         <h2 class="my-2">Withdrawl Gifts</h2>
                         <table class="table" id="gift-table">
@@ -124,32 +125,33 @@
 
         <script>
             $(document).ready(function() {
-                $('#gift-table').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'excelHtml5',
-                            title: 'Withdraw History',
-                            className: 'btn btn-success'
-                        },
-                        {
-                            extend: 'csvHtml5',
-                            title: 'Withdraw History',
-                            className: 'btn btn-info'
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            title: 'Withdraw History',
-                            className: 'btn btn-danger',
-                            orientation: 'landscape',
-                            pageSize: 'A4'
-                        },
-                        {
-                            extend: 'print',
-                            title: 'Withdraw History',
-                            className: 'btn btn-primary'
-                        }
-                    ]
-                });
+                $('#gift-table').DataTable();
+                // $('#gift-table').DataTable({
+                    // dom: 'Bfrtip',
+                    // buttons: [{
+                    //         extend: 'excelHtml5',
+                    //         title: 'Withdraw History',
+                    //         className: 'btn btn-success'
+                    //     },
+                    //     {
+                    //         extend: 'csvHtml5',
+                    //         title: 'Withdraw History',
+                    //         className: 'btn btn-info'
+                    //     },
+                    //     {
+                    //         extend: 'pdfHtml5',
+                    //         title: 'Withdraw History',
+                    //         className: 'btn btn-danger',
+                    //         orientation: 'landscape',
+                    //         pageSize: 'A4'
+                    //     },
+                    //     {
+                    //         extend: 'print',
+                    //         title: 'Withdraw History',
+                    //         className: 'btn btn-primary'
+                    //     }
+                    // ]
+                // });
             });
         </script>
     @endsection
