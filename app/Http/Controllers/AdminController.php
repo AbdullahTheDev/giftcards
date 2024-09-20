@@ -19,8 +19,10 @@ class AdminController extends Controller
         $user = User::findOrFail(Auth::id());
 
         $totalUsers = User::count();
+        $totalGifts = User::count();
+        $totalSenders = User::count();
 
-        return view('admin.dashboard', compact('user', 'totalUsers'));
+        return view('admin.dashboard', compact('user', 'totalUsers', 'totalGifts', 'totalSenders'));
     }
 
     function users()

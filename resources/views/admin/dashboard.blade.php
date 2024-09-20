@@ -47,9 +47,9 @@
     </div>
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header p-3 pt-2">
+                    <div class="card-body p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                             <i class="material-icons opacity-10">weekend</i>
@@ -62,16 +62,31 @@
                     <hr class="dark horizontal my-0">
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header p-3 pt-2">
+                    <div class="card-body p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Recieved Gifts</p>
-                            <h4 class="mb-0"></h4>
+                            <p class="text-sm mb-0 text-capitalize">Total Gifts</p>
+                            <h4 class="mb-0">{{ $totalGifts }}</h4>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">Total Senders</p>
+                            <h4 class="mb-0">{{ $totalSenders }}</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
