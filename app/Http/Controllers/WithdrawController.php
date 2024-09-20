@@ -85,13 +85,15 @@ class WithdrawController extends Controller
 
                 $amount += $gift->amount;
             }
+            $settings = Setting::find(1);
 
             $withd = Withdrawl::find($withdrawl->id);
             $withd->invoice_id = Auth::id() . (time() % 100000);
             $withd->amount = $amount;
+            $withd->admin_fees = $settings->merchant_fees;
+            $withd->merchant_fees = $settings->admin_fees;
             $withd->save();
 
-            $settings = Setting::find(1);
             $user = User::find(Auth::id());
 
             $data = [
@@ -103,7 +105,7 @@ class WithdrawController extends Controller
 
             // return $request->all();
 
-            return redirect()->back()->with('success', 'Withdrawl request sent successfully!');
+            return redirect()->route('withdraw')->with('success', 'Withdrawl request sent successfully!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

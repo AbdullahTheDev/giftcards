@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gift;
+use App\Models\Sender;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Event;
@@ -19,8 +20,8 @@ class AdminController extends Controller
         $user = User::findOrFail(Auth::id());
 
         $totalUsers = User::count();
-        $totalGifts = User::count();
-        $totalSenders = User::count();
+        $totalGifts = Gift::count();
+        $totalSenders = Sender::count();
 
         return view('admin.dashboard', compact('user', 'totalUsers', 'totalGifts', 'totalSenders'));
     }

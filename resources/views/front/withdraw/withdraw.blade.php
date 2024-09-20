@@ -35,8 +35,9 @@
                             <th class="text-center">Amount</th>
                             <th class="text-center">Payment</th>
                             <th class="text-center">Admin Fees</th>
+                            <th class="text-center">Merchant Fees</th>
                             <th class="text-center">Mode</th>
-                            <th class="text-center">Note</th>
+                            {{-- <th class="text-center">Note</th> --}}
                             <th class="text-center">Date</th>
                         </tr>
                     </thead>
@@ -45,10 +46,21 @@
                             <tr>
                                 <td class="text-center">{{ $withdrawl?->invoice_id }}</td>
                                 <td class="text-center">${{ number_format($withdrawl?->amount, 2) }}</td>
-                                <th class="text-center">{{ $withdrawl->payment_status }}</th>
-                                <td class="text-center">$0.00</td>
+                                <th class="text-center">
+                                    @if($withdrawl->payment_status == 'pending')
+                                        <span class="badge bg-secondary">
+                                            {{ ucfirst($withdrawl->payment_status) }}
+                                        </span>
+                                    @else
+                                        <span class="badge bg-success">
+                                            {{ ucfirst($withdrawl->payment_status) }}
+                                        </span>
+                                    @endif
+                                </th>
+                                <td class="text-center">${{ number_format($withdrawl?->merchant_fees, 2) }}</td>
+                                <td class="text-center">${{ number_format($withdrawl?->admin_fees, 2) }}</td>
                                 <th class="text-center">{{ $withdrawl->mode }}</th>
-                                <th class="text-center">{{ $withdrawl->note }}</th>
+                                {{-- <th class="text-center">{{ $withdrawl->note }}</th> --}}
                                 <td class="text-center">{{ \Carbon\Carbon::parse($withdrawl?->date)->format('Y M d') }}</td>
                             </tr>
                         @endforeach
