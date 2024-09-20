@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminWithdraw;
 use App\Models\Gift;
 use App\Models\PaymentDetail;
+use App\Models\Setting;
+use App\Models\User;
 use App\Models\WithdrawGifts;
 use App\Models\Withdrawl;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class WithdrawController extends Controller
 {
@@ -85,9 +89,17 @@ class WithdrawController extends Controller
             $withd = Withdrawl::find($withdrawl->id);
             $withd->invoice_id = Auth::id() . (time() % 100000);
             $withd->amount = $amount;
-            $withd->admin_fees = 5;
             $withd->save();
 
+            $settings = Setting::find(1);
+            $user = User::find(Auth::id());
+
+            $data = [
+                'username' => $user->first_name . ' ' . $user->last_name,
+                'total' => $amount,
+            ];
+
+            Mail::to($settings->email)->send(new AdminWithdraw($data));
 
             // return $request->all();
 
