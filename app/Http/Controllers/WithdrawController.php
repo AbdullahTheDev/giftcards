@@ -12,24 +12,27 @@ use Illuminate\Support\Facades\Auth;
 
 class WithdrawController extends Controller
 {
-    function index(){
+    function index()
+    {
         $withdrawls = Withdrawl::where('user_id', Auth::id())->get();
 
         $total = 0;
 
-        foreach($withdrawls as $withdrawl){
+        foreach ($withdrawls as $withdrawl) {
             $total += $withdrawl->amount;
         }
 
         return view('front.withdraw.withdraw', compact('withdrawls', 'total'));
     }
 
-    function adminWithdraw(){
+    function adminWithdraw()
+    {
         $withdrawls = Withdrawl::all();
 
         return view('admin.withdraw.withdraw', compact('withdrawls'));
     }
-    function adminWithdrawDetails($id){
+    function adminWithdrawDetails($id)
+    {
         $withdraw = Withdrawl::find($id);
 
         $withdrawlGifts = WithdrawGifts::where('withdrawl_id', $withdraw->id)->get();
@@ -39,19 +42,34 @@ class WithdrawController extends Controller
         // return $withdrawlGifts[0]->gifts;
         return view('admin.withdraw.withdraw_details', compact('withdraw', 'withdrawlGifts', 'paymentDetails'));
     }
-    function requestWithdrawPage(Request $request){
+
+    function adminWithdrawPaymentStatus($id, Request $request)
+    {
+        try {
+            $withdraw = Withdrawl::find($id);
+            $withdraw->payment_status = $request->payment_status;
+            $withdraw->save();
+
+            return redirect()->back()->with('success', 'Payment status updated successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    function requestWithdrawPage(Request $request)
+    {
         $gifts = Gift::where('user_id', Auth::id())->where('requested', 0)->get();
 
         return view('front.withdraw.gifts', compact('gifts'));
     }
-    function requestWithdraw(Request $request){
+    function requestWithdraw(Request $request)
+    {
         try {
             $withdrawl = Withdrawl::create([
                 'user_id' => Auth::id()
             ]);
             $amount = 0;
 
-            foreach($request->gift_ids as $gift_id){
+            foreach ($request->gift_ids as $gift_id) {
                 $gift = Gift::find($gift_id);
                 $gift->requested = 1;
                 $gift->save();
@@ -72,7 +90,7 @@ class WithdrawController extends Controller
 
 
             // return $request->all();
-            
+
             return redirect()->back()->with('success', 'Withdrawl request sent successfully!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

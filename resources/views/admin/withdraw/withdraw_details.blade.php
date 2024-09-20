@@ -45,7 +45,7 @@
                                     <h6>Phone</h6>
                                     <p>{{ $withdraw->user->phone }}</p>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div style="border: 2px solid #303035; border-radius: 10px; padding: 10px; height: 100%;">
@@ -66,7 +66,7 @@
                                     <h6>Bank Name</h6>
                                     <p>{{ $paymentDetails->bankName }}</p>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                     <hr class="bg-secondary">
@@ -74,28 +74,31 @@
                         <h5>Total Amount</h5>
                         <p style="font-weight: bold;">${{ number_format($withdraw->amount) }}</p>
                     </div>
-                    <div class="d-flex flex-row my-2 gap-3" style="justify-content: space-between; align-items: center;">
+                    <div class="d-flex flex-row my-2" style="justify-content: space-between; align-items: center;">
                         <h5 style="align-items: center; display: flex; gap: 13px;">
-                            Payment Status 
-                            @if($withdraw->payment_status == 'pending')
+                            Payment Status
+                            @if ($withdraw->payment_status == 'pending')
                                 <span class="ml-3 badge bg-secondary">{{ $withdraw->payment_status }}</span>
                             @else
                                 <span class="ml-3 badge bg-success">{{ $withdraw->payment_status }}</span>
                             @endif
                         </h5>
-                        @if($withdraw->payment_status == 'paid')
-                            <form action="" method="post">
+                        @if ($withdraw->payment_status == 'pending')
+                            <form class="withdraw-status-form" data-id="{{ $withdraw->id }}" method="post">
                                 @csrf
                                 <input type="hidden" name="payment_status" value="paid" id="">
-                                <button class="btn btn-success">Make Payment Paid</button>
+                                <button type="button" class="btn btn-success submit-withdraw-form">Make Payment
+                                    Paid</button>
                             </form>
                         @else
-                            <form action="" method="post">
+                            <form class="withdraw-status-form" data-id="{{ $withdraw->id }}" method="post">
                                 @csrf
                                 <input type="hidden" name="payment_status" value="pending" id="">
-                                <button class="btn btn-success">Make Payment Pending</button>
+                                <button type="button" class="btn btn-secondary submit-withdraw-form">Make Payment
+                                    Pending</button>
                             </form>
                         @endif
+
                     </div>
 
                     <hr class="bg-secondary mb-4">
@@ -140,31 +143,68 @@
             $(document).ready(function() {
                 $('#gift-table').DataTable();
                 // $('#gift-table').DataTable({
-                    // dom: 'Bfrtip',
-                    // buttons: [{
-                    //         extend: 'excelHtml5',
-                    //         title: 'Withdraw History',
-                    //         className: 'btn btn-success'
-                    //     },
-                    //     {
-                    //         extend: 'csvHtml5',
-                    //         title: 'Withdraw History',
-                    //         className: 'btn btn-info'
-                    //     },
-                    //     {
-                    //         extend: 'pdfHtml5',
-                    //         title: 'Withdraw History',
-                    //         className: 'btn btn-danger',
-                    //         orientation: 'landscape',
-                    //         pageSize: 'A4'
-                    //     },
-                    //     {
-                    //         extend: 'print',
-                    //         title: 'Withdraw History',
-                    //         className: 'btn btn-primary'
-                    //     }
-                    // ]
+                // dom: 'Bfrtip',
+                // buttons: [{
+                //         extend: 'excelHtml5',
+                //         title: 'Withdraw History',
+                //         className: 'btn btn-success'
+                //     },
+                //     {
+                //         extend: 'csvHtml5',
+                //         title: 'Withdraw History',
+                //         className: 'btn btn-info'
+                //     },
+                //     {
+                //         extend: 'pdfHtml5',
+                //         title: 'Withdraw History',
+                //         className: 'btn btn-danger',
+                //         orientation: 'landscape',
+                //         pageSize: 'A4'
+                //     },
+                //     {
+                //         extend: 'print',
+                //         title: 'Withdraw History',
+                //         className: 'btn btn-primary'
+                //     }
+                // ]
                 // });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                // Handle button click for form submission
+                $('.submit-withdraw-form').on('click', function(e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    var form = $(this).closest('form'); // Find the closest form
+                    var actionUrl = "{{ url('admin/withdraw-payment-status') }}/" + form.data(
+                    'id'); // Construct the form action URL
+
+                    // Prepare form data for submission
+                    var formData = form.serialize();
+                    
+                    // console.log(formData);
+                    // return;
+
+                    // Submit the form using AJAX
+                    $.ajax({
+                        url: actionUrl,
+                        type: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            toastr.success('Payment status updated successfully.');
+
+                            // Optionally, reload the page or update the UI dynamically here
+                            location.reload(); // Reload the page to reflect changes
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            toastr.success(error);
+                            // alert(error);
+                        }
+                    });
+                });
             });
         </script>
     @endsection
