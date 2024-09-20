@@ -56,6 +56,12 @@ class AdminController extends Controller
         }
     }
 
+    function transactions()
+    {
+        $transactions = Gift::latest()->get();
+
+        return view('admin.transactions.transactions', compact('transactions'));
+    }
 
     function gifts()
     {

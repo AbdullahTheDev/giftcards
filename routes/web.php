@@ -63,6 +63,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Gifts
         Route::get('/gifts', [AdminController::class, 'gifts'])->name('admin.gifts');
 
+        //Transactions
+        Route::get('/transactions', [AdminController::class, 'transactions'])->name('admin.transactions');
+
         // Events
         Route::get('/events', [AdminController::class, 'events'])->name('admin.events');
         Route::get('/event-details/{id}', [AdminController::class, 'eventDetails'])->name('admin.events.details');
