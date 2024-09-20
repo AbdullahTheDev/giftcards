@@ -117,7 +117,7 @@
                                     <tr>
                                         <td class="text-center">{{ $withdrawlGift->gifts->gift_id }}</td>
                                         <td class="text-center">{{ $withdrawlGift->withdrawFunc->user->email }}</td>
-                                        <td class="text-center">${{ number_format($withdrawlGift->amount, 2) }}</td>
+                                        <td class="text-center">${{ number_format($withdrawlGift->gifts->amount, 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
