@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -38,7 +39,7 @@ class AdminController extends Controller
 
     function settingsSave(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'admin_fees' => 'required|numeric',
                 'merchant_fees' => 'required|numeric',
@@ -50,7 +51,7 @@ class AdminController extends Controller
             $settings->save();
 
             return redirect()->back()->with('success', 'Settings Updated!');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -85,10 +86,59 @@ class AdminController extends Controller
 
         return view('admin.events.events', compact('events'));
     }
-    function eventUpdate()
+    function eventUpdate(Request $request)
     {
-        $events = Event::latest()->get();
+        try {
+            $event = Event::find($request->event_id);
 
-        return view('admin.events.events', compact('events'));
+            $messages = [
+                'name.unique' => 'The event name is already taken. Please choose a different name.',
+            ];
+
+            $request->validate([
+                'name' => [
+                    'required',
+                    Rule::unique('events', 'name')->ignore($event->id)->where(function ($query) use ($request) {
+                        $query->whereRaw('LOWER(name) = ?', [strtolower($request->name)]);
+                    }),
+                ],
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048',
+                'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,jpeg|max:2048'
+            ], $messages);
+            // $event = Event::where('user_id', $user->id)->first();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('uploads/images'), $imageName);
+                $imagePath = 'uploads/images/' . $imageName;
+            } else {
+                $imagePath = $event->image;
+            }
+
+            // Handle banner upload
+            if ($request->hasFile('banner')) {
+                $banner = $request->file('banner');
+                $bannerName = time() . '_' . $banner->getClientOriginalName();
+                $banner->move(public_path('uploads/banners'), $bannerName);
+                $bannerPath = 'uploads/banners/' . $bannerName;
+            } else {
+                $bannerPath = $event->banner;
+            }
+
+            $event->update([
+                'name' => $request->name,
+                'showname' => $request->showname,
+                'image' => $imagePath,
+                'banner' => $bannerPath,
+                'event_date' => $request->event_date,
+                'description' => $request->description,
+                'location' => $request->location,
+            ]);
+
+            return redirect()->back()->with('success', 'Event Updated Successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

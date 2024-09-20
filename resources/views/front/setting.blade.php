@@ -77,8 +77,7 @@
                                 </div>
                                     <div class="input-group">
                                         <label for="eventImage">Event Image:</label>
-                                        <input type="file" name="image" id="eventImage" accept="image/*"
-                                            onchange="previewImage(event, 'eventImagePreview')">
+                                        <input type="file" name="image" id="eventImage" accept="image/*" onchange="previewImage(event, 'eventImagePreview')">
                                         <!-- Show existing image if available -->
                                         @if ($event->image ?? null)
                                             <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
@@ -98,8 +97,7 @@
                                 --}}
                                     <div class="input-group">
                                         <label for="eventBanner">Event Banner:</label>
-                                        <input type="file" name="banner" id="eventBanner" accept="image/*"
-                                            onchange="previewImage(event, 'eventBannerPreview')">
+                                        <input type="file" name="banner" id="eventBanner" accept="image/*" onchange="previewImage(event, 'eventBannerPreview')">
 
 
                                         @if ($event->banner ?? null)

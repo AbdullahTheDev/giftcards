@@ -65,7 +65,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Events
         Route::get('/events', [AdminController::class, 'events'])->name('admin.events');
         Route::get('/event-details/{id}', [AdminController::class, 'eventDetails'])->name('admin.events.details');
-        Route::get('/event-details/{id}', [AdminController::class, 'eventDetails'])->name('admin.events.details');
+        Route::post('/event-update', [AdminController::class, 'eventUpdate'])->name('admin.event.update');
 
 
     });

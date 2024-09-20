@@ -26,12 +26,14 @@
 
             <div class="card mt-5">
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('admin.event.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
                                     <label for="">Event Name</label>
+                                    <input type="hidden" class="form-control border px-2" value="{{ $event->id }}"
+                                        name="event_id" id="">
                                     <input type="text" class="form-control border px-2" value="{{ $event->showname }}"
                                         name="showname" id="">
                                 </div>
@@ -46,7 +48,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="">Event Date</label>
-                                    <input type="date" class="form-control border px-2" value="{{ $event->event_date }}" name="date" id="">
+                                    <input type="date" class="form-control border px-2" value="{{ $event->event_date }}"
+                                        name="event_date" id="">
 
 
                                 </div>
@@ -66,16 +69,33 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="">Event Image</label>
-                            <input type="file" name="image" class="form-control border" value="{{ $event->image }}"
-                                id="">
-                            <img style="width: 300px; margin-top: 6px;" class="rounded" src="{{ asset('/') }}{{ $event->image }}" alt="">
+                            <div class="input-group">
+                                <label for="eventImage">Event Image:</label>
+                                <input type="file" name="image" id="eventImage" accept="image/*"
+                                    onchange="previewImage(event, 'eventImagePreview')">
+
+                                @if ($event->image ?? null)
+                                    <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
+                                        style="max-width: 200px; display: block; margin-top: 10px;">
+                                @else
+                                    <img id="eventImagePreview" style="max-width: 200px; display: none; margin-top: 10px;">
+                                @endif
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="">Event Banner</label>
-                            <input type="file" name="banner" class="form-control border" value="{{ $event->banner }}"
-                                id="">
-                            <img style="width: 300px; margin-top: 6px;" class="rounded" src="{{ asset('/') }}{{ $event->banner }}" alt="">
+                            <div class="input-group">
+                                <label for="">Event Banner</label>
+                                <input type="file" name="banner" id="eventBanner" accept="image/*"
+                                    onchange="previewImage(event, 'eventBannerPreview')">
+
+
+                                @if ($event->banner ?? null)
+                                    <img id="eventBannerPreview" src="{{ asset($event->banner) }}" alt="Event Banner"
+                                        style="max-width: 200px; display: block; margin-top: 10px;">
+                                @else
+                                    <img id="eventBannerPreview" style="max-width: 200px; display: none; margin-top: 10px;">
+                                @endif
+                            </div>
                         </div>
                         <div class="mb3">
                             <button class="btn btn-success">Update</button>
@@ -86,4 +106,15 @@
         </div>
     @endsection
     @section('scripts')
+        <script>
+            function previewImage(event, previewId) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var output = document.getElementById(previewId);
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
     @endsection
