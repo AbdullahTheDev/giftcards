@@ -29,6 +29,10 @@
                     <form action="{{ route('admin.settings.save') }}" method="post">
                         @csrf
                         <div class="row">
+                            <div class="col-12">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="john@example.com" value="{{ $settings->email }}" class="form-control border px-4">
+                            </div>
                             <div class="col-6">
                                 <label for="">Merchant Fees (%)</label>
                                 <input type="text" class="form-control border px-4" value="{{ $settings->admin_fees }}" name="admin_fees" id="">

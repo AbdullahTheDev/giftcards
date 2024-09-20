@@ -45,11 +45,13 @@ class AdminController extends Controller
             $request->validate([
                 'admin_fees' => 'required|numeric',
                 'merchant_fees' => 'required|numeric',
+                'email' => 'required|email',
             ]);
 
             $settings = Setting::find(1);
             $settings->admin_fees = $request->admin_fees;
             $settings->merchant_fees = $request->merchant_fees;
+            $settings->email = $request->email;
             $settings->save();
 
             return redirect()->back()->with('success', 'Settings Updated!');

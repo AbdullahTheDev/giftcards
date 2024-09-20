@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminGift;
 use App\Mail\GiftRecieve;
 use App\Mail\Payment;
+use App\Mail\SenderGift;
 use App\Models\Gift;
 use App\Models\Sender;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -86,7 +89,13 @@ class PaymentController extends Controller
             $data = [
                 'name' => $user->first_name . ' ' . $user->last_name,
             ];
+
+            $settings = Setting::find(1);
+
             Mail::to($request->email)->send(new Payment($data));
+
+            Mail::to($settings->email)->send(new AdminGift($data));
+            Mail::to($request->email)->send(new SenderGift($data));
 
             return redirect()->route('payment.success')->with('success', 'Payment successful!');
         } catch (\Exception $e) {
