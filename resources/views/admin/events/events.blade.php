@@ -46,8 +46,7 @@
                                     <td class="text-center">{{ \CArbon\Carbon::parse($event->date)->format('Y M d') }}</td>
                                     <td class="text-center">{{ $event->location }}</td>
                                     <td>
-                                        <a href="{{ route('admin.events.details', $event->id) }}" class="btn btn-succes">View</a>
-                                        <a href="" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.events.details', $event->id) }}" class="btn btn-success">View/Edit</a>
                                     </td>
                                     {{-- <td>{{ $gift?->date }}</td> --}}
                                 </tr>
