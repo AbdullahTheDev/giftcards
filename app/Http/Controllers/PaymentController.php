@@ -41,16 +41,24 @@ class PaymentController extends Controller
         ]);
 
         try {
+            $settings = Setting::find(1);
+
+            $adminFees = ($request->amount * $settings->admin_fees) / 100;
+            $merchantFees = ($request->amount * $settings->merchant_fees) / 100;
+
+            $totalAmount = $request->amount + $adminFees + $merchantFees;
+
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $token = $request->input('stripeToken');
 
             $payment_details = Charge::create([
-                'amount' => $request->amount * 100, // Amount in cents
+                'amount' => $totalAmount * 100,
                 'currency' => 'usd',
                 'source' => $token,
                 'description' => $request->message,
             ]);
+            
 
             $sender = Sender::create([
                 'first_name' => $request->first_name,
@@ -73,7 +81,9 @@ class PaymentController extends Controller
                 'sender' => $sender->id,
                 'message' => $request->message,
                 'amount' => $request->amount,
-                'admin_fee' => 5,
+                'total_amount' => $totalAmount,
+                'admin_fee' => $merchantFees,
+                'merchant_fee' => $adminFees,
                 'date' => now(),
                 'payment_details' => $payment_details,
             ]);
@@ -82,10 +92,10 @@ class PaymentController extends Controller
 
             $data = [
                 'sender_name' => $request->first_name . ' ' . $request->last_name,
-                'recevier_name' => $user->first_name . ' ' . $user->last_name,
+                'receiver_name' => $user->first_name . ' ' . $user->last_name,
             ];
             
-            $settings = Setting::find(1);
+            
             
             Mail::to($user->email)->send(new GiftRecieve($data));
             Mail::to($settings->email)->send(new AdminGift($data));

@@ -38,7 +38,7 @@ class AdminGift extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.payment.admin_email',
             with: $this->data
         );
     }
