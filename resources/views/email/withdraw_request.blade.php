@@ -12,7 +12,7 @@
     </p>
     <br>
     <p>
-        Total Amount: <strong>{{ $data['total'] }}</strong>
+        Total Amount Requested: <strong>{{ $data['total'] }}</strong>
     </p>
 
     
