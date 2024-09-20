@@ -78,22 +78,16 @@ class PaymentController extends Controller
                 'payment_details' => $payment_details,
             ]);
 
-            $data = [
-                'name' => $request->first_name . ' ' . $request->last_name,
-            ];
-
             $user = User::find($request->user_id);
 
-            Mail::to($user->email)->send(new GiftRecieve($data));
-
             $data = [
-                'name' => $user->first_name . ' ' . $user->last_name,
+                'sender_name' => $request->first_name . ' ' . $request->last_name,
+                'recevier_name' => $user->first_name . ' ' . $user->last_name,
             ];
-
+            
             $settings = Setting::find(1);
-
-            Mail::to($request->email)->send(new Payment($data));
-
+            
+            Mail::to($user->email)->send(new GiftRecieve($data));
             Mail::to($settings->email)->send(new AdminGift($data));
             Mail::to($request->email)->send(new SenderGift($data));
 

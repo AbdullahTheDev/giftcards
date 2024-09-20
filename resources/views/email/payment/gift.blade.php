@@ -7,6 +7,6 @@
     <title>Gift Recieved</title>
 </head>
 <body>
-    You recieved a gift from {{ $data['name'] }}
+    You recieved a gift from {{ $data['sender_name'] }}
 </body>
 </html>
