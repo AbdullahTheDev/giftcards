@@ -74,15 +74,20 @@
                         <h5>Total Amount</h5>
                         <p style="font-weight: bold;">${{ number_format($withdraw->amount) }}</p>
                     </div>
-                    <div class="d-flex flex-row my-2 gap-3">
-                        <h5>Payment Status</h5>
-                        <p>
+                    <div class="d-flex flex-row my-2 gap-3" style="justify-content: space-between; align-items: center;">
+                        <h5 style="align-items: center; display: flex; gap: 13px;">
+                            Payment Status 
                             @if($withdraw->payment_status == 'pending')
-                                <span class="badge bg-secondary">{{ $withdraw->payment_status }}</span>
+                                <span class="ml-3 badge bg-secondary">{{ $withdraw->payment_status }}</span>
                             @else
-                                <span class="badge bg-success">{{ $withdraw->payment_status }}</span>
+                                <span class="ml-3 badge bg-success">{{ $withdraw->payment_status }}</span>
                             @endif
-                        </p>
+                        </h5>
+                        @if($withdraw->payment_status == 'paid')
+                            <a href="" class="btn btn-success">Make Payment Paid</a>
+                        @else
+                            <a href="" class="btn btn-success">Make Payment Pending</a>
+                        @endif
                     </div>
 
                     <hr class="bg-secondary mb-4">
