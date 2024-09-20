@@ -29,21 +29,64 @@
 
             <div class="card mt-5">
                 <div class="card-body">
-                    <div class="d-flex flex-row my-2 gap-3">
-                        <h5>User Email</h5>
-                        <p>{{ $withdraw->withdrawFunc }}</p>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div style="border: 2px solid #303035; border-radius: 10px; padding: 10px; height: 100%;">
+                                <h4 class="text-center my-2">User Details</h4>
+                                <div class="d-flex flex-row my-2 gap-3">
+                                    <h6>Name</h6>
+                                    <p>{{ $withdraw->user->first_name . ' ' . $withdraw->user->last_name }}</p>
+                                </div>
+                                <div class="d-flex flex-row my-2 gap-3">
+                                    <h6>Email</h6>
+                                    <p>{{ $withdraw->user->email }}</p>
+                                </div>
+                                <div class="d-flex flex-row gap-3">
+                                    <h6>Phone</h6>
+                                    <p>{{ $withdraw->user->phone }}</p>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div style="border: 2px solid #303035; border-radius: 10px; padding: 10px; height: 100%;">
+                                <h4 class="text-center my-2">User Payment Details</h4>
+                                <div class="d-flex flex-row my-2 gap-3">
+                                    <h6>Account Name</h6>
+                                    <p>{{ $paymentDetails->accountName }}</p>
+                                </div>
+                                <div class="d-flex flex-row my-2 gap-3">
+                                    <h6>BSB Number</h6>
+                                    <p>{{ $paymentDetails->BSBNumber }}</p>
+                                </div>
+                                <div class="d-flex flex-row my-2 gap-3">
+                                    <h6>Account Number</h6>
+                                    <p>{{ $paymentDetails->accountNumber }}</p>
+                                </div>
+                                <div class="d-flex flex-row gap-3">
+                                    <h6>Bank Name</h6>
+                                    <p>{{ $paymentDetails->bankName }}</p>
+                                </div>
+                            </div>  
+                        </div>
                     </div>
+                    <hr class="bg-secondary">
                     <div class="d-flex flex-row my-2 gap-3">
                         <h5>Total Amount</h5>
-                        <p>{{ $withdraw->amount }}</p>
+                        <p style="font-weight: bold;">${{ number_format($withdraw->amount) }}</p>
                     </div>
                     <div class="d-flex flex-row my-2 gap-3">
                         <h5>Payment Status</h5>
-                        <p>{{ $withdraw->payment_status }}</p>
+                        <p>
+                            @if($withdraw->payment_status == 'pending')
+                                <span class="badge bg-secondary">{{ $withdraw->payment_status }}</span>
+                            @else
+                                <span class="badge bg-success">{{ $withdraw->payment_status }}</span>
+                            @endif
+                        </p>
                     </div>
 
                     <div>
-                        <h2 class="my-2">Transactions</h2>
+                        <h2 class="my-2">Withdrawl Gifts</h2>
                         <table class="table" id="gift-table">
                             <thead>
                                 <tr>

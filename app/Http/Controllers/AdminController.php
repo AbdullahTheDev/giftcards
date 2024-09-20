@@ -80,12 +80,6 @@ class AdminController extends Controller
         return view('admin.events.event_details', compact('event'));
     }
 
-    function eventEdit()
-    {
-        $events = Event::latest()->get();
-
-        return view('admin.events.events', compact('events'));
-    }
     function eventUpdate(Request $request)
     {
         try {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gift;
+use App\Models\PaymentDetail;
 use App\Models\WithdrawGifts;
 use App\Models\Withdrawl;
 use Exception;
@@ -33,8 +34,10 @@ class WithdrawController extends Controller
 
         $withdrawlGifts = WithdrawGifts::where('withdrawl_id', $withdraw->id)->get();
 
+        $paymentDetails = PaymentDetail::where('user_id', $withdraw->user_id)->first();
+
         // return $withdrawlGifts[0]->gifts;
-        return view('admin.withdraw.withdraw_details', compact('withdraw', 'withdrawlGifts'));
+        return view('admin.withdraw.withdraw_details', compact('withdraw', 'withdrawlGifts', 'paymentDetails'));
     }
     function requestWithdrawPage(Request $request){
         $gifts = Gift::where('user_id', Auth::id())->where('requested', 0)->get();
