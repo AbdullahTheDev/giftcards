@@ -72,7 +72,13 @@
                     <hr class="bg-secondary">
                     <div class="d-flex flex-row my-2 gap-3">
                         <h5>Total Amount</h5>
-                        <p style="font-weight: bold;">${{ number_format($withdraw->amount) }}</p>
+                        <p style="font-weight: bold;">${{ number_format($withdraw->amount, 2) }}</p>
+                    </div>
+                    <div>
+                        <div class="d-flex flex-row gap-3">
+                            <p>Admin fees deducted from client</p>
+                            <p style="font-weight: bold;">${{ number_format($withdraw->admin_fees, 2) }}</p>
+                        </div>
                     </div>
                     <div class="d-flex flex-row my-2" style="justify-content: space-between; align-items: center;">
                         <h5 style="align-items: center; display: flex; gap: 13px;">

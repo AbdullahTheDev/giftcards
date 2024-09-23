@@ -47,8 +47,8 @@
                                     <td class="text-center">{{ $gift?->senderInfo->first_name . ' ' . $gift?->senderInfo->last_name }}</td>
                                     <td class="text-center">{{ $gift?->message }}</td>
                                     <td class="text-center">${{ number_format($gift?->amount, 2) }}</td>
-                                    <td class="text-center">${{ number_format($gift?->merchant_fee, 2) }}</td>
                                     <td class="text-center">${{ number_format($gift?->admin_fee, 2) }}</td>
+                                    <td class="text-center">${{ number_format($gift?->merchant_fee, 2) }}</td>
                                     <td class="text-center">${{ number_format($gift?->total_amount, 2) }}</td>
                                     <td class="text-center">{{ \CArbon\Carbon::parse($gift?->date)->format('Y M d') }}</td>
                                     {{-- <td>{{ $gift?->date }}</td> --}}
