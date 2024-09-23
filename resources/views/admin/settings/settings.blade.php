@@ -35,11 +35,11 @@
                             </div>
                             <div class="col-6">
                                 <label for="">Merchant Fees (%)</label>
-                                <input type="text" class="form-control border px-4" value="{{ $settings->admin_fees }}" name="admin_fees" id="">
+                                <input type="text" class="form-control border px-4" value="{{ $settings->merchant_fees }}" name="merchant_fees" id="">
                             </div>
                             <div class="col-6">
                                 <label for="">Admin Fees (%)</label>
-                                <input type="text" class="form-control border px-4" value="{{ $settings->merchant_fees }}" name="merchant_fees" id="">
+                                <input type="text" class="form-control border px-4" value="{{ $settings->admin_fees }}" name="admin_fees" id="">
                             </div>
                         </div>
                         <div>

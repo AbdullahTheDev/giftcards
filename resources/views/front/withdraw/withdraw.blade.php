@@ -21,6 +21,7 @@
                 <div>
                     <h3>Withdraw History</h3>
                     <h6>Withdraw amount: ${{ number_format($total, 2) }}</h6>
+                    <h6>Remaining amount: ${{ number_format($giftsAmount, 2) }}</h6>
                 </div>
                 <a class="btn btn-warning m-0" href="{{ route('withdraw.request.page') }}">Request Withdraw</a>
             </div>
@@ -57,8 +58,8 @@
                                         </span>
                                     @endif
                                 </th>
-                                <td class="text-center">${{ number_format($withdrawl?->merchant_fees, 2) }}</td>
-                                {{-- <td class="text-center">${{ number_format($withdrawl?->admin_fees, 2) }}</td> --}}
+                                {{-- <td class="text-center">${{ number_format($withdrawl?->merchant_fees, 2) }}</td> --}}
+                                <td class="text-center">${{ number_format($withdrawl?->admin_fees, 2) }}</td>
                                 <th class="text-center">{{ $withdrawl->mode }}</th>
                                 {{-- <th class="text-center">{{ $withdrawl->note }}</th> --}}
                                 <td class="text-center">{{ \Carbon\Carbon::parse($withdrawl?->date)->format('Y M d') }}</td>

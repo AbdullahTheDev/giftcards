@@ -20,13 +20,15 @@ class WithdrawController extends Controller
     {
         $withdrawls = Withdrawl::where('user_id', Auth::id())->get();
 
+        $giftsAmount = Gift::where('user_id', Auth::id())->where('requested', 0)->sum('amount');
+
         $total = 0;
 
         foreach ($withdrawls as $withdrawl) {
             $total += $withdrawl->amount;
         }
 
-        return view('front.withdraw.withdraw', compact('withdrawls', 'total'));
+        return view('front.withdraw.withdraw', compact('withdrawls', 'total', 'giftsAmount'));
     }
 
     function adminWithdraw()
@@ -75,6 +77,7 @@ class WithdrawController extends Controller
             ]);
             $amount = 0;
 
+            $admin_fees = 0;
             foreach ($request->gift_ids as $gift_id) {
                 $gift = Gift::find($gift_id);
                 $gift->requested = 1;
@@ -86,15 +89,15 @@ class WithdrawController extends Controller
                 ]);
 
                 $netAmount = $gift->amount - $settings->admin_fees;
-
+                $admin_fees += $settings->admin_fees;
                 $amount += $netAmount;
             }
-            
+
             $withd = Withdrawl::find($withdrawl->id);
             $withd->invoice_id = Auth::id() . (time() % 100000);
             $withd->amount = $amount;
-            $withd->admin_fees = $settings->merchant_fees;
-            $withd->merchant_fees = $settings->admin_fees;
+            $withd->admin_fees = $admin_fees;
+            $withd->merchant_fees = $settings->merchant_fees;
             $withd->mode = 'Bank Transfer';
             
             $withd->save();

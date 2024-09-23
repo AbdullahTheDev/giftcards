@@ -60,8 +60,8 @@
                                         </td>
                                         <td class="text-center">{{ $gift?->message }}</td>
                                         <td class="text-center">${{ number_format($gift?->amount, 2) }}</td>
-                                        <td class="text-center">${{ number_format($gift?->merchant_fee, 2) }}</td>
-                                        {{-- <td class="text-center">${{ number_format($gift?->admin_fee, 2) }}</td> --}}
+                                        {{-- <td class="text-center">${{ number_format($gift?->merchant_fee, 2) }}</td> --}}
+                                        <td class="text-center">${{ number_format($gift?->admin_fee, 2) }}</td>
                                         <td class="text-center">{{ \Carbon\Carbon::parse($gift?->date)->format('Y M d') }}
                                         </td>
                                     </tr>
