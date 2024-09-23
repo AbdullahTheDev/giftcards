@@ -34,7 +34,7 @@
                                 <th class="text-center">Message</th>
                                 <th class="text-center">Amount</th>
                                 <th class="text-center">Admin Fees</th>
-                                <th class="text-center">Merchant Fees</th>
+                                {{-- <th class="text-center">Merchant Fees</th> --}}
                                 <th class="text-center">Date</th>
                                 {{-- <th>Actions</th> --}}
                             </tr>
@@ -47,7 +47,7 @@
                                     <td class="text-center">{{ $gift?->message }}</td>
                                     <td class="text-center">${{ number_format($gift?->amount, 2) }}</td>
                                     <td class="text-center">${{ number_format($gift?->merchant_fee, 2) }}</td>
-                                    <td class="text-center">${{ number_format($gift?->admin_fee, 2) }}</td>
+                                    {{-- <td class="text-center">${{ number_format($gift?->admin_fee, 2) }}</td> --}}
                                     <td class="text-center">{{ \CArbon\Carbon::parse($gift?->date)->format('Y M d') }}</td>
                                     {{-- <td>{{ $gift?->date }}</td> --}}
                                 </tr>

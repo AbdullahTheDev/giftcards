@@ -35,7 +35,7 @@
                             <th class="text-center">Amount</th>
                             <th class="text-center">Payment</th>
                             <th class="text-center">Admin Fees</th>
-                            <th class="text-center">Merchant Fees</th>
+                            {{-- <th class="text-center">Merchant Fees</th> --}}
                             <th class="text-center">Mode</th>
                             {{-- <th class="text-center">Note</th> --}}
                             <th class="text-center">Date</th>
@@ -58,7 +58,7 @@
                                     @endif
                                 </th>
                                 <td class="text-center">${{ number_format($withdrawl?->merchant_fees, 2) }}</td>
-                                <td class="text-center">${{ number_format($withdrawl?->admin_fees, 2) }}</td>
+                                {{-- <td class="text-center">${{ number_format($withdrawl?->admin_fees, 2) }}</td> --}}
                                 <th class="text-center">{{ $withdrawl->mode }}</th>
                                 {{-- <th class="text-center">{{ $withdrawl->note }}</th> --}}
                                 <td class="text-center">{{ \Carbon\Carbon::parse($withdrawl?->date)->format('Y M d') }}</td>
