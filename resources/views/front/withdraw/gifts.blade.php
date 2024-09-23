@@ -34,7 +34,10 @@
                                 <tr>
                                     <th class="text-center" style="padding: 10px;">
                                         <!-- Add "Select All" checkbox -->
-                                        <input type="checkbox" id="select-all" style="width: 20px; height: 20px;">
+                                        {{-- <div class="d-flex flex-row" style="justify-content: center; align-content: center; gap: 6px;"> --}}
+                                            <p style="font-weight: bold">Check All</p>
+                                            <input type="checkbox" id="select-all" style="width: 20px; height: 20px;">
+                                        {{-- </div> --}}
                                     </th>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Gift ID</th>
