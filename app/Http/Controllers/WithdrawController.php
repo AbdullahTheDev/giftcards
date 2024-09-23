@@ -68,6 +68,8 @@ class WithdrawController extends Controller
     function requestWithdraw(Request $request)
     {
         try {
+            $settings = Setting::find(1);
+
             $withdrawl = Withdrawl::create([
                 'user_id' => Auth::id()
             ]);
@@ -83,10 +85,11 @@ class WithdrawController extends Controller
                     'withdrawl_id' => $withdrawl->id
                 ]);
 
-                $amount += $gift->amount;
-            }
-            $settings = Setting::find(1);
+                $netAmount = $gift->amount - $settings->admin_fees;
 
+                $amount += $netAmount;
+            }
+            
             $withd = Withdrawl::find($withdrawl->id);
             $withd->invoice_id = Auth::id() . (time() % 100000);
             $withd->amount = $amount;
