@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\AdminWithdraw;
+use App\Mail\PaymentDone;
 use App\Models\Gift;
 use App\Models\PaymentDetail;
 use App\Models\Setting;
@@ -55,6 +56,12 @@ class WithdrawController extends Controller
             $withdraw = Withdrawl::find($id);
             $withdraw->payment_status = $request->payment_status;
             $withdraw->save();
+
+            $data = [];
+
+            if($request->payment_status == 'paid'){
+                Mail::to($withdraw->user->email)->send(new PaymentDone($data));
+            }
 
             return redirect()->back()->with('success', 'Payment status updated successfully!');
         } catch (Exception $e) {
