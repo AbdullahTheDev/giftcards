@@ -180,11 +180,11 @@
                                         <span id="showFees">$0</span>
                                         <span style="display: none;" id="admin_fees">{{ $settings->admin_fees }}</span>
                                     </div>
-                                    <div class="d-flex justify-content-between">
+                                    {{-- <div class="d-flex justify-content-between">
                                         <span>Admin fee</span>
                                         <span id="showMerchantFees">$0</span>
                                         <span style="display: none;" id="merchant_fees">{{ $settings->merchant_fees }}</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
                                         <span>$<span id="amountValTotal">0</span>
@@ -360,7 +360,7 @@
 
                 // Calculate the admin fee as a percentage of the amount
                 var adminFees = (amountValue * adminFeesPercent) / 100;
-                var merchantFees = (amountValue * merchantFeesPercent) / 100;
+                // var merchantFees = (amountValue * merchantFeesPercent) / 100;
 
                 // Update the hidden input value
                 $('#amountValInput').val(amountValue);
@@ -369,12 +369,12 @@
                 $('#amountVal').text(amountValue.toFixed(2));
 
                 // Calculate the total with admin fees and update the display
-                var totalAmount = amountValue + adminFees + merchantFees;
+                var totalAmount = amountValue + adminFees;
                 
                 $('#amountValTotal').text(totalAmount.toFixed(2));
 
                 $('#showFees').text('$' + adminFees.toFixed(2));
-                $('#showMerchantFees').text('$' + merchantFees.toFixed(2));
+                // $('#showMerchantFees').text('$' + merchantFees.toFixed(2));
             });
         });
     </script>
