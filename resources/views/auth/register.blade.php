@@ -65,6 +65,9 @@
                         <div class="detailss">
                             <h3>Register Now</h3>
                             <p>Please fill the form below to register as a host.</p>
+                            {{-- <a href="{{ route('login.google') }}" class="btn btn-primary">
+                                Login with Google
+                            </a> --}}
                         </div>
                         <form action="{{ route('register') }}" method="POST" class="main-form form-group"
                             id="register-form">
