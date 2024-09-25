@@ -8,6 +8,10 @@ use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VerificationController;
+use Illuminate\Foundation\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\GoogleController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,13 +23,45 @@ use App\Http\Controllers\VerificationController;
 |
 */
 
-use App\Http\Controllers\Auth\GoogleController;
 
 // Redirect to Google for login
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 
 // Handle Google callback
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+
+// Email Verification
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email'); // Create this view
+// })->name('verification.notice');
+
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+//     return back()->with('success', 'Verification link sent!');
+// })->middleware(['auth'])->name('verification.send');
+
+
+
+
+Route::get('/verification', [VerificationController::class, 'showVerificationForm'])
+    ->name('verification');
+    
+Route::post('/verification', [VerificationController::class, 'verifyCode']);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Route::post('/send-verification-code', [VerificationController::class, 'sendVerificationCode'])->name('send.verification.code');

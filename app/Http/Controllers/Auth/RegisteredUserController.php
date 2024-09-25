@@ -46,6 +46,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->sendEmailVerificationNotification();
+        
         $event = Event::create([
             'user_id' => $user->id,
             'name' => $user->id,

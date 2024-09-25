@@ -39,7 +39,7 @@ class VerificationCode extends Mailable
     {
         return new Content(
             view: 'email.verification_code',
-            with: $this->code
+            with: [$this->code]
         );
     }
 
