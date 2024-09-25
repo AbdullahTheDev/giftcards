@@ -63,6 +63,10 @@
                             <h3>Login</h3>
                             <p>Welcome To My Wishing Well.</p>
                         </div>
+                        <a href="{{ route('login.google') }}" class="btn btn-primary">
+                            <i class="fab fa-google"></i> Login with Google
+                        </a>
+                        
                         @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul style="margin: 0 !important; list-style: none;">

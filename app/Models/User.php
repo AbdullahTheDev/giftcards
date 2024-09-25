@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'qrcode',
         'last_login',
-        'phone'
+        'phone',
+        'google_id'
     ];
 
     /**
