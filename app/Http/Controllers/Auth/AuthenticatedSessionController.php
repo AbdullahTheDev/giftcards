@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Mail;
+use Str;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -52,5 +54,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    protected function sendVerificationCode($user)
+    {
+        $code = Str::random(6); // Generate a random 6-character code
+        // Store the code in the session for later verification
+        session(['verification_code' => $code]);
+
+        // Send the email
+        Mail::to($user->email)->send(new \App\Mail\VerificationCode($code));
     }
 }
