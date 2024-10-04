@@ -75,7 +75,7 @@
                                 </span>
                             @enderror
 
-                            <input type="submit" value="Reset Password" id="ResetPassword" class="btn btn-primary">
+                            <input type="submit" value="Reset Password" id="ResetPassword" class="btn btn-primary mt-3">
 
                         </form>
                     </div>
