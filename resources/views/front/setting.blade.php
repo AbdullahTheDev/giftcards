@@ -159,18 +159,18 @@
                         @csrf
                         <label for="accountName">Account Name</label>
                         <input type="text" name="accountName" value="{{ $paymentDetails->accountName }}"
-                            id="accountName" placeholder="Enter your card number">
+                            id="accountName" placeholder="Enter your account name">
 
                         <label for="BSBNumber">BSB Number</label>
-                        <input type="text" name="BSBNumber" value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
+                        <input type="text" name="BSBNumber" placeholder="Enter your BSB number" value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
 
                         <label for="accountNumber">Account Number</label>
                         <input type="text" name="accountNumber" value="{{ $paymentDetails->accountNumber }}"
-                            id="accountNumber" placeholder="Enter your card number">
+                            id="accountNumber" placeholder="Enter your account number">
 
                         <label for="bankName">Bank Name</label>
                         <input type="text" name="bankName" value="{{ $paymentDetails->bankName }}" id="bankName"
-                            placeholder="Enter name on card">
+                            placeholder="Enter your bank name">
 
                         <button type="submit">Save</button>
                     </form>
