@@ -80,53 +80,77 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="input-group">
-                                        <label for="eventImage">Event Image:</label>
-                                        <input type="file" name="image" id="eventImage" accept="image/*" onchange="previewImage(event, 'eventImagePreview')">
-                                        <!-- Show existing image if available -->
+
+                                <div class="input-group">
+                                    <label for="eventImage">Event Image:</label>
+                                    <input type="file" name="image" id="eventImage" accept="image/*"
+                                        onchange="previewImage(event, 'eventImagePreview')">
+
+                                    <div style="position: relative; display: inline-block;">
                                         @if ($event->image ?? null)
                                             <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
                                                 style="max-width: 200px; display: block; margin-top: 10px;">
+                                                <button type="button" onclick="clearImage('eventImage', 'eventImagePreview')"
+                                            style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
+                                            id="clearEventImageBtn">
+                                            X
+                                        </button>
                                         @else
                                             <img id="eventImagePreview"
                                                 style="max-width: 200px; display: none; margin-top: 10px;">
                                         @endif
+                                        <button type="button" onclick="clearImage('eventImage', 'eventImagePreview')"
+                                            style="display: none; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
+                                            id="clearEventImageBtn">
+                                            X
+                                        </button>
                                     </div>
-                                    {{-- 
-                                  <div class="input-group">
-                                    <label for="eventBannerType">Event Banner Type:</label>
-                                    <select id="eventBannerType">
-                                      <option value="static">Static Image</option>
-                                    </select>
-                                  </div> 
-                                --}}
-                                    <div class="input-group">
-                                        <label for="eventBanner">Event Banner:</label>
-                                        <input type="file" name="banner" id="eventBanner" accept="image/*" onchange="previewImage(event, 'eventBannerPreview')">
+                                </div>
 
+                                <div class="input-group">
+                                    <label for="eventBanner">Event Banner:</label>
+                                    <input type="file" name="banner" id="eventBanner" accept="image/*"
+                                        onchange="previewImage(event, 'eventBannerPreview')">
 
+                                    <div style="position: relative; display: inline-block;">
                                         @if ($event->banner ?? null)
                                             <img id="eventBannerPreview" src="{{ asset($event->banner) }}"
                                                 alt="Event Banner"
                                                 style="max-width: 200px; display: block; margin-top: 10px;">
+                                                <button type="button" onclick="clearImage('eventBanner', 'eventBannerPreview')"
+                                            style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
+                                            id="clearEventImageBtn">
+                                            X
+                                        </button>
                                         @else
                                             <img id="eventBannerPreview"
                                                 style="max-width: 200px; display: none; margin-top: 10px;">
                                         @endif
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="eventDate">Event Date:</label>
-                                        <input type="date" name="event_date"
-                                            value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}"
-                                            id="eventDate">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="eventDescription">Event Description:</label>
-                                        <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
+                                        <button type="button" onclick="clearImage('eventBanner', 'eventBannerPreview')"
+                                            style="display: none; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
+                                            id="clearEventBannerBtn">
+                                            X
+                                        </button>
                                     </div>
                                 </div>
 
-                                {{-- <div class="profile-visibility">
+
+
+
+
+                                <div class="input-group">
+                                    <label for="eventDate">Event Date:</label>
+                                    <input type="date" name="event_date"
+                                        value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') ?? '' }}"
+                                        id="eventDate">
+                                </div>
+                                <div class="input-group">
+                                    <label for="eventDescription">Event Description:</label>
+                                    <textarea id="eventDescription" name="description" rows="5">{{ $event->description ?? '' }}</textarea>
+                                </div>
+                            </div>
+
+                            {{-- <div class="profile-visibility">
                                 <h3>Profile Visibility Setup</h3>
                                 <div class="input-group">
                                     <label for="visibility">Profile Name Position:</label>
@@ -137,7 +161,7 @@
                                 </div>
                             </div> --}}
 
-                                <button type="submit">Save</button>
+                            <button type="submit">Save</button>
                         </form>
                     </div>
 
@@ -167,7 +191,8 @@
                             id="accountName" placeholder="Enter your account name">
 
                         <label for="BSBNumber">BSB Number</label>
-                        <input type="text" name="BSBNumber" placeholder="Enter your BSB number" value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
+                        <input type="text" name="BSBNumber" placeholder="Enter your BSB number"
+                            value="{{ $paymentDetails->BSBNumber }}" id="BSBNumber">
 
                         <label for="accountNumber">Account Number</label>
                         <input type="text" name="accountNumber" value="{{ $paymentDetails->accountNumber }}"
@@ -207,8 +232,26 @@
                 var output = document.getElementById(previewId);
                 output.src = reader.result;
                 output.style.display = 'block';
+
+                // Show the "X" button
+                var clearBtnId = previewId === 'eventImagePreview' ? 'clearEventImageBtn' : 'clearEventBannerBtn';
+                document.getElementById(clearBtnId).style.display = 'block';
             };
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function clearImage(inputId, previewId) {
+            // Clear the file input
+            document.getElementById(inputId).value = '';
+
+            // Hide the image preview
+            var output = document.getElementById(previewId);
+            output.style.display = 'none';
+            output.src = ''; // Clear the src attribute
+
+            // Hide the "X" button
+            var clearBtnId = previewId === 'eventImagePreview' ? 'clearEventImageBtn' : 'clearEventBannerBtn';
+            document.getElementById(clearBtnId).style.display = 'none';
         }
     </script>
     <script>
