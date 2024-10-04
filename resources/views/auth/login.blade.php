@@ -89,7 +89,7 @@
                                 <label for="remember">Remember Me</label>
                                 <input type="checkbox" name="remember" placeholder="" class="form-control check">
                             </div>
-                            {{-- <p><a href="">Lost your password?</a></p> --}}
+                            <p><a href="{{ route('password.request') }}">Lost your password?</a></p>
                             <span>Don't have an account yet?<a href="{{ route('register') }}">Register now.</a></span>
                         </form>
                     </div>

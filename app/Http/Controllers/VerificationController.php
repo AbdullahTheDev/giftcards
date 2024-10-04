@@ -17,11 +17,11 @@ class VerificationController extends Controller
     public function verifyCode(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|size:6',
+            'code' => 'required|numeric',
         ]);
 
         // Check the entered code against the stored session code
-        if ($request->code === session('verification_code')) {
+        if ($request->code == session('verification_code')) {
             // Log the user in
             Auth::loginUsingId(session('user_id'));
 
