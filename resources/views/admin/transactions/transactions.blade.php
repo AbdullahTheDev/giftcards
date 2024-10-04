@@ -45,12 +45,15 @@
                                 <tr>
                                     <td class="text-center">{{ $transaction->gift_id }}</td>
                                     <td class="text-center">${{ number_format($transaction->amount, 2) }}</td>
-                                    <td class="text-center">{{ $transaction?->senderInfo->first_name . ' ' . $transaction?->senderInfo->last_name }}</td>
+                                    <td class="text-center">
+                                        {{ $transaction?->senderInfo->first_name . ' ' . $transaction?->senderInfo->last_name }}
+                                    </td>
                                     <td class="text-center">{{ $transaction?->senderInfo->email }}</td>
                                     <td class="text-center">{{ $transaction?->senderInfo->phone }}</td>
                                     <td class="text-center">{{ $transaction?->senderInfo->address }}</td>
                                     <td class="text-center">{{ $transaction?->user->email }}</td>
-                                    <td class="text-center">{{ \Carbon\Carbon::parse($transaction?->date)->format('Y M d') }}</td>
+                                    <td class="text-center">
+                                        {{ \Carbon\Carbon::parse($transaction?->date)->format('Y M d') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -60,43 +63,46 @@
         </div>
     @endsection
     @section('scripts')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
-    <script>
-         $(document).ready(function() {
-            $('#gift-table').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                        title: 'Withdraw History',
-                        className: 'btn btn-success'
-                    },
-                    {
-                        extend: 'csvHtml5',
-                        title: 'Withdraw History',
-                        className: 'btn btn-info'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        title: 'Withdraw History',
-                        className: 'btn btn-danger',
-                        orientation: 'landscape',
-                        pageSize: 'A4'
-                    },
-                    {
-                        extend: 'print',
-                        title: 'Withdraw History',
-                        className: 'btn btn-primary'
-                    }
-                ]
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#gift-table').DataTable({
+                    dom: 'Bfrtip',
+                    // buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                    buttons: [{
+                            extend: 'excelHtml5',
+                            title: 'Withdraw History',
+                            className: 'btn btn-success'
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            title: 'Withdraw History',
+                            className: 'btn btn-info'
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            title: 'Withdraw History',
+                            className: 'btn btn-danger',
+                            orientation: 'landscape',
+                            pageSize: 'A4'
+                        },
+                        {
+                            extend: 'print',
+                            title: 'Withdraw History',
+                            className: 'btn btn-primary'
+                        }
+                    ]
+                });
             });
-        });
-    </script>
+        </script>
     @endsection
