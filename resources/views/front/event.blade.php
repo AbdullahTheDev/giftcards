@@ -72,10 +72,17 @@
                     <h4>{{ $event?->showname }}</h4>
                     <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
                             {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
-                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
-                            {{ $event?->location }}</b></p>
-                    <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
-                    </p>
+                    @if ($event->location != null)
+                        <p>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
+                                {{ $event?->location }}</b>
+                            </p>
+                    @endif
+                    @if ($event->description != null)
+                        <p>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -178,7 +185,8 @@
                                     <div class="d-flex justify-content-between">
                                         <span>Merchant fee</span>
                                         <span id="showFees">$0</span>
-                                        <span style="display: none;" id="merchant_fees">{{ $settings->merchant_fees }}</span>
+                                        <span style="display: none;"
+                                            id="merchant_fees">{{ $settings->merchant_fees }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
@@ -363,7 +371,7 @@
 
                 // Calculate the total with admin fees and update the display
                 var totalAmount = amountValue + merchantFees;
-                
+
                 $('#amountValTotal').text(totalAmount.toFixed(2));
 
                 $('#showFees').text('$' + merchantFees.toFixed(2));

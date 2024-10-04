@@ -119,6 +119,11 @@
                                 </span>
                             @enderror
 
+                            <div class="d-block mt-2">
+                                <input type="checkbox" name="terms" id="terms" class="form-check-input mx-3" style="border-radius: 0;">
+                                <label for="terms"> <span>*</span> I agree to the <a href="https://wishify.com.au/terms-conditions/">Terms & Conditions</a></label>
+                            </div>
+
                             <input type="submit" value="Register Now" id="submit-btn" class="btn btn-primary">
                         </form>
                     </div>
