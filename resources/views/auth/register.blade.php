@@ -76,7 +76,7 @@
                             <input type="email" name="email" placeholder="Enter your email" class="form-control"
                                 id="email-input">
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback-custom" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -89,7 +89,7 @@
                             <input type="text" name="first_name" placeholder="Enter your first name"
                                 class="form-control">
                             @error('first_name')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback-custom" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -97,7 +97,7 @@
                             <label for="last_name">Last Name *</label>
                             <input type="text" name="last_name" placeholder="Enter your last name" class="form-control">
                             @error('last_name')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback-custom" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -105,7 +105,7 @@
                             <label for="password">Password *</label>
                             <input type="password" name="password" placeholder="Enter your password" class="form-control">
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback-custom" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -114,15 +114,24 @@
                             <input type="password" name="password_confirmation" placeholder="Confirm your password"
                                 class="form-control">
                             @error('password_confirmation')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback-custom" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
                             <div class="d-block mt-2">
-                                <input type="checkbox" name="terms" id="terms" class="form-check-input mx-3" style="border-radius: 0;">
-                                <label for="terms"> <span>*</span> I agree to the <a href="https://wishify.com.au/terms-conditions/">Terms & Conditions</a></label>
-                            </div>
+                                <input type="checkbox" value="1" name="terms" id="terms" class="form-check-input mx-3"
+                                    style="border-radius: 0;">
+                                <label for="terms"> <span style="color: #ab0000;">*</span> I agree to the <a
+                                        href="https://wishify.com.au/terms-conditions/" style="color: #b2924c;">Terms &
+                                        Conditions</a>
+                                    </label>
+                                </div>
+                                @error('terms')
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
                             <input type="submit" value="Register Now" id="submit-btn" class="btn btn-primary">
                         </form>
@@ -161,7 +170,8 @@
                             alert(errors.email[0]); // Display error message if validation fails
                         } else {
                             alert(
-                            'An error occurred. Please try again.'); // General error message
+                                'An error occurred. Please try again.'
+                                ); // General error message
                         }
                     }
                 });

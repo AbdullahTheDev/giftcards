@@ -867,3 +867,9 @@ section.login {
     width: 100%;
 }
 }
+
+.invalid-feedback-custom{
+    display: block;
+    color: #fff;
+    margin: 8px 0px;;
+}
