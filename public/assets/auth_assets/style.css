@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 /* header  */
-header.header {
-    background: #b1914c;
-}
+header.header {padding-top: 15px;z-index: 1111;}
 
 .main-logo a img {
-    width: 100%;
+    width: 91%;
 }
 
 nav.header-menu ul li a {
@@ -17,7 +15,7 @@ nav.header-menu ul li a {
 }
 
 nav.header-menu ul {
-    margin-top: 10%;
+    margin-top: 9%;
     display: flex;
     justify-content: space-evenly;
 }
@@ -45,6 +43,20 @@ a.registerr {
 a.registerr:hover {
     background: transparent;
     color: #fff;
+}
+
+section.login:after {
+    content: "";
+    background: #00000078;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+header.header .col-md-3, header.header .col-md-6 {
+    z-index: 1111;
 }
 
 a.loginn {
@@ -81,22 +93,24 @@ footer.footer {
 }
 
 .footer-list h5 {
-    font-size: 31px;
-    font-weight: 700;
+    font-weight: 400;
     color: #fff;
     margin-bottom: 3%;
+    font-family: "League Gothic", Sans-serif;
+    font-size: 38px;
 }
 
 .footer-list ul li a {
-    font-size: 19px;
+    font-size: 17px;
     color: #fff;
     text-decoration: none;
     font-weight: 400;
+    !i;!;
 }
 
 .footer-list ul li {
     list-style: none;
-    line-height: 1.9;
+    line-height: 2.3;
 }
 
 .footer-list ul {
@@ -351,7 +365,7 @@ input#submit-btn {
 }@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 .host {
   background-image: url(./img/my-wishing-well-banner.jpg);
-  height: 90vh;
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -359,6 +373,8 @@ input#submit-btn {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: -10%;
+  padding-top: 11%;
 }
 .host h1{
     color: #fff;
@@ -461,7 +477,7 @@ button.Register:hover{
 }
 .login {
     background-image: url(./img/my-wishing-well-login-banner.jpg);
-    height: 100vh;
+    height: auto;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -469,6 +485,9 @@ button.Register:hover{
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-top: -10%;
+    padding-top: 14%;
+    position: relative;
 }
 
 
@@ -559,8 +578,6 @@ input#submit-btn {
 
 
 
-
-/* / event  / */
 #send-gift-frm h3 {
     font-family: playfair display, sans-serif;
     font-size: 34px;
@@ -648,7 +665,7 @@ input#send-gift {
     font-size: 162px;
     color: #fff;
 }
-
+.container{max-width: 1140px;z-index: 11;}
 .user-prf {
     width: 150px;
     height: 150px;
@@ -667,6 +684,7 @@ input#send-gift {
 .user-details p {
     font-size: 15px;
 }
+
 button.btn.btn-warning.w-100 {
     background: #b09042 !important;
     padding: 11px 40px !important;
@@ -680,4 +698,172 @@ button.btn.btn-warning.w-100 {
     margin-top: 5% !important;
     width: 30% !important;
 }
-/ event  /
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1024px) {
+    .header-btn a {padding: 11px 17px;}
+    
+    .host {
+        margin-top: -12%;
+    }
+    
+    .search-wrapper form {
+        display: flex;
+    }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+header.header .col-md-6 {
+    max-width: 40%;
+    flex: 0 40%;
+}
+
+header.header .col-md-3 {
+    max-width: 30%;
+    flex: 0 30%;
+}
+
+nav.header-menu ul li {
+}
+
+nav.header-menu ul {
+    justify-content: left;
+    padding: 0;
+    margin: 41px 0;
+}
+
+nav.header-menu ul li {
+    padding: 0 4px;
+}
+
+.host {
+    margin-top: -16%;
+}
+.footer-list h5 {
+    font-size: 29px;
+}
+
+.main-logo p {
+    max-width: 100%;
+}
+
+.top-form {
+    max-width: 75%;
+}
+
+section.login {
+    margin-top: -16%;
+    padding-top: 19%;
+}
+    
+}
+
+
+@media only screen and (max-width: 425px) {
+    header.header .col-md-3,header.header .col-md-6 {
+    max-width: 100%;
+    flex: 0 100%;
+    text-align: center;
+}
+
+section.host {
+    margin-top: -94%;
+    height: auto;
+    padding-top: 110%;
+}
+
+.main-logo a img {
+    width: 65%;
+}
+
+nav.header-menu ul {
+    margin-top: 5px;
+    justify-content: space-around;
+    margin-bottom: 0;
+}
+
+.header-btn {
+    margin-top: 8%;
+}
+
+    .header-btn a {
+        padding: 11px 17px;
+        font-size: 14px;
+    }
+    .host h1 {
+    font-size: 48px;
+}
+
+a.btn.Login {
+    width: 100%;
+    margin: 0;
+}
+
+.button .Register {
+    width: 100%;
+    margin-top: 3%;
+}
+footer.footer {
+    text-align: center;
+}
+
+.main-logo p {
+    padding: 0 14px;
+}
+.search-wrapper form {
+    display: block;
+    max-width: 100%;
+}
+
+.search-wrapper button {
+    width: 100% !important;
+    margin: 0;
+}
+
+.search-wrapper input {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.top-form {
+    max-width: 100%;
+}
+
+section.login {
+    margin-top: -55%;
+    padding-top: 70%;
+}
+.detailss h3 {
+    font-size: 37px;
+}
+
+.tab-heading {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tab-content {
+    width: 100%;
+}
+}

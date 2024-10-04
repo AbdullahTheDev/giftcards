@@ -27934,3 +27934,80 @@
   }
   
   /*# sourceMappingURL=dashboard-free.css.map */
+  
+  
+  .input-group.input-group-outline {
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 1024px) {
+     div.dt-container div.dt-layout-full {
+        width: 100%;
+        overflow-x: overlay;
+    }
+     div#gift-table_wrapper {overflow-x: scroll;}
+     .tab-heading{
+         margin: 0 !important;
+     }
+}
+
+
+@media only screen and (max-width: 425px) {
+    div.dt-container div.dt-layout-full {
+        width: 100%;
+        overflow-x: overlay;
+    }
+    div#gift-table_wrapper {overflow-x: scroll;}
+    .card {
+        margin-top: 7%;
+    }
+    .card-header.px-3.py-5 svg {
+        margin-left: 40%;
+    }
+    
+    .card-header.px-3.py-5 .row {
+        text-align: center;
+    }
+    
+    .card-header.px-3.py-5 .row ul {
+        padding: 0;
+    }
+    .card-header.px-3.py-2.d-flex {
+        flex-direction: column;
+    }
+    .tab-heading {
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .tab-container {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .tabs {
+        width: 100% !important;
+    }
+    
+    .tab-content {
+        width: 100% !important;
+    }
+    .setting-tabs-container .form-container{
+        width:100% !important;
+    }
+    div#bar-code a {
+        margin-left: 71%;
+        margin-top: 10% !IMPORTANT;
+    }
+    .report-card button.btn.btn-primary {
+        width: 100% !important;
+    }
+    .card-header.px-3.py-2.d-flex {
+        align-items: normal !important;
+        text-align: center;
+    }
+    th {
+    padding: 0 34px !important;
+}
+}
