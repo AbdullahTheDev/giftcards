@@ -57,8 +57,8 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="phone">Password:</label>
-                                    <input type="tel" name="phone" value="{{ $user->phone }}" id="phone">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" value="" id="password">
                                 </div>
                             </div>
 
