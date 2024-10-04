@@ -206,10 +206,14 @@ class UserController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             }
+
+            $customPublicPath = env('CUSTOM_PUBLIC_PATH');
+
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('uploads/images'), $imageName);
+                $path = $customPublicPath . 'uploads/images/';
+                $image->move($path, $imageName);
                 $imagePath = 'uploads/images/' . $imageName;
             } else {
                 $imagePath = $event->image;
@@ -219,7 +223,9 @@ class UserController extends Controller
             if ($request->hasFile('banner')) {
                 $banner = $request->file('banner');
                 $bannerName = time() . '_' . $banner->getClientOriginalName();
-                $banner->move(public_path('uploads/banners'), $bannerName);
+                $path = $customPublicPath . 'uploads/banners/';
+
+                $banner->move($path, $bannerName);
                 $bannerPath = 'uploads/banners/' . $bannerName;
             } else {
                 $bannerPath = $event->banner;
