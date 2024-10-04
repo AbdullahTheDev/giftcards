@@ -94,7 +94,7 @@ class AuthenticatedSessionController extends Controller
 
     protected function sendVerificationCode($user)
     {
-        $code = Str::random(6); // Generate a random 6-character code
+        $code = mt_rand(100000, 999999); // Generate a random 6-digit number
         // Store the code in the session for later verification
         session(['verification_code' => $code]);
 
