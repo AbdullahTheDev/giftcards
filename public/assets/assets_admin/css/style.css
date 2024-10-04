@@ -495,3 +495,24 @@ textarea {
     color: #fff;
     border-radius: 29px;
 }
+
+@media screen and (max-width: 1200px) {
+    .tab-heading {
+        margin-left: 3%;
+    }    
+}
+@media screen and (min-width: 1400px) and (max-width: 1550px) {
+    .tab-heading {
+        margin-left: 19%;
+    }    
+}
+@media screen and (min-width: 1550px) and (max-width: 1950px) {
+    .tab-heading {
+        margin-left: 18%;
+    }    
+}
+@media screen and (min-width: 1950px) {
+    .tab-heading {
+        margin-left: 14%;
+    }    
+}
