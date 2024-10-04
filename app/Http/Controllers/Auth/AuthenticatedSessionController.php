@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
     {
         // return $request;
         // Authenticate the user
-        // $request->authenticate();
+        $request->authenticate();
 
         // Get the authenticated user (but do not log them in yet)
         $user = User::where('email', $request->email)->first();
