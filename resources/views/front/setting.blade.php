@@ -55,6 +55,11 @@
                                     <label for="phone">Contact Phone:</label>
                                     <input type="tel" name="phone" value="{{ $user->phone }}" id="phone">
                                 </div>
+
+                                <div class="input-group">
+                                    <label for="phone">Password:</label>
+                                    <input type="tel" name="phone" value="{{ $user->phone }}" id="phone">
+                                </div>
                             </div>
 
                             <div class="event-setup">

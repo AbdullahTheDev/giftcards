@@ -9,6 +9,7 @@ use App\Models\User;
 use Endroid\QrCode\Writer\PngWriter;
 use Exception;
 use File;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -200,6 +201,11 @@ class UserController extends Controller
             
             $event = Event::where('user_id', $user->id)->first();
 
+            if($request->has('password')){
+                $request->user()->update([
+                    'password' => Hash::make($request->password),
+                ]);
+            }
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '_' . $image->getClientOriginalName();
