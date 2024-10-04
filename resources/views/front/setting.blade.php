@@ -81,58 +81,68 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="input-group">
                                     <label for="eventImage">Event Image:</label>
                                     <input type="file" name="image" id="eventImage" accept="image/*"
-                                        onchange="previewImage(event, 'eventImagePreview')">
+                                        onchange="previewImage(event, 'eventImagePreview', 'clearImageInput')">
+
+                                    <input type="hidden" name="clear_image" value="0" id="clearImageInput">
 
                                     <div style="position: relative; display: inline-block;">
                                         @if ($event->image ?? null)
                                             <img id="eventImagePreview" src="{{ asset($event->image) }}" alt="Event Image"
                                                 style="max-width: 200px; display: block; margin-top: 10px;">
-                                                <button type="button" onclick="clearImage('eventImage', 'eventImagePreview')"
-                                            style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
-                                            id="clearEventImageBtn">
-                                            X
-                                        </button>
+                                            <button type="button"
+                                                onclick="clearImage('eventImage', 'eventImagePreview', 'clearImageInput')"
+                                                style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: pointer; padding: 1px 8px; width: max-content;"
+                                                id="clearEventImageBtn">
+                                                X
+                                            </button>
                                         @else
                                             <img id="eventImagePreview"
                                                 style="max-width: 200px; display: none; margin-top: 10px;">
+                                            <button type="button"
+                                                onclick="clearImage('eventImage', 'eventImagePreview', 'clearImageInput')"
+                                                style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: pointer; padding: 1px 8px; width: max-content;"
+                                                id="clearEventImageBtn2">
+                                                X
+                                            </button>
                                         @endif
-                                        <button type="button" onclick="clearImage('eventImage', 'eventImagePreview')"
-                                            style="display: none; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
-                                            id="clearEventImageBtn">
-                                            X
-                                        </button>
                                     </div>
                                 </div>
 
                                 <div class="input-group">
                                     <label for="eventBanner">Event Banner:</label>
                                     <input type="file" name="banner" id="eventBanner" accept="image/*"
-                                        onchange="previewImage(event, 'eventBannerPreview')">
+                                        onchange="previewImage(event, 'eventBannerPreview', 'clearBannerInput')">
+
+                                    <input type="hidden" name="clear_banner" value="0" id="clearBannerInput">
 
                                     <div style="position: relative; display: inline-block;">
                                         @if ($event->banner ?? null)
                                             <img id="eventBannerPreview" src="{{ asset($event->banner) }}"
                                                 alt="Event Banner"
                                                 style="max-width: 200px; display: block; margin-top: 10px;">
-                                                <button type="button" onclick="clearImage('eventBanner', 'eventBannerPreview')"
-                                            style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
-                                            id="clearEventImageBtn">
-                                            X
-                                        </button>
+                                            <button type="button"
+                                                onclick="clearImage('eventBanner', 'eventBannerPreview', 'clearBannerInput')"
+                                                style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: pointer; padding: 1px 8px; width: max-content;"
+                                                id="clearEventBannerBtn">
+                                                X
+                                            </button>
                                         @else
                                             <img id="eventBannerPreview"
                                                 style="max-width: 200px; display: none; margin-top: 10px;">
+                                            <button id="eventBannerPreviewBtn" type="button"
+                                                onclick="clearImage('eventBanner', 'eventBannerPreview', 'clearBannerInput')"
+                                                style="display: block; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: pointer; padding: 1px 8px; width: max-content;">
+                                                X
+                                            </button>
                                         @endif
-                                        <button type="button" onclick="clearImage('eventBanner', 'eventBannerPreview')"
-                                            style="display: none; position: absolute; top: 4px; right: 4px; background: #cd8603; color: white; border: none; cursor: poin; padding: 1px 8px; width: max-content;"
-                                            id="clearEventBannerBtn">
-                                            X
-                                        </button>
                                     </div>
                                 </div>
+
 
 
 
@@ -226,28 +236,54 @@
             $(this).val(formattedEventName);
         });
 
-        function previewImage(event, previewId) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById(previewId);
-                output.src = reader.result;
-                output.style.display = 'block';
+        function previewImage(event, previewId, clearInputId) {
+            const output = document.getElementById(previewId);
+            const clearInput = document.getElementById(clearInputId);
 
-                // Show the "X" button
-                var clearBtnId = previewId === 'eventImagePreview' ? 'clearEventImageBtn' : 'clearEventBannerBtn';
-                document.getElementById(clearBtnId).style.display = 'block';
-            };
-            reader.readAsDataURL(event.target.files[0]);
+            // Display the selected image
+            if (event.target.files && event.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    output.src = e.target.result;
+                    output.style.display = 'block'; // Show the image preview
+
+                    // Reset the hidden input to indicate a new upload
+                    clearInput.value = '0'; // Set to 0 since a new image is being uploaded
+
+                    // Show the clear button
+                    const clearBtn = document.getElementById(previewId + 'Btn');
+                    clearBtn.style.display = 'block';
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
         }
 
-        function clearImage(inputId, previewId) {
+
+        function clearImage(inputId, previewId, clearInputId) {
             // Clear the file input
             document.getElementById(inputId).value = '';
 
             // Hide the image preview
             var output = document.getElementById(previewId);
             output.style.display = 'none';
-            output.src = ''; // Clear the src attribute
+            output.src = '';
+
+            // Hide the "X" button
+            var clearBtnId = previewId === 'eventImagePreview' ? 'clearEventImageBtn' : 'clearEventBannerBtn';
+            document.getElementById(clearBtnId).style.display = 'none';
+
+            // Set the hidden input value to indicate the user wants to clear the image
+            document.getElementById(clearInputId).value = '1';
+        }
+
+        function clearImage2(inputId, previewId, clearInputId) {
+            // Clear the file input
+            document.getElementById(inputId).value = '';
+
+            // Hide the image preview
+            var output = document.getElementById(previewId);
+            output.style.display = 'none';
+            output.src = '';
 
             // Hide the "X" button
             var clearBtnId = previewId === 'eventImagePreview' ? 'clearEventImageBtn' : 'clearEventBannerBtn';

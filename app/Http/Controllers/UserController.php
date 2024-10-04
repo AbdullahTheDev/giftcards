@@ -22,7 +22,7 @@ class UserController extends Controller
 {
     function profile()
     {
-        if(\Auth::user()->role == 'admin'){
+        if (\Auth::user()->role == 'admin') {
             return redirect(route('admin.dashboard'));
         }
         $user = User::findOrFail(Auth::id());
@@ -171,6 +171,7 @@ class UserController extends Controller
 
     function updateUser(Request $request)
     {
+        // return $request->file('banner');
         try {
             $event = Event::where('user_id', Auth::id())->first();
 
@@ -198,10 +199,10 @@ class UserController extends Controller
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
             ]);
-            
+
             $event = Event::where('user_id', $user->id)->first();
 
-            if($request->has('password')){
+            if ($request->has('password')) {
                 $request->user()->update([
                     'password' => Hash::make($request->password),
                 ]);
@@ -229,6 +230,50 @@ class UserController extends Controller
                 $bannerPath = 'uploads/banners/' . $bannerName;
             } else {
                 $bannerPath = $event->banner;
+            }// Handle image removal if requested
+            if ($request->input('clear_image') == '1') {
+                // Delete the existing image file if it exists
+                if ($event->image) {
+                    $existingImagePath = $customPublicPath . $event->image;
+                    if (file_exists($existingImagePath)) {
+                        unlink($existingImagePath);
+                    }
+                }
+                $imagePath = null; // Set imagePath to null to indicate removal
+            } else {
+                // Handle image upload
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $path = $customPublicPath . 'uploads/images/';
+                    $image->move($path, $imageName);
+                    $imagePath = 'uploads/images/' . $imageName;
+                } else {
+                    $imagePath = $event->image; // Keep the existing image
+                }
+            }
+
+            // Handle banner removal if requested
+            if ($request->input('clear_banner') == '1') {
+                // Delete the existing banner file if it exists
+                if ($event->banner) {
+                    $existingBannerPath = $customPublicPath . $event->banner;
+                    if (file_exists($existingBannerPath)) {
+                        unlink($existingBannerPath);
+                    }
+                }
+                $bannerPath = null; // Set bannerPath to null to indicate removal
+            } else {
+                // Handle banner upload
+                if ($request->hasFile('banner')) {
+                    $banner = $request->file('banner');
+                    $bannerName = time() . '_' . $banner->getClientOriginalName();
+                    $path = $customPublicPath . 'uploads/banners/';
+                    $banner->move($path, $bannerName);
+                    $bannerPath = 'uploads/banners/' . $bannerName;
+                } else {
+                    $bannerPath = $event->banner; // Keep the existing banner
+                }
             }
 
             $event->update([
