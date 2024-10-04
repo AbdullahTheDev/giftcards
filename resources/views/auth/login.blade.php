@@ -87,7 +87,7 @@
                             <input type="submit" value="Login" id="submit-btn" class="form-control">
                             <div class="d-block mt-2">
                                 <label for="remember">Remember Me</label>
-                                <input type="checkbox" name="remember" placeholder="" class="form-control check">
+                                <input type="checkbox" name="remember" class="form-check-input mx-3" style="border-radius: 0;">
                             </div>
                             <p><a href="{{ route('password.request') }}">Lost your password?</a></p>
                             <span>Don't have an account yet?<a href="{{ route('register') }}">Register now.</a></span>

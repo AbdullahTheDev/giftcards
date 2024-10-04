@@ -40,6 +40,8 @@ class AuthenticatedSessionController extends Controller
             return back()->withErrors(['email' => 'User not found.']);
         }
 
+        Auth::logout();
+        
         // Send the verification code
         $this->sendVerificationCode($user);
 
