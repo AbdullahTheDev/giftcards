@@ -210,27 +210,29 @@ class UserController extends Controller
 
             $customPublicPath = env('CUSTOM_PUBLIC_PATH');
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $path = $customPublicPath . 'uploads/images/';
-                $image->move($path, $imageName);
-                $imagePath = 'uploads/images/' . $imageName;
-            } else {
-                $imagePath = $event->image;
-            }
+            // if ($request->hasFile('image')) {
+            //     $image = $request->file('image');
+            //     $imageName = time() . '_' . $image->getClientOriginalName();
+            //     $path = $customPublicPath . 'uploads/images/';
+            //     $image->move($path, $imageName);
+            //     $imagePath = 'uploads/images/' . $imageName;
+            // } else {
+            //     $imagePath = $event->image;
+            // }
 
-            // Handle banner upload
-            if ($request->hasFile('banner')) {
-                $banner = $request->file('banner');
-                $bannerName = time() . '_' . $banner->getClientOriginalName();
-                $path = $customPublicPath . 'uploads/banners/';
+            // // Handle banner upload
+            // if ($request->hasFile('banner')) {
+            //     $banner = $request->file('banner');
+            //     $bannerName = time() . '_' . $banner->getClientOriginalName();
+            //     $path = $customPublicPath . 'uploads/banners/';
 
-                $banner->move($path, $bannerName);
-                $bannerPath = 'uploads/banners/' . $bannerName;
-            } else {
-                $bannerPath = $event->banner;
-            }// Handle image removal if requested
+            //     $banner->move($path, $bannerName);
+            //     $bannerPath = 'uploads/banners/' . $bannerName;
+            // } else {
+            //     $bannerPath = $event->banner;
+            // }
+            
+            // Handle image removal if requested
             if ($request->input('clear_image') == '1') {
                 // Delete the existing image file if it exists
                 if ($event->image) {
