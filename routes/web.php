@@ -5,6 +5,7 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
+use App\Mail\GiftRecieve;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VerificationController;
@@ -42,7 +43,20 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 //     return back()->with('success', 'Verification link sent!');
 // })->middleware(['auth'])->name('verification.send');
 
+// use App\Mail\GiftRecieve;
+Route::get('/mail', function(){
+    $data = [
+        'sender_name' => '$request->first_name ->last_name',
+        'receiver_name' => '$user->first_name . ',
+        'gift_id' => '$giftId',
+        'amount' => '$request->amount',
+    ];
 
+    // Send confirmation emails
+    Mail::to('user@yopmail.com')->send(new GiftRecieve($data));
+
+    return 1;
+});
 
 
 Route::get('/verification', [VerificationController::class, 'showVerificationForm'])
