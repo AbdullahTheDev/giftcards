@@ -33,11 +33,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.0/dist/jquery.min.js"></script>
 
     <link href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tiny.cloud/1/9i0uh9qzhjhrvq9yjsplj8k8f016yzhad0xham2137ae5p0d/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
 
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+        id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -51,7 +56,8 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -59,7 +65,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('gifts') ? 'active bg-gradient-primary' : '' }}" href="{{ route('gifts') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('gifts') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('gifts') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">card_giftcard</i>
                         </div>
@@ -67,7 +74,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('withdraw') ? 'active bg-gradient-primary' : '' }}" href="{{ route('withdraw') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('withdraw') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('withdraw') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">attach_money</i>
                         </div>
@@ -75,7 +83,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('setting') ? 'active bg-gradient-primary' : '' }}" href="{{ route('setting') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('setting') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('setting') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">settings_applications</i>
                         </div>
@@ -83,7 +92,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}" href="{{ route('reports') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('reports') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">assessment</i>
                         </div>
@@ -441,6 +451,39 @@
     <script src="{{ asset('assets/assets_admin/js/material-dashboard.min.js?v=3.1.0') }}"></script>
 
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
+
+
+    <script>
+        tinymce.init({
+            selector: '#eventDescription',
+            plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media',
+                'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Oct 10, 2024:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker',
+                'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage',
+                'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags',
+                'autocorrect', 'typography', 'inlinecss', 'markdown',
+            ],
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [{
+                    value: 'First.Name',
+                    title: 'First Name'
+                },
+                {
+                    value: 'Email',
+                    title: 'Email'
+                },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
+                'See docs to implement AI Assistant')),
+        });
+    </script>
+
 
     @yield('scripts')
 </body>

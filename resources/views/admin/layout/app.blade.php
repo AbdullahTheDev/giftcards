@@ -33,6 +33,10 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.0/dist/jquery.min.js"></script>
 
     <link href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tiny.cloud/1/9i0uh9qzhjhrvq9yjsplj8k8f016yzhad0xham2137ae5p0d/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -490,7 +494,7 @@
 
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
@@ -501,7 +505,10 @@
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
 
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
+
+
     
+
     @yield('scripts')
 </body>
 
