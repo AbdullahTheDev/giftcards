@@ -37,7 +37,9 @@
 
 <body class="g-sidenav-show  bg-gray-200">
 
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+        id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -51,7 +53,8 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -67,7 +70,8 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.settings') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.settings') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.settings') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.settings') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">settings</i>
                         </div>
@@ -75,7 +79,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.withdraw') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.withdraw') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.withdraw') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.withdraw') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">attach_money</i>
                         </div>
@@ -83,7 +88,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.transactions') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.transactions') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.transactions') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.transactions') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -91,7 +97,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.gifts') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.gifts') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.gifts') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.gifts') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">redeem</i>
                         </div>
@@ -99,7 +106,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.events') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.events') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.events') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.events') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">event</i>
                         </div>
@@ -107,7 +115,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.users') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.users') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('admin.users') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.users') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">account_circle</i>
                         </div>
@@ -152,7 +161,6 @@
             </div>
         </div> -->
     </aside>
-
 
     @yield('content')
 
@@ -482,6 +490,18 @@
 
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
 
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
+    
     @yield('scripts')
 </body>
 
