@@ -39,14 +39,12 @@
                     <!-- Email Address -->
 
                     @if (session('status'))
-                        <div class="mb-4">
-                            {{ session('status') }}
+                        <div class="alert alert-primary">
+                            <p style="margin: 0; color: #000;">{{ session('status') }}</p>
                         </div>
                     @endif
 
-                    <div class="alert alert-primary">
-                        <p style="margin: 0; color: #000;">We have emailed your password reset link.</p>
-                    </div>
+
 
 
                     @if ($errors->any())
@@ -59,7 +57,7 @@
                         </div>
                     @endif
                     <div>
-                        <label for="email">Email</label>
+                        <label for="email"></label>
                         <input type="email" name="email" id="email" class="form-control" required
                             value="{{ old('email') }}">
                     </div>
