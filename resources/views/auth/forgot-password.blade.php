@@ -1,4 +1,4 @@
-{{-- <x-guest-layout>
+<x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -22,53 +22,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout> --}}
-@extends('layouts.ourapp')
-
-@section('content')
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
-
-                    <h5 class="my-3">Forgot your password? No problem. Just let us know your email address and we will
-                        email you a
-                        password reset
-                        link that will allow you to choose a new one.</h5>
-                    <!-- Email Address -->
-
-                    @if (session('status'))
-                        <div class="alert alert-primary">
-                            <p style="margin: 0; color: #000;">{{ session('status') }}</p>
-                        </div>
-                    @endif
-
-
-
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul style="margin: 0 !important; list-style: none;">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <div>
-                        <label for="email"></label>
-                        <input type="email" name="email" id="email" class="form-control" required
-                            value="{{ old('email') }}">
-                    </div>
-
-                    <div class="mt-4">
-                        <button class="btn btn-primary">
-                            Email Password Reset Link
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endsection
+</x-guest-layout>

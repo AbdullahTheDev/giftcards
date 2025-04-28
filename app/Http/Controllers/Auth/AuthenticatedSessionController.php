@@ -10,8 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Mail;
-use Str;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,57 +26,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // return $request;
-        // Authenticate the user
         $request->authenticate();
 
-        // Get the authenticated user (but do not log them in yet)
-        $user = User::where('email', $request->email)->first();
+        $request->session()->regenerate();
 
-        // Check if the user is found
-        if (!$user) {
-            return back()->withErrors(['email' => 'User not found.']);
-        }
-
-        Auth::logout();
+        $user = User::findOrFail(Auth::id());
+        $user->last_login = now();
+        $user->save();
         
-        // Send the verification code
-        $this->sendVerificationCode($user);
-
-        // return $user;
-        // Store the user ID in the session to remember them
-        session(['user_id' => $user->id]);
-
-        // Redirect to the verification page
-        return redirect()->route('verification');
-        // // Regenerate the session
-        // $request->session()->regenerate();
-
-        // // Get the authenticated user
-        // $user = Auth::user();
-
-        // // Check if the user is verified
-        // if (!$user->hasVerifiedEmail()) {
-        //     // Send the verification email
-        //     $user->sendEmailVerificationNotification();
-
-        //     // Log out the user and redirect to the verification notice page
-        //     Auth::logout();
-
-        //     return redirect()->route('verification.notice'); // Make sure to create this route
-        // }
-
-        // // Update last login time and redirect based on role
-        // $user->last_login = now();
-        // $user->save();
-
-        // if ($user->role == 'admin') {
-        //     return redirect()->intended(RouteServiceProvider::ADMIN);
-        // }
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
+        if($user->role == 'admin'){
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
-
 
     /**
      * Destroy an authenticated session.
@@ -93,15 +53,4 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
-
-    protected function sendVerificationCode($user)
-    {
-        $code = mt_rand(100000, 999999); // Generate a random 6-digit number
-        // Store the code in the session for later verification
-        session(['verification_code' => $code]);
-
-        // Send the email
-        Mail::to($user->email)->send(new \App\Mail\VerificationCode($code));
-    }
-
 }

@@ -33,14 +33,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.0/dist/jquery.min.js"></script>
 
     <link href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css" rel="stylesheet">
-
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
 
-    <aside
-        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
-        id="sidenav-main">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -54,8 +51,7 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -63,8 +59,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('gifts') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('gifts') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('gifts') ? 'active bg-gradient-primary' : '' }}" href="{{ route('gifts') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">card_giftcard</i>
                         </div>
@@ -72,8 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('withdraw') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('withdraw') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('withdraw') ? 'active bg-gradient-primary' : '' }}" href="{{ route('withdraw') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">attach_money</i>
                         </div>
@@ -81,8 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('setting') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('setting') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('setting') ? 'active bg-gradient-primary' : '' }}" href="{{ route('setting') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">settings_applications</i>
                         </div>
@@ -90,8 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('reports') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-gradient-primary' : '' }}" href="{{ route('reports') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">assessment</i>
                         </div>
@@ -449,18 +441,6 @@
     <script src="{{ asset('assets/assets_admin/js/material-dashboard.min.js?v=3.1.0') }}"></script>
 
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
-
-
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
-
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
 
     @yield('scripts')
 </body>

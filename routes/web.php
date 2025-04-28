@@ -5,14 +5,9 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
-use App\Mail\GiftRecieve;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VerificationController;
-use Illuminate\Foundation\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\GoogleController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,58 +19,13 @@ use App\Http\Controllers\Auth\GoogleController;
 |
 */
 
+use App\Http\Controllers\Auth\GoogleController;
 
 // Redirect to Google for login
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 
 // Handle Google callback
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-
-
-// Email Verification
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email'); // Create this view
-// })->name('verification.notice');
-
-
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-//     return back()->with('success', 'Verification link sent!');
-// })->middleware(['auth'])->name('verification.send');
-
-// use App\Mail\GiftRecieve;
-Route::get('/mail', function(){
-    $data = [
-        'sender_name' => '$request->first_name ->last_name',
-        'receiver_name' => '$user->first_name . ',
-        'gift_id' => '$giftId',
-        'amount' => '$request->amount',
-    ];
-
-    // Send confirmation emails
-    Mail::to('user@yopmail.com')->send(new GiftRecieve($data));
-
-    return 1;
-});
-
-
-Route::get('/verification', [VerificationController::class, 'showVerificationForm'])
-    ->name('verification');
-    
-Route::post('/verification', [VerificationController::class, 'verifyCode']);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Route::post('/send-verification-code', [VerificationController::class, 'sendVerificationCode'])->name('send.verification.code');

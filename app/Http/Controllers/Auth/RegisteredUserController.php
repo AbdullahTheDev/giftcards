@@ -37,7 +37,6 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'terms' => 'required|boolean'
         ]);
 
         $user = User::create([
@@ -47,8 +46,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->sendEmailVerificationNotification();
-        
         $event = Event::create([
             'user_id' => $user->id,
             'name' => $user->id,
