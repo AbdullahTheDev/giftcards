@@ -1,8 +1,12 @@
-/* header  */
-header.header {
-    padding-top: 15px;
-    z-index: 1111;
+p.eventName {
+    width: 100% !important;
+    text-align: center !important;
+    /* margin-top: 4% !important; */
+    position: absolute;
+    top: 26%;
 }
+/* header  */
+header.header {padding-top: 15px;z-index: 1111;}
 
 .main-logo a img {
     width: 91%;
@@ -57,8 +61,7 @@ section.login:after {
     left: 0;
 }
 
-header.header .col-md-3,
-header.header .col-md-6 {
+header.header .col-md-3, header.header .col-md-6 {
     z-index: 1111;
 }
 
@@ -108,6 +111,7 @@ footer.footer {
     color: #fff;
     text-decoration: none;
     font-weight: 400;
+    !i;!;
 }
 
 .footer-list ul li {
@@ -167,39 +171,35 @@ input#footer_send {
 
 
 .host {
-    background-image: url(./img/my-wishing-well-banner.jpg);
-    height: 90vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  background-image: url(./img/my-wishing-well-banner.jpg);
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-
-.host h1 {
+.host h1{
     color: #fff;
     font-family: "Playfair Display", serif;
     font-size: 75px;
     margin-bottom: 30px;
 }
-
-.host h3 {
+.host h3{
     color: #fff;
     font-family: sans-serif;
     font-size: 22px;
 }
-
-.search-wrapper {
+.search-wrapper{
     background-color: #000;
     border-radius: 35px;
     padding: 35px;
     margin-bottom: 40px;
     /* margin-top: -15px; */
 }
-
-.search-wrapper input {
+.search-wrapper input{
     background-color: #1a1a1a;
     border: 3px solid #fff;
     border-radius: 30px;
@@ -209,19 +209,16 @@ input#footer_send {
     color: #fff;
     margin-right: 10px;
 }
-
-.search-wrapper input::-ms-input-placeholder {
-    /* Edge 12-18 */
+.search-wrapper input::-ms-input-placeholder { /* Edge 12-18 */
     color: #fff;
     font-weight: 800;
-}
-
+  }
+  
 .search-wrapper input::placeholder {
     color: #fff;
     font-weight: 700;
 }
-
-.search-wrapper button {
+.search-wrapper button{
     width: 28%;
     background-color: #b09043;
     border-radius: 30px;
@@ -233,28 +230,23 @@ input#footer_send {
     border-color: #b08f4300;
     font-family: "Playfair Display", serif;
 }
-
-button:hover {
+button:hover{
     background-color: #5e5e5e;
     color: #fefefe;
 }
-
-hr {
+hr{
     color: #fff;
     height: 1px !important;
     opacity: 1;
 }
-
-p {
+p{
     color: #fff;
     font-size: 18px;
     font-weight: 400;
 }
-
-.login-register {
+.login-register{
     padding: 12px;
 }
-
 .button .Login {
     background-color: #b09043;
     padding: 10px;
@@ -268,13 +260,11 @@ p {
     margin-right: 70px;
     font-family: "Playfair Display", serif;
 }
-
-.button .Login:hover {
+.button .Login:hover{
     background-color: #5e5e5e;
     color: #fefefe;
 }
-
-.button .Register {
+.button .Register{
     background-color: #767676;
     padding: 10px;
     width: 28%;
@@ -286,12 +276,10 @@ p {
     border-color: #b08f4300;
     font-family: "Playfair Display", serif;
 }
-
-.button .Register:hover {
+.button .Register:hover{
     background-color: #343838;
     color: #fefefe;
 }
-
 .login {
     background-image: url(./img/Pic.jpg) !important;
     height: 100vh;
@@ -337,7 +325,6 @@ form.main-form.form-group label {
     font-weight: 600;
     color: #a57458;
 }
-
 .code {
     display: flex;
     margin-top: 6%;
@@ -360,18 +347,15 @@ form.main-form.form-group span a {
     color: #a9755b;
     padding-left: 7px;
 }
-
 input.form-control.check {
     width: auto;
     border-radius: 0 !important;
     background: transparent !important;
 }
-
 .d-block {
     display: flex !important;
     align-items: center;
 }
-
 input#submit-btn {
     background: #b09042 !important;
     color: #fff;
@@ -380,51 +364,43 @@ input#submit-btn {
     padding: 10px 30px;
     margin-top: 7%;
 }
-
-#sen-cde {
+#sen-cde{
     background: #b09042 !important;
     width: 48%;
     margin-left: 5%;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+}@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 .host {
-    background-image: url(./img/my-wishing-well-banner.jpg);
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: -10%;
-    padding-top: 11%;
+  background-image: url(./img/my-wishing-well-banner.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -10%;
+  padding-top: 11%;
 }
-
-.host h1 {
+.host h1{
     color: #fff;
     font-family: "Playfair Display", serif;
     font-size: 75px;
     margin-bottom: 30px;
 }
-
-.host h3 {
+.host h3{
     color: #fff;
     font-family: sans-serif;
     font-size: 22px;
 }
-
-.search-wrapper {
+.search-wrapper{
     background-color: #000;
     border-radius: 35px;
     padding: 35px;
     margin-bottom: 40px;
     /* margin-top: -15px; */
 }
-
-.search-wrapper input {
+.search-wrapper input{
     background-color: #1a1a1a;
     border: 3px solid #fff;
     border-radius: 30px;
@@ -434,19 +410,16 @@ input#submit-btn {
     color: #fff;
     margin-right: 10px;
 }
-
-.search-wrapper input::-ms-input-placeholder {
-    /* Edge 12-18 */
+.search-wrapper input::-ms-input-placeholder { /* Edge 12-18 */
     color: #fff;
     font-weight: 800;
-}
-
+  }
+  
 .search-wrapper input::placeholder {
     color: #fff;
     font-weight: 700;
 }
-
-.search-wrapper button {
+.search-wrapper button{
     width: 28%;
     background-color: #b09043;
     border-radius: 30px;
@@ -458,28 +431,23 @@ input#submit-btn {
     border-color: #b08f4300;
     font-family: "Playfair Display", serif;
 }
-
-button:hover {
+button:hover{
     background-color: #5e5e5e;
     color: #fefefe;
 }
-
-hr {
+hr{
     color: #fff;
     height: 1px !important;
     opacity: 1;
 }
-
-p {
+p{
     color: #fff;
     font-size: 18px;
     font-weight: 400;
 }
-
-.login-register {
+.login-register{
     padding: 12px;
 }
-
 button.Login {
     background-color: #b09043;
     padding: 10px;
@@ -493,13 +461,11 @@ button.Login {
     margin-right: 70px;
     font-family: "Playfair Display", serif;
 }
-
-button.Login:hover {
+button.Login:hover{
     background-color: #5e5e5e;
     color: #fefefe;
 }
-
-button.Register {
+button.Register{
     background-color: #767676;
     padding: 10px;
     width: 28%;
@@ -511,12 +477,10 @@ button.Register {
     border-color: #b08f4300;
     font-family: "Playfair Display", serif;
 }
-
-button.Register:hover {
+button.Register:hover{
     background-color: #343838;
     color: #fefefe;
 }
-
 .login {
     background-image: url(./img/my-wishing-well-login-banner.jpg);
     height: auto;
@@ -565,7 +529,6 @@ form.main-form.form-group label {
     font-weight: 600;
     color: #a57458;
 }
-
 .code {
     display: flex;
     margin-top: 6%;
@@ -588,18 +551,15 @@ form.main-form.form-group span a {
     color: #a9755b;
     padding-left: 7px;
 }
-
 input.form-control.check {
     width: auto;
     border-radius: 0 !important;
     background: transparent !important;
 }
-
 .d-block {
     display: flex !important;
     align-items: center;
 }
-
 input#submit-btn {
     background: #b09042 !important;
     color: #fff;
@@ -608,13 +568,11 @@ input#submit-btn {
     padding: 10px 30px;
     margin-top: 7%;
 }
-
-#sen-cde {
+#sen-cde{
     background: #b09042 !important;
     width: 48%;
     margin-left: 5%;
 }
-
 .d-block.mt-2 input {
     padding: 8px !important;
 }
@@ -690,20 +648,17 @@ input#send-gift {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .total-container {
     background-color: #f1f1f1;
     padding: 20px;
     border-radius: 8px;
     margin-top: 20px;
 }
-
 .form-title {
     font-weight: bold;
     margin-bottom: 20px;
     color: #866d32;
 }
-
 .user-main {
     background: #b09042;
     display: flex;
@@ -716,12 +671,7 @@ input#send-gift {
     font-size: 162px;
     color: #fff;
 }
-
-.container {
-    max-width: 1140px;
-    z-index: 11;
-}
-
+.container{max-width: 1140px;z-index: 11;}
 .user-prf {
     width: 150px;
     height: 150px;
@@ -754,11 +704,7 @@ button.btn.btn-warning.w-100 {
     margin-top: 5% !important;
     width: 30% !important;
 }
-
-section.even-banner img {
-    margin-top: -10%;
-}
-
+section.even-banner img { margin-top: -10%; }
 .another-frm {
     position: relative !important;
 }
@@ -789,14 +735,12 @@ section.even-banner img {
 
 
 @media only screen and (max-width: 1024px) {
-    .header-btn a {
-        padding: 11px 17px;
-    }
-
+    .header-btn a {padding: 11px 17px;}
+    
     .host {
         margin-top: -12%;
     }
-
+    
     .search-wrapper form {
         display: flex;
     }
@@ -805,77 +749,114 @@ section.even-banner img {
 
 
 @media only screen and (max-width: 768px) {
-    header.header .col-md-6 {
-        max-width: 40%;
-        flex: 0 40%;
-    }
+header.header .col-md-6 {
+    max-width: 40%;
+    flex: 0 40%;
+}
 
-    header.header .col-md-3 {
-        max-width: 30%;
-        flex: 0 30%;
-    }
+header.header .col-md-3 {
+    max-width: 30%;
+    flex: 0 30%;
+}
 
-    nav.header-menu ul li {}
+nav.header-menu ul li {
+}
 
-    nav.header-menu ul {
-        justify-content: left;
-        padding: 0;
-        margin: 41px 0;
-    }
+nav.header-menu ul {
+    justify-content: left;
+    padding: 0;
+    margin: 41px 0;
+}
 
-    nav.header-menu ul li {
-        padding: 0 4px;
-    }
+nav.header-menu ul li {
+    padding: 0 4px;
+}
 
-    .host {
-        margin-top: -16%;
-    }
+.host {
+    margin-top: -16%;
+}
+.footer-list h5 {
+    font-size: 29px;
+}
 
-    .footer-list h5 {
-        font-size: 29px;
-    }
+.main-logo p {
+    max-width: 100%;
+}
 
-    .main-logo p {
-        max-width: 100%;
-    }
+.top-form {
+    max-width: 75%;
+}
 
-    .top-form {
-        max-width: 75%;
-    }
-
-    section.login {
-        margin-top: -16%;
-        padding-top: 19%;
-    }
-
-    section.even-banner img {
-        margin-top: -18%;
-    }
-
+section.login {
+    margin-top: -16%;
+    padding-top: 19%;
+}
+section.even-banner img {
+    margin-top: -18%;
+}
+    
 }
 
 
 @media only screen and (max-width: 425px) {
-
-    header.header .col-md-3,
-    header.header .col-md-6 {
-        max-width: 100%;
-        flex: 0 100%;
-        text-align: center;
-    }
+    header.header .col-md-3,header.header .col-md-6 {
+    max-width: 100%;
+    flex: 0 100%;
+    text-align: center;
 }
 
-.total-container h4 {
-    margin-bottom: 40% !important;
+.search-wrapper form {
+    margin-bottom: 40px;
 }
+nav#navbarBlur {
+    background: #d28826;
+}
+
+nav#navbarBlur h6 {
+    color: #fff;
+    font-size: 18px;
+}
+
+.sidenav-toggler-inner i {
+    color: #fff !important;
+}
+
+.navbar .sidenav-toggler-inner .sidenav-toggler-line {
+    background: #fff !important;
+    width: 24px;
+    height: 7px;
+}
+header.header {
+    padding: 0 !important;
+  /*  background-color: #b49453 !important;*/
+    position: relative !important;
+    background-image: url(https://wishify.com.au/wp-content/uploads/2024/08/Group-29297-1.png);
+    backgroung-repeat: no-repeat;
+    background-size: cover;
+    backgroung-position: center;
+    height: 216px !important;
+    border-radius: 0px 0px 20px 20px  !important;
+}
+
+header.header img {
+    width: 197px !important;
+}
+
+.search-wrapper {
+    background-color: #000;
+    border-radius: 35px;
+    padding: 35px;
+    margin-bottom: 40px;
+    /* margin-top: -15px; */
+      /* height: 370px;*/
+}
+
+
+
+
 
 section.even-banner img {
-    margin-top: -60%;
-}
-
-section.even-banner span {
-    position: relative;
-    top: -65px;
+    margin-top: -77%;
 }
 
 .user-prf {
@@ -893,10 +874,7 @@ section.host {
 }
 
 
-.inner-event {
-    flex-direction: column !important;
-    padding: 6% 15px !important;
-}
+.inner-event {flex-direction: column !important;padding: 6% 15px !important;}
 
 .user-prf {
     width: 155px;
@@ -920,13 +898,12 @@ nav.header-menu ul {
     margin-top: 8%;
 }
 
-.header-btn a {
-    padding: 11px 17px;
-    font-size: 14px;
-}
-
-.host h1 {
-    font-size: 48px;
+    .header-btn a {
+        padding: 11px 17px;
+        font-size: 14px;
+    }
+    .host h1 {
+    font-size: 40px;
 }
 
 a.btn.Login {
@@ -947,7 +924,6 @@ span.text-muted.certificate-text {
     width: 100%;
     margin-top: 3%;
 }
-
 footer.footer {
     text-align: center;
 }
@@ -955,15 +931,15 @@ footer.footer {
 .main-logo p {
     padding: 0 14px;
 }
-
 .search-wrapper form {
-    display: block;
-    max-width: 100%;
+        display: flex;
+        max-width: 100%;
+        flex-direction: column;
 }
 
 .search-wrapper button {
     width: 100% !important;
-    margin: 0;
+    margin-top: 18%;
 }
 
 .search-wrapper input {
@@ -976,16 +952,17 @@ footer.footer {
 }
 
 section.login {
-    margin-top: -55%;
-    padding-top: 70%;
-}
+            /* margin-top: -55%; */
+       padding: 12% 0;
+        margin: 4px 0;
 
+}
 .detailss h3 {
     font-size: 37px;
 }
 
 div#send-gift-frm {
-    width: 100% !important;
+    width: 100% !important;!i;!;
 }
 
 input#send-gift {
@@ -1011,3 +988,35 @@ input#send-gift {
 .tab-content {
     width: 100%;
 }
+button.verify {
+    margin-top: 0 !important;
+    margin-bottom: -40px !important;
+}
+section.even-banner {
+    margin-top: 61%;
+}
+
+img.event-banner {
+    height: 211px !important;
+}
+
+p.eventName {
+    top: -187px;
+}
+.inner-event {
+    margin-top: -15%;
+}
+}
+@media only screen and (max-width: 375px) {
+    p.eventName {
+        top: -155px;
+    }
+}
+
+
+
+
+
+
+
+
