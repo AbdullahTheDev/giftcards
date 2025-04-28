@@ -90,8 +90,8 @@
                                     <div class="input-group">
                                         <label for="imageShow">Image Show:</label>
                                         <select name="show_image" id="imageShow">
-                                            <option value="1" {{ $event->show_image ?? 1 == 1 ? 'selected' : '' }}>Yes</option>
-                                            <option value="0" {{ $event->show_image ?? 1 == 0 ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ $event->show_profile == 1 ? 'selected' : '' }}>Yes</option>
+                                            <option value="0" {{ $event->show_profile == 0 ? 'selected' : '' }}>No</option>
                                         </select>
                                     </div>
                                     {{-- 
@@ -119,8 +119,8 @@
                                     <div class="input-group">
                                         <label for="bannerShow">Banner Show:</label>
                                         <select name="show_banner" id="bannerShow">
-                                            <option value="1" {{ $event->show_banner ?? 1 == 1 ? 'selected' : '' }}>Yes</option>
-                                            <option value="0" {{ $event->show_banner ?? 1 == 0 ? 'selected' : '' }}>No</option>
+                                            <option value="1" {{ $event->show_banner == 1 ? 'selected' : '' }}>Yes</option>
+                                            <option value="0" {{ $event->show_banner == 0 ? 'selected' : '' }}>No</option>
                                         </select>
                                     </div>
                                     <div class="input-group">

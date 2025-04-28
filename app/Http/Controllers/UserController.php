@@ -49,7 +49,7 @@ class UserController extends Controller
 
         // Create a QR Code
         $qrCode = new QrCode($url);
-        $qrCode->setSize(200);
+        $qrCode->setSize(400);
 
         // Create a PNG writer and generate PNG data
         $writer = new PngWriter();
@@ -225,7 +225,9 @@ class UserController extends Controller
                 'banner' => $bannerPath,
                 'event_date' => $request->event_date,
                 'description' => $request->description,
-                'showname' => $request->showname
+                'showname' => $request->showname,
+                'show_profile' => $request->show_image,
+                'show_banner' => $request->show_banner
             ]);
 
             return redirect()->back()->with('success', 'Information Updated Successfully!');
