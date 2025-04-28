@@ -1,6 +1,27 @@
 @extends('layouts.ourapp')
 @section('title')
     {{ $user->first_name . ' ' . $user->last_name }} Profile
+
+<!-- Primary Meta Tags -->
+<title>{{ $event->showname ?? 'Default Title' }}</title>
+<meta name="title" content="{{ $event->showname ?? 'Default Title' }}">
+<meta name="description" content="{{ $event->description ?? 'Default Description' }}">
+
+<!-- Open Graph / Facebook / Instagram / WhatsApp / Messenger -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:title" content="{{ $event->showname ?? 'Default Title' }}">
+<meta property="og:description" content="{{ $event->description ?? 'Default Description' }}">
+<meta property="og:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ url()->current() }}">
+<meta name="twitter:title" content="{{ $event->showname ?? 'Default Title' }}">
+<meta name="twitter:description" content="{{ $event->description ?? 'Default Description' }}">
+<meta name="twitter:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
+
+
 @endsection
 @section('content')
     <style>
@@ -47,13 +68,15 @@
     <section class="">
         <div style="width: 100%; position: relative;">
             @if ($event->banner != null)
-                <div>
-                    <img src="{{ asset('/') }}{{ $event?->banner }}"
-                        style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
-                    <div style="position: absolute; top: 27%; text-align: center; width: 100%;">
-                        <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</span>
+                @if ($event->show_banner == 1)
+                    <div>
+                        <img src="{{ asset('/') }}{{ $event?->banner }}"
+                            style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
+                        <div style="position: absolute; top: 27%; text-align: center; width: 100%;">
+                            <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</span>
+                        </div>
                     </div>
-                </div>
+                @endif
             @else
                 @if ($event->image != null)
                     <div style="height: 35px;"></div>
@@ -62,11 +85,13 @@
             <div
                 style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
                 @if ($event->image != null)
-                    <div class="user-prf">
-                        <img src="{{ asset($event?->image) }}"
-                            style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
-                        {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
-                    </div>
+                    @if ($event->show_profile == 1)
+                        <div class="user-prf">
+                            <img src="{{ asset($event?->image) }}"
+                                style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
+                            {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
+                        </div>
+                    @endif
                 @endif
                 <div class="user-details">
                     <h4>{{ $event?->showname }}</h4>
@@ -178,7 +203,8 @@
                                     <div class="d-flex justify-content-between">
                                         <span>Merchant fee</span>
                                         <span id="showFees">$0</span>
-                                        <span style="display: none;" id="merchant_fees">{{ $settings->merchant_fees }}</span>
+                                        <span style="display: none;"
+                                            id="merchant_fees">{{ $settings->merchant_fees }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
@@ -363,7 +389,7 @@
 
                 // Calculate the total with admin fees and update the display
                 var totalAmount = amountValue + merchantFees;
-                
+
                 $('#amountValTotal').text(totalAmount.toFixed(2));
 
                 $('#showFees').text('$' + merchantFees.toFixed(2));

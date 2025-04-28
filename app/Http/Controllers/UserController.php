@@ -9,6 +9,7 @@ use App\Models\User;
 use Endroid\QrCode\Writer\PngWriter;
 use Exception;
 use File;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -21,7 +22,7 @@ class UserController extends Controller
 {
     function profile()
     {
-        if(\Auth::user()->role == 'admin'){
+        if (\Auth::user()->role == 'admin') {
             return redirect(route('admin.dashboard'));
         }
         $user = User::findOrFail(Auth::id());
@@ -49,7 +50,7 @@ class UserController extends Controller
 
         // Create a QR Code
         $qrCode = new QrCode($url);
-        $qrCode->setSize(400);
+        $qrCode->setSize(800);
 
         // Create a PNG writer and generate PNG data
         $writer = new PngWriter();
@@ -67,16 +68,10 @@ class UserController extends Controller
     {
         $formattedUserId = str_replace(' ', '-', $id);
 
-        // return  $formattedUserId;
-
-        // Search for the event by name using the formatted user_id
         $event = Event::whereRaw('LOWER(name) = ?', [strtolower($formattedUserId)])->first();
-
-        // $event = Event::where('name', $id)->first();
-
+        
         if ($event) {
             $user = User::findOrFail($event->user_id);
-            // return $user;
 
             return view('front.event', compact('user', 'event'));
         } else {
@@ -90,14 +85,20 @@ class UserController extends Controller
             'user_id' => 'required'
         ]);
 
-        // Replace spaces with hyphens for the search
         $formattedUserId = str_replace(' ', '-', $request->user_id);
-
-        // return  $formattedUserId;
-
-        // Search for the event by name using the formatted user_id
         $event = Event::whereRaw('LOWER(name) = ?', [strtolower($formattedUserId)])->first();
+        
+        if ($event) {
+            return redirect(route('user.profile', $event->name));
+        }
+ 
+        $name = strtolower($request->user_id);
 
+        $event = Event::join('users', 'events.user_id', '=', 'users.id')
+        ->whereRaw("LOWER(CONCAT(users.first_name, ' ', users.last_name)) = ?", [$name])
+        ->select('events.*')
+        ->first();
+    
         if ($event) {
             return redirect(route('user.profile', $event->name));
         }
@@ -170,6 +171,7 @@ class UserController extends Controller
 
     function updateUser(Request $request)
     {
+        // return $request->file('banner');
         try {
             $event = Event::where('user_id', Auth::id())->first();
 
@@ -197,32 +199,120 @@ class UserController extends Controller
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
             ]);
-            
+
             $event = Event::where('user_id', $user->id)->first();
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('uploads/images'), $imageName);
-                $imagePath = 'uploads/images/' . $imageName;
-            } else {
-                $imagePath = $event->image;
+            if ($request->has('password')) {
+                $request->user()->update([
+                    'password' => Hash::make($request->password),
+                ]);
             }
 
-            // Handle banner upload
-            if ($request->hasFile('banner')) {
-                $banner = $request->file('banner');
-                $bannerName = time() . '_' . $banner->getClientOriginalName();
-                $banner->move(public_path('uploads/banners'), $bannerName);
-                $bannerPath = 'uploads/banners/' . $bannerName;
+            $customPublicPath = env('CUSTOM_PUBLIC_PATH');
+
+            // if ($request->hasFile('image')) {
+            //     $image = $request->file('image');
+            //     $imageName = time() . '_' . $image->getClientOriginalName();
+            //     $path = $customPublicPath . 'uploads/images/';
+            //     $image->move($path, $imageName);
+            //     $imagePath = 'uploads/images/' . $imageName;
+            // } else {
+            //     $imagePath = $event->image;
+            // }
+
+            // // Handle banner upload
+            // if ($request->hasFile('banner')) {
+            //     $banner = $request->file('banner');
+            //     $bannerName = time() . '_' . $banner->getClientOriginalName();
+            //     $path = $customPublicPath . 'uploads/banners/';
+
+            //     $banner->move($path, $bannerName);
+            //     $bannerPath = 'uploads/banners/' . $bannerName;
+            // } else {
+            //     $bannerPath = $event->banner;
+            // }
+            
+            // Handle image removal if requested
+            if ($request->input('clear_image') == '1') {
+                // Delete the existing image file if it exists
+                if ($event->image) {
+                    $existingImagePath = $customPublicPath . $event->image;
+                    if (file_exists($existingImagePath)) {
+                        unlink($existingImagePath);
+                    }
+                }
+                $imagePath = null; // Set imagePath to null to indicate removal
             } else {
-                $bannerPath = $event->banner;
+                // Handle image upload
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $path = $customPublicPath . 'uploads/images/';
+                    $image->move($path, $imageName);
+                    $imagePath = 'uploads/images/' . $imageName;
+                } else {
+                    $imagePath = $event->image; // Keep the existing image
+                }
             }
 
+            // Handle banner removal if requested
+            if ($request->input('clear_banner') == '1') {
+                // Delete the existing banner file if it exists
+                if ($event->banner) {
+                    $existingBannerPath = $customPublicPath . $event->banner;
+                    if (file_exists($existingBannerPath)) {
+                        unlink($existingBannerPath);
+                    }
+                }
+                $bannerPath = null; // Set bannerPath to null to indicate removal
+            } else {
+                // Handle banner upload
+                if ($request->hasFile('banner')) {
+                    $banner = $request->file('banner');
+                    $bannerName = time() . '_' . $banner->getClientOriginalName();
+                    $path = $customPublicPath . 'uploads/banners/';
+                    $banner->move($path, $bannerName);
+                    $bannerPath = 'uploads/banners/' . $bannerName;
+                } else {
+                    $bannerPath = $event->banner; // Keep the existing banner
+                }
+            }
+
+
+            
+            // Handle meta_image removal if requested
+            if ($request->input('clear_meta_image') == '1') {
+                // Delete the existing meta_image file if it exists
+                if ($event->meta_image) {
+                    $existingMetaImagePath = $customPublicPath . $event->meta_image;
+                    if (file_exists($existingMetaImagePath)) {
+                        unlink($existingMetaImagePath);
+                    }
+                }
+                $metaImagePath = null; // Set bannerPath to null to indicate removal
+            } else {
+                // Handle meta_image upload
+                if ($request->hasFile('meta_image')) {
+                    $image = $request->file('meta_image');
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $path = $customPublicPath . 'uploads/meta_image/';
+                    $image->move($path, $imageName);
+                    $metaImagePath= 'uploads/meta_image/' . $imageName;
+                } else {
+                    $metaImagePath= $event->meta_image; // Keep the existing image
+                }
+            }
+            
+            
+            
+            
+
+      
             $event->update([
                 'name' => $request->name,
                 'image' => $imagePath,
                 'banner' => $bannerPath,
+                'meta_image' => $metaImagePath,
                 'event_date' => $request->event_date,
                 'description' => $request->description,
                 'showname' => $request->showname,
