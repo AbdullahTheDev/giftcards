@@ -107,10 +107,22 @@ class PaymentController extends Controller
                 'amount' => $request->amount,
             ];
 
+            $host_data = [
+                'host_name' => $user->first_name . ' ' . $user->last_name,
+                'gifter_name' => $request->first_name . ' ' . $request->last_name,
+                'amount' => $request->amount,
+            ];
+
+            $gifter_data = [
+                'username' => $request->first_name . ' ' . $request->last_name,
+                'event_name' => $user->event->showname ?? $user->event->name,
+                'amount' => $request->amount,
+            ];
+
             // Send confirmation emails
             Mail::to($user->email)->send(new GiftRecieve($data));
             Mail::to($settings->email)->send(new AdminGift($data));
-            Mail::to($request->email)->send(new SenderGift($data));
+            Mail::to($request->email)->send(new SenderGift($gifter_data));
 
             // Redirect on success
             return redirect()->route('payment.success')->with('success', 'Payment successful!');

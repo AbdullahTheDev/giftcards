@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gift Sent</title>
+    <title>Gift Confirmation</title>
 </head>
 <body>
-    You successfully sent a gift to {{ $data['receiver_name'] }}
+    <p>
+        Hi {{ $data['username'] }},
+    </p>
+    <p>
+        Thank you for your generous gift!
+    </p>
+    <p>
+        You have sent a gift of <strong>${{ $data['amount'] }}</strong> on the event <strong>{{ $data['event_name'] }}</strong>.
+    </p>
+    <br>
+    <p>
+        We truly appreciate your support.
+    </p>
 </body>
 </html>

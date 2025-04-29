@@ -7,6 +7,18 @@
     <title>Gift Recieved</title>
 </head>
 <body>
-    You recieved a gift from {{ $data['sender_name'] }}
+    <p>
+        Hi {{ $data['host_name'] }},
+    </p>
+    <p>
+        Great news! You’ve received a gift from <strong>{{ $data['gifter_name'] }}</strong>.
+    </p>
+    <p>
+        Gift Amount: <strong>${{ $data['amount'] }}</strong>
+    </p>
+    <br>
+    <p>
+        Keep up the amazing work!
+    </p>
 </body>
 </html>
