@@ -1,29 +1,26 @@
 @extends('layouts.ourapp')
 @section('title')
     {{ $user->first_name . ' ' . $user->last_name }} Profile
-
 @endsection
 @section('meta')
-<!-- Primary Meta Tags -->
-<title>{{ $event->showname ?? 'Default Title' }}</title>
-<meta name="title" content="{{ $event->showname ?? 'Default Title' }}">
-<meta name="description" content="{{ $event->description ?? 'Default Description' }}">
+    <!-- Primary Meta Tags -->
+    <title>{{ $event->showname ?? 'Default Title' }}</title>
+    <meta name="title" content="{{ $event->showname ?? 'Default Title' }}">
+    <meta name="description" content="{{ $event->description ?? 'Default Description' }}">
 
-<!-- Open Graph / Facebook / Instagram / WhatsApp / Messenger -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ url()->current() }}">
-<meta property="og:title" content="{{ $event->showname ?? 'Default Title' }}">
-<meta property="og:description" content="{{ $event->description ?? 'Default Description' }}">
-<meta property="og:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
+    <!-- Open Graph / Facebook / Instagram / WhatsApp / Messenger -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ $event->showname ?? 'Default Title' }}">
+    <meta property="og:description" content="{{ $event->description ?? 'Default Description' }}">
+    <meta property="og:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="{{ url()->current() }}">
-<meta name="twitter:title" content="{{ $event->showname ?? 'Default Title' }}">
-<meta name="twitter:description" content="{{ $event->description ?? 'Default Description' }}">
-<meta name="twitter:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
-
-
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="{{ $event->showname ?? 'Default Title' }}">
+    <meta name="twitter:description" content="{{ $event->description ?? 'Default Description' }}">
+    <meta name="twitter:image" content="{{ asset($event->meta_image ?? 'default-image.jpg') }}">
 @endsection
 @section('content')
     <style>
@@ -66,55 +63,54 @@
         button:hover {
             background-color: #4353b8;
         }
-
     </style>
     <section class="even-banner">
         <div style="width: 100%; position: relative;">
             @if ($event->banner != null)
-            @if ($event->show_banner == 1)
-                <div>
-                    <img src="{{ asset('/') }}{{ $event?->banner }}" class="event-banner"
-                        style="width: 100%;height: 50vh;object-fit: cover;filter: brightness(0.6);">
-                        <p class="eventName" style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</p>
+                @if ($event->show_banner == 1)
+                    <div>
+                        <img src="{{ asset('/') }}{{ $event?->banner }}" class="event-banner"
+                            style="width: 100%;height: 50vh;object-fit: cover;filter: brightness(0.6);">
+                        <p class="eventName" style="color: #fff; font-size: 42px; font-weight: bold;">
+                            -{{ $event->showname }}-</p>
                     </div>
-                </div>
-                @endif
-            @else
-              <img src="{{ asset('uploads/banners/banner.jpg') }}"
-                        style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
-                @if ($event->image != null)
-                 <!---  <div style="height: 35px;"></div>-->
-                
-                @endif
-            @endif
-            <div class="inner-event"
-                style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
-                @if ($event->image != null)
-                 @if ($event->show_profile == 1)
+        </div>
+        @endif
+    @else
+        <img src="{{ asset('uploads/banners/banner.jpg') }}"
+            style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
+        @if ($event->image != null)
+            <!---  <div style="height: 35px;"></div>-->
+        @endif
+        @endif
+        <div class="inner-event"
+            style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
+            @if ($event->image != null)
+                @if ($event->show_profile == 1)
                     <div class="user-prf">
                         <img src="{{ asset($event?->image) }}"
                             style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
                         {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
                     </div>
-                    @endif
                 @endif
-                <div class="user-details">
-                    <h4>{{ $event?->showname }}</h4>
-                    <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
-                            {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
-                    @if ($event->location != null)
-                        <p>
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
-                                {{ $event?->location }}</b>
-                            </p>
-                    @endif
-                    @if ($event->description != null)
-                        <p>
-                            <i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
-                        </p>
-                    @endif
-                </div>
+            @endif
+            <div class="user-details">
+                <h4>{{ $event?->showname }}</h4>
+                <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
+                        {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
+                @if ($event->location != null)
+                    <p>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
+                            {{ $event?->location }}</b>
+                    </p>
+                @endif
+                @if ($event->description != null)
+                    <p>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
+                    </p>
+                @endif
             </div>
+        </div>
         </div>
 
         <div class="container py-5">
@@ -180,7 +176,8 @@
                                 <div class="mb-3 row">
                                     <div class="col-md-6">
                                         <label for="suburb" class="form-label">Suburb *</label>
-                                        <input type="text" name="suburb" class="form-control" id="suburb" required>
+                                        <input type="text" name="suburb" class="form-control" id="suburb"
+                                            required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="state" class="form-label">State *</label>
@@ -263,12 +260,51 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/country-state-city@3.0.1/lib/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script src="https://js.stripe.com/v3/"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
 
     <script>
+        const countrySelect = document.getElementById('country');
+        const stateSelect = document.getElementById('state');
+    
+        // Load all countries
+        axios.get('https://countriesnow.space/api/v0.1/countries/positions')
+            .then(res => {
+                res.data.data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.name;
+                    option.textContent = country.name;
+                    countrySelect.appendChild(option);
+                });
+            });
+    
+        // Load states on country change
+        countrySelect.addEventListener('change', () => {
+            stateSelect.innerHTML = '<option value="">Loading...</option>';
+            axios.post('https://countriesnow.space/api/v0.1/countries/states', {
+                country: countrySelect.value
+            })
+            .then(res => {
+                stateSelect.innerHTML = '<option value="">Select State</option>';
+                res.data.data.states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.name;
+                    option.textContent = state.name;
+                    stateSelect.appendChild(option);
+                });
+            });
+        });
+    </script>
+    
+    
+    <script>
         // Initialize Stripe
-var stripe = Stripe('pk_test_51MdztzFgNsE3EcUKLIVsuDYrVMoV1FkaROiYxGzKMN6BgPpW8Z6tletimlr4o6ziiu3P0JnYhG8RyejLIh1ZezGx00Utc7hvC4');
+        var stripe = Stripe(
+            'pk_test_51MdztzFgNsE3EcUKLIVsuDYrVMoV1FkaROiYxGzKMN6BgPpW8Z6tletimlr4o6ziiu3P0JnYhG8RyejLIh1ZezGx00Utc7hvC4'
+            );
         var elements = stripe.elements();
 
         // Create an instance of the card Element
