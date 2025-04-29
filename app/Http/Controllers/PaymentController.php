@@ -49,7 +49,7 @@ class PaymentController extends Controller
             $totalAmount = $request->amount + $merchantFees;
 
             // Set Stripe API key
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey('sk_test_51MdztzFgNsE3EcUKQhhDy859ihSi1scXRLX4n8RRUTTKIQnZtWN4hCzGgzT46LvsijXZwUuAw7HzJZ7SC4ajK3lP00J1v5Zks8');
 
             // Check if the Stripe token exists
             if (!$request->has('stripeToken')) {
@@ -120,9 +120,14 @@ class PaymentController extends Controller
             ];
 
             // Send confirmation emails
-            Mail::to($user->email)->send(new GiftRecieve($data));
+            Mail::to($user->email)->send(new GiftRecieve($host_data));
             Mail::to($settings->email)->send(new AdminGift($data));
             Mail::to($request->email)->send(new SenderGift($gifter_data));
+
+            // Mail::to('dev@uniquelogodesigns.com')->send(new GiftRecieve($host_data));
+            // Mail::to('dev@uniquelogodesigns.com')->send(new AdminGift($data));
+            // Mail::to('dev@uniquelogodesigns.com')->send(new SenderGift($gifter_data));
+
 
             // Redirect on success
             return redirect()->route('payment.success')->with('success', 'Payment successful!');

@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    @yield('meta')
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -21,6 +22,10 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
 
 </head>
 
@@ -30,7 +35,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="main-logo">
-                        <a href="">
+                        <a href="https://wishify.com.au/">
                             <img src="https://wishify.com.au/wp-content/uploads/2024/08/Wishify-Logo.png"
                                 alt="">
                         </a>
@@ -39,10 +44,10 @@
                 <div class="col-md-6">
                     <nav class="header-menu">
                         <ul>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">FAQ's</a></li>
-                            <li><a href="">Caontact Us</a></li>
+                            <li><a href="https://wishify.com.au/">Home</a></li>
+                            <li><a href="https://wishify.com.au/about/">About</a></li>
+                            <li><a href="https://wishify.com.au/faqs/">FAQ's</a></li>
+                            <li><a href="https://wishify.com.au/contact-us/">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -70,7 +75,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="main-logo">
                         <a href="">
                             <img src="https://wishify.com.au/wp-content/uploads/2024/08/Wishify-Logo.png"
@@ -81,34 +86,37 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="footer-list">
                         <h5>Quick Links</h5>
                         <ul>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">FAQ's</a></li>
-                            <li><a href="">Caontact Us</a></li>
+                            <li><a href="https://wishify.com.au/">Home</a></li>
+                            <li><a href="https://wishify.com.au/about/">About</a></li>
+                            <li><a href="https://wishify.com.au/faqs/">FAQ's</a></li>
+                            <li><a href="https://wishify.com.au/contact-us/">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="footer-list">
                         <h5>Hosts</h5>
                         <ul>
-                            <li><a href="">Register</a></li>
-                            <li><a href="">Login</a></li>
-                            <li><a href="">Terms & Conditions</a></li>
+                            @if (!Auth::check())
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                            @endif
+                            
+                            <li><a href="https://wishify.com.au/terms-conditions/">Terms & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="footer-list">
-                        <h5>Stay in touch</h5>
+                       <!-- <h5>Stay in touch</h5>
                         <form action="">
                             <input type="email" class="form-control" placeholder="Enter Your Email...">
                             <input type="submit" value="SUMBIT" id="footer_send">
-                        </form>
+                        </form> -->
                         <img src="https://wishify.com.au/wp-content/uploads/2024/08/image-21.png" alt="">
                     </div>
                 </div>

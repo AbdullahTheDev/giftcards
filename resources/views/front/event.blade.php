@@ -2,6 +2,8 @@
 @section('title')
     {{ $user->first_name . ' ' . $user->last_name }} Profile
 
+@endsection
+@section('meta')
 <!-- Primary Meta Tags -->
 <title>{{ $event->showname ?? 'Default Title' }}</title>
 <meta name="title" content="{{ $event->showname ?? 'Default Title' }}">
@@ -64,43 +66,53 @@
         button:hover {
             background-color: #4353b8;
         }
+
     </style>
-    <section class="">
+    <section class="even-banner">
         <div style="width: 100%; position: relative;">
             @if ($event->banner != null)
-                @if ($event->show_banner == 1)
-                    <div>
-                        <img src="{{ asset('/') }}{{ $event?->banner }}"
-                            style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
-                        <div style="position: absolute; top: 27%; text-align: center; width: 100%;">
-                            <span style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</span>
-                        </div>
+            @if ($event->show_banner == 1)
+                <div>
+                    <img src="{{ asset('/') }}{{ $event?->banner }}" class="event-banner"
+                        style="width: 100%;height: 50vh;object-fit: cover;filter: brightness(0.6);">
+                        <p class="eventName" style="color: #fff; font-size: 42px; font-weight: bold;">-{{ $event->showname }}-</p>
                     </div>
+                </div>
                 @endif
             @else
+              <img src="{{ asset('uploads/banners/banner.jpg') }}"
+                        style="width: 100%; height: 50vh; object-fit: cover; filter: brightness(0.6)" alt="">
                 @if ($event->image != null)
-                    <div style="height: 35px;"></div>
+                 <!---  <div style="height: 35px;"></div>-->
+                
                 @endif
             @endif
-            <div
+            <div class="inner-event"
                 style="position: relative; height: 100%; padding: 10px 10%; background-color: #000; display: flex; flex-direction: row; gap: 18px;">
                 @if ($event->image != null)
-                    @if ($event->show_profile == 1)
-                        <div class="user-prf">
-                            <img src="{{ asset($event?->image) }}"
-                                style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
-                            {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
-                        </div>
+                 @if ($event->show_profile == 1)
+                    <div class="user-prf">
+                        <img src="{{ asset($event?->image) }}"
+                            style="width: 100%; height: 100%; border-radius: 50%; margin-top: -60px" alt="">
+                        {{-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> --}}
+                    </div>
                     @endif
                 @endif
                 <div class="user-details">
                     <h4>{{ $event?->showname }}</h4>
                     <p><i class="fa fa-calendar-o" aria-hidden="true"></i>Event Date:<b>
                             {{ \Carbon\Carbon::parse($event?->event_date)->format('d M Y') }}</b></p>
-                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
-                            {{ $event?->location }}</b></p>
-                    <p><i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
-                    </p>
+                    @if ($event->location != null)
+                        <p>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>Event Location:<b>
+                                {{ $event?->location }}</b>
+                            </p>
+                    @endif
+                    @if ($event->description != null)
+                        <p>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>Description:<b> {{ $event?->description }} </b>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -128,7 +140,7 @@
                                 <label for="amount"><b>Enter your gift amount ($)</b></label>
                                 <input type="number" name="amount" id="amount" placeholder="" class="form-control"
                                     pattern="[0-9]*" title="Please enter only numbers.">
-                                <h3 class="text-start">Message</h3>
+                                <h3 class="text-center mt-4">Message</h3>
                                 <label for=""><i>Your special message for the host</i></label>
                                 <textarea name="message" id="" rows="3" class="form-control"></textarea>
                                 <input type="submit" value="Send Gift" id="send-gift" class="form-control">
@@ -252,11 +264,11 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"></script>
 
     <script>
         // Initialize Stripe
-        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
+var stripe = Stripe('pk_test_51MdztzFgNsE3EcUKLIVsuDYrVMoV1FkaROiYxGzKMN6BgPpW8Z6tletimlr4o6ziiu3P0JnYhG8RyejLIh1ZezGx00Utc7hvC4');
         var elements = stripe.elements();
 
         // Create an instance of the card Element
